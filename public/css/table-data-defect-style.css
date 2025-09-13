@@ -33,62 +33,6 @@
     --color_LightRed: #e24a64;
 }
 
-.tbl-data-defect td#number:hover {
-    cursor: pointer;
-    color: var(--color_Light3);
-    background-color: var(--color_Green1);
-    font-weight: bolder;
-}
-
-.tbl-data-defect a#linked-number {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.tbl-data-defect #linked-number:hover {
-    cursor: pointer;
-    color: var(--color_Light3);
-    background-color: var(--color_Green1);
-    font-weight: bolder;
-}
-
-.tbl-data-defect td#action-for-table-defect {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    padding: 3px 5px;
-    border: 0.05px solid var(--color_Light1);
-}
-
-.tbl-data-defect a#btn-edit {
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    align-self: center;
-    font-size: 0.7rem;
-    padding: 2px 15px;
-    border-radius: 5px;
-    justify-content: center;
-    border: none;
-    color: #fff;
-    height: 20px;
-    background-color: var(--color_Blue);
-}
-
-#userModal {
-    /* width: 80%; */
-    border-collapse: collapse;
-    margin-top: 100px;
-    margin-left: 150px;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
 .filter-table input,
 .filter-table select {
     width: 100%;
@@ -120,7 +64,7 @@
 }
 
 .table-defect-container {
-    /* width: 100%; */
+    width: 100%;
     max-width: 100%;
     overflow-x: auto;
     margin-bottom: 20px;
@@ -128,6 +72,59 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     -webkit-overflow-scrolling: touch;
     /* Untuk smooth scrolling di Safari iOS */
+}
+
+.tbl-data-defect td#number:hover {
+    cursor: pointer;
+    color: var(--color_Light3);
+    background-color: var(--color_Green1);
+    font-weight: bolder;
+}
+
+.tbl-data-defect a#linked-number {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.tbl-data-defect #linked-number:hover {
+    cursor: pointer;
+    color: var(--color_Light3);
+    background-color: var(--color_Green1);
+    font-weight: bolder;
+}
+
+.tbl-data-defect td#action-for-table-defect {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 5px;
+    border: 0.05px solid var(--color_Light1);
+}
+
+.tbl-data-defect a#btn-edit {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    align-self: center;
+    border-radius: 5px;
+    justify-content: center;
+    border: none;
+    height: 20px;
+    gap: 5px;
+    background-color: transparent;
+}
+
+#userModal {
+    border-collapse: collapse;
+    margin-top: 100px;
+    margin-left: 150px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
 }
 
 .tbl-data-defect {
@@ -164,37 +161,45 @@
 .tbl-data-defect #line {
     width: 50px;
     justify-items: center;
+    text-wrap: nowrap;
 }
 
 .tbl-data-defect #date,
 .tbl-data-defect #fy-n {
     width: 80px;
     justify-items: center;
+    text-wrap: nowrap;
 }
 
-.tbl-data-defect #action-for-table-defect,
-.tbl-data-defect #reporter,
-.tbl-data-defect #coil-no {
-    width: 80px;
+
+.tbl-data-defect #reporter {
+    width: 60px;
     padding-left: 5px;
+    text-wrap: nowrap;
 }
 
 .tbl-data-defect #data-time {
     width: 100px;
     justify-items: center;
+    text-wrap: nowrap;
 }
 
-.tbl-data-defect #item-name {
+.tbl-data-defect #item-name,
+.tbl-data-defect #coil-no {
     width: 180px;
+    text-wrap: nowrap;
 }
 
+.tbl-data-defect #action-for-table-defect,
 .tbl-data-defect #defect-category,
 .tbl-data-defect #defect-name,
 .tbl-data-defect #defect-area,
 .tbl-data-defect #defect-qty-a,
-.tbl-data-defect #defect-qty-b {
-    width: 50px;
+.tbl-data-defect #defect-qty-b,
+.tbl-data-defect #bolster {
+    width: 40px;
     justify-items: center;
+    text-wrap: nowrap;
 }
 
 .tbl-data-defect th p {

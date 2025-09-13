@@ -203,15 +203,8 @@ class TableDowntimeController extends Controller
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
+
         try {
-            $production = TableProduction::findOrFail($id);
-
-            // Log raw request data
-            Log::info('Update request data downtime', [
-                'id' => $id,
-                'data' => $request->all()
-            ]);
-
             // Validasi input
             $validatedData = $request->validate([
                 'reporter' => 'required|string',
@@ -226,23 +219,19 @@ class TableDowntimeController extends Controller
                 'model_year' => 'nullable|string',
                 'spm' => 'required|numeric',
                 'item_name' => 'required|string',
-                'coil_no' => 'required|string',
-                'plan_a' => 'required|integer',
-                'plan_b' => 'required|integer',
-                'ok_a' => 'required|integer',
-                'ok_b' => 'required|integer',
-                'rework_a' => 'required|integer',
-                'rework_b' => 'required|integer',
-                'scrap_a' => 'required|integer',
-                'scrap_b' => 'required|integer',
-                'sample_a' => 'required|integer',
-                'sample_b' => 'required|integer',
-                'rework_exp' => 'nullable|string',
-                'scrap_exp' => 'nullable|string',
-                'trial_sample_exp' => 'nullable|string',
+                'coil_no' => 'nullable|string',
 
-                // Validasi untuk production problems dinamis
+                // Validasi untuk material ticket data
+                'which-side-material' => 'nullable|array',
+                'material_ticket_no_text' => 'nullable|array',
+                'material_ticket_no_r' => 'nullable|array',
+                'material_ticket_no_s' => 'nullable|array',
+                'material_ticket_no_p' => 'nullable|array',
+
+                // Validasi untuk production problems
                 'production_problems' => 'nullable|array',
+                'production_problems.*.id' => 'nullable|integer',
+                'production_problems.*.delete_picture' => 'nullable|boolean',
                 'production_problems.*.time_from' => 'required|date_format:H:i',
                 'production_problems.*.time_until' => 'required|date_format:H:i',
                 'production_problems.*.total_time' => 'required|integer',
@@ -255,178 +244,89 @@ class TableDowntimeController extends Controller
                 'production_problems.*.counter_measure' => 'required|string',
                 'production_problems.*.pic' => 'required|string',
                 'production_problems.*.status' => 'required|string',
-                'production_problems.*.problem_picture' => 'nullable|string',
+                'production_problems.*.problem_picture_data' => 'nullable|string',
+                'production_problems.*.problem_picture_name' => 'nullable|string',
             ]);
 
-            Log::info('Update validation passed', ['validatedData' => $validatedData]);
+            // Generate coil_no dari material ticket data
+            $coilNumbers = [];
+            $whichSides = $request->input('which-side-material', []);
+            $ticketTexts = $request->input('material_ticket_no_text', []);
+            $ticketRs = $request->input('material_ticket_no_r', []);
+            $ticketSs = $request->input('material_ticket_no_s', []);
+            $ticketPs = $request->input('material_ticket_no_p', []);
 
-            $date = $validatedData['date'];
-            $carbonDate = \Carbon\Carbon::parse($date);
-            $year = $carbonDate->year;
-            $month = $carbonDate->month;
+            // Pastikan array memiliki minimal 1 elemen dan tidak kosong
+            if (!empty($whichSides) && !empty($ticketTexts)) {
+                for ($i = 0; $i < count($whichSides); $i++) {
+                    $whichSide = isset($whichSides[$i]) ? $whichSides[$i] : '';
+                    $ticketText = isset($ticketTexts[$i]) ? $ticketTexts[$i] : '';
+                    $ticketR = isset($ticketRs[$i]) ? $ticketRs[$i] : '';
+                    $ticketS = isset($ticketSs[$i]) ? $ticketSs[$i] : '';
+                    $ticketP = isset($ticketPs[$i]) ? $ticketPs[$i] : '';
 
-            // Hitung tahun fiskal
-            if ($month >= 4) {
-                $fyYear = $year;
-            } else {
-                $fyYear = $year - 1;
-            }
+                    // Hanya tambahkan jika ada data minimal which-side dan ticket text
+                    if (!empty($whichSide) && !empty($ticketText)) {
+                        // Format: "which-side : material_ticket_no_text-material_ticket_no_r-material_ticket_no_s-material_ticket_no_p"
+                        $coilPart = $whichSide . ' : ' . $ticketText;
 
-            // Hitung urutan bulan fiskal (April = 1, Maret = 12)
-            $fiscalMonth = $month >= 4 ? $month - 3 : $month + 9;
-
-            // Format: FY2025-1, FY2025-2, dst
-            $validatedData['fy_n'] = 'FY' . $fyYear . '-' . $fiscalMonth;
-
-            // Update production data
-            $production->update($validatedData);
-            Log::info('InputProduction updated', ['id' => $production->id]);
-
-            // Delete existing production problems
-            $production->tableDowntimes()->delete();
-            Log::info('Existing production problems deleted');
-
-            // Data yang akan dishare untuk production problems
-            $sharedData = [
-                // 'input_production_id' => $production->id,
-                'table_production_id' => $production->id,
-                'reporter' => $production->reporter,
-                'group' => $production->group,
-                'date' => $production->date,
-                'fy_n' => $validatedData['fy_n'],
-                'shift' => $production->shift,
-                'line' => $production->line,
-                'model' => $production->model,
-                'model_year' => $production->model_year,
-                'item_name' => $production->item_name,
-                'coil_no' => $production->coil_no,
-            ];
-
-            // Ambil data production problems
-            $productionProblems = $request->input('production_problems', []);
-
-            if (!empty($productionProblems)) {
-                foreach ($productionProblems as $index => $problem) {
-                    try {
-                        Log::info('Processing production problem', [
-                            'index' => $index,
-                            'problem' => $problem
-                        ]);
-
-                        $problemData = array_merge($sharedData, $problem);
-
-                        // Cek apakah ada data gambar base64
-                        if (isset($problem['problem_picture_data']) && !empty($problem['problem_picture_data'])) {
-                            // Ekstrak data gambar dari string base64
-                            $base64Image = $problem['problem_picture_data'];
-                            list($type, $data) = explode(';', $base64Image);
-                            list(, $data) = explode(',', $data);
-                            $imageData = base64_decode($data);
-
-                            // Dapatkan ekstensi file
-                            $extension = 'jpg'; // Default
-                            if (isset($problem['problem_picture_name'])) {
-                                $originalName = $problem['problem_picture_name'];
-                                $extension = pathinfo($originalName, PATHINFO_EXTENSION) ?: 'jpg';
-                            }
-
-                            // Buat nama file unik
-                            $filename = 'problem_picture_' . str_pad($production->id, 7, '0', STR_PAD_LEFT) . '_' . ($index + 1) . '.' . $extension;
-
-                            // Simpan file
-                            $path = public_path('images/problems');
-                            if (!file_exists($path)) {
-                                mkdir($path, 0777, true);
-                            }
-                            file_put_contents($path . '/' . $filename, $imageData);
-
-                            // Simpan nama file ke database
-                            $problemData['problem_picture'] = 'images/problems/' . $filename;
-
-                            // Hapus data base64 dan nama file asli dari data yang akan disimpan ke database
-                            unset($problemData['problem_picture_data']);
-                            unset($problemData['problem_picture_name']);
+                        // Tambahkan R, S, P jika ada
+                        if (!empty($ticketR)) {
+                            $coilPart .= '-' . $ticketR;
                         }
-                        // Cek apakah menggunakan metode tradisional file upload
-                        else if ($request->hasFile('problem_pictures') && isset($request->file('problem_pictures')[$index])) {
-                            $file = $request->file('problem_pictures')[$index];
-                            if ($file) {
-                                $filename = 'problem_picture_' . str_pad($production->id, 7, '0', STR_PAD_LEFT) . '_' . ($index + 1) . '.' . $file->getClientOriginalExtension();
-                                $file->move(public_path('images/problems'), $filename);
-
-                                // Ubah ini:
-                                $problemData['problem_picture'] = $filename;
-
-                                // Menjadi:
-                                $problemData['problem_picture'] = 'images/problems/' . $filename;
-                            }
+                        if (!empty($ticketS)) {
+                            $coilPart .= '-' . $ticketS;
+                        }
+                        if (!empty($ticketP)) {
+                            $coilPart .= '-' . $ticketP;
                         }
 
-                        // Simpan ke table_downtimes
-                        $createdProblem = $production->tableDowntimes()->create($problemData);
-
-                        Log::info('ProductionProblem created', [
-                            'id' => $createdProblem->id,
-                            'data' => $createdProblem->toArray()
-                        ]);
-                    } catch (\Exception $e) {
-                        Log::error('Error creating production problem', [
-                            'index' => $index,
-                            'error' => $e->getMessage()
-                        ]);
-                        throw $e;
+                        $coilNumbers[] = $coilPart;
                     }
                 }
             }
 
-            $production->tableDefects()->delete();
+            // Gabungkan dengan semicolon dan spasi
+            $validatedData['coil_no'] = implode(' ; ', $coilNumbers);
 
-            // Simpan defect baru
-            $defectAreas = $request->input('defect_areas', []);
-            $defectNames = $request->input('defect_names', []);
-            $defectQtysA = $request->input('defect_qtys_a', []);
-            $defectQtysB = $request->input('defect_qtys_b', []);
-            $defectCategories = $request->input('defect_categories', []);
-            log::info('Defect data received', [
-                'defect_areas' => $defectAreas,
-                'defect_names' => $defectNames,
-                'defect_qtys_a' => $defectQtysA,
-                'defect_qtys_b' => $defectQtysB,
-                'defect_categories' => $defectCategories
-            ]);
+            Log::info('Generated coil_no for downtime update', ['coil_no' => $validatedData['coil_no']]);
 
-            for ($i = 0; $i < count($defectAreas); $i++) {
-                $production->tableDefects()->create([
-                    'reporter' => $production->reporter,
-                    'group' => $production->group,
-                    'date' => $production->date,
-                    'fy_n' => $production->fy_n,
-                    'shift' => $production->shift,
-                    'line' => $production->line,
-                    'model' => $production->model,
-                    'model_year' => $production->model_year,
-                    'item_name' => $production->item_name,
-                    'coil_no' => $production->coil_no,
-                    'defect_area' => $defectAreas[$i],
-                    'defect_name' => $defectNames[$i],
-                    'defect_qty_a' => $defectQtysA[$i],
-                    'defect_qty_b' => $defectQtysB[$i] ?? null,
-                    'defect_category' => $defectCategories[$i],
-                ]);
+            $production = TableProduction::findOrFail($id);
+
+            // Update data produksi
+            $production->update($validatedData);
+
+            // Ambil data production problems
+            $productionProblems = $request->input('production_problems', []);
+
+            foreach ($productionProblems as $index => $problem) {
+                // Jika ada ID, berarti ini update record yang sudah ada
+                if (isset($problem['id'])) {
+                    $downtimeId = $problem['id'];
+                    $downtime = \App\Models\TableDowntime::find($downtimeId);
+
+                    if ($downtime) {
+                        // Update logic for downtime problems...
+                        $downtime->update($problem);
+                    }
+                }
+                // Jika tidak ada ID, berarti ini data baru
+                else {
+                    // Create new downtime record...
+                    $production->tableDowntimes()->create($problem);
+                }
             }
 
             DB::commit();
-            Log::info('Update transaction committed successfully');
-
-            return redirect()->route('table_downtime')->with('success', 'Data berhasil diupdate');
+            return redirect()->route('downtime.edit', $id)->with('success', 'Data downtime berhasil diupdate');
         } catch (\Exception $e) {
             DB::rollback();
-            Log::error('Error in update method', [
+            Log::error('Error in downtime update method', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
 
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
+            return redirect()->route('downtime.edit', $id)->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }
 

@@ -147,6 +147,18 @@
                             <p>Problem Picture</p>
                         </th>
                         <th id="tbl-data-downtime">
+                            <p>Bolster 1</p>
+                        </th>
+                        <th id="tbl-data-downtime">
+                            <p>Bolster 2</p>
+                        </th>
+                        <th id="tbl-data-downtime">
+                            <p>Bolster 3</p>
+                        </th>
+                        <th id="tbl-data-downtime">
+                            <p>Bolster 4</p>
+                        </th>
+                        <th id="tbl-data-downtime">
                             <p>Created at</p>
                         </th>
                         <th id="tbl-data-downtime">
@@ -246,6 +258,18 @@
                                     <span>No image</span>
                                 @endif
                             </td>
+                            <td class="tbl-data-downtime" id="bolster">
+                                <p>{{ $table_downtime->bolster_1 }}</p>
+                            </td>
+                            <td class="tbl-data-downtime" id="bolster">
+                                <p>{{ $table_downtime->bolster_2 }}</p>
+                            </td>
+                            <td class="tbl-data-downtime" id="bolster">
+                                <p>{{ $table_downtime->bolster_3 }}</p>
+                            </td>
+                            <td class="tbl-data-downtime" id="bolster">
+                                <p>{{ $table_downtime->bolster_4 }}</p>
+                            </td>
                             <td class="tbl-data-downtime" id="data-time">
                                 <p>{{ \Carbon\Carbon::parse($table_downtime->created_at)->format('Y-m-d H:i') }}</p>
                             </td>
@@ -257,7 +281,8 @@
 
                                 <a href="{{ route('table_downtime.edit', $table_downtime->table_production_id) }}"
                                     class="table-downtime-btn" id="btn-edit">
-                                    Edit or Delete
+                                    <i class="bx bx-edit" style="color: blue"></i>
+                                    <i class="bx bx-trash" style="color: red"></i>
                                 </a>
                             </td>
                         </tr>

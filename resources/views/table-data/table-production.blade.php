@@ -166,6 +166,18 @@
                             <p>Trial Sample Explanation</p>
                         </th>
                         <th id="tbl-data-production">
+                            <p>Bolster 1</p>
+                        </th>
+                        <th id="tbl-data-production">
+                            <p>Bolster 2</p>
+                        </th>
+                        <th id="tbl-data-production">
+                            <p>Bolster 3</p>
+                        </th>
+                        <th id="tbl-data-production">
+                            <p>Bolster 4</p>
+                        </th>
+                        <th id="tbl-data-production">
                             <p>Created at</p>
                         </th>
                         <th id="tbl-data-production">
@@ -282,6 +294,18 @@
                             <td class="table-data-production" id="trial-sample-exp">
                                 <p>{{ $table_production->trial_sample_exp }}</p>
                             </td>
+                            <td class="table-data-production" id="bolster">
+                                <p>{{ $table_production->bolster_1 }}</p>
+                            </td>
+                            <td class="table-data-production" id="bolster">
+                                <p>{{ $table_production->bolster_2 }}</p>
+                            </td>
+                            <td class="table-data-production" id="bolster">
+                                <p>{{ $table_production->bolster_3 }}</p>
+                            </td>
+                            <td class="table-data-production" id="bolster">
+                                <p>{{ $table_production->bolster_4 }}</p>
+                            </td>
                             <td class="table-data-production" id="created-at">
                                 <p>{{ \Carbon\Carbon::parse($table_production->created_at)->format('Y-m-d H:i') }}</p>
                             </td>
@@ -292,13 +316,13 @@
 
                                 <a href="{{ route('table_production.edit', $table_production->id) }}"
                                     class="table-production-btn" id="btn-edit">
-                                    Edit
+                                    <i class="bx bx-edit" style="color: blue"></i>
                                 </a>
 
                                 <button class="delete-table-production-btn" id="btn-delete"
                                     data_id="{{ $table_production->id }}"
                                     item_name="{{ $table_production->item_name }}"
-                                    production_date="{{ $table_production->date }}">Delete</button>
+                                    production_date="{{ $table_production->date }}"><i class="bx bx-trash" style="color: red"></i></button>
                             </td>
                         </tr>
                     @empty

@@ -171,6 +171,13 @@ class TableProductionController extends Controller
                 'spm' => 'required|numeric',
                 'item_name' => 'required|string',
                 'coil_no' => 'required|string',
+
+                // Validasi untuk bolster data
+                'bolster_1' => 'nullable|string|in:LH,RH',
+                'bolster_2' => 'nullable|string|in:LH,RH',
+                'bolster_3' => 'nullable|string|in:LH,RH',
+                'bolster_4' => 'nullable|string|in:LH,RH',
+
                 'plan_a' => 'required|integer',
                 'plan_b' => 'required|integer',
                 'ok_a' => 'required|integer',
@@ -245,6 +252,10 @@ class TableProductionController extends Controller
                 'model_year' => $production->model_year,
                 'item_name' => $production->item_name,
                 'coil_no' => $production->coil_no,
+                'bolster_1' => $production->bolster_1,
+                'bolster_2' => $production->bolster_2,
+                'bolster_3' => $production->bolster_3,
+                'bolster_4' => $production->bolster_4,
             ];
 
             // Ambil data production problems
@@ -362,6 +373,10 @@ class TableProductionController extends Controller
                     'model_year' => $production->model_year,
                     'item_name' => $production->item_name,
                     'coil_no' => $production->coil_no,
+                    'bolster_1' => $production->bolster_1,
+                    'bolster_2' => $production->bolster_2,
+                    'bolster_3' => $production->bolster_3,
+                    'bolster_4' => $production->bolster_4,
                     'defect_area' => $defectAreas[$i],
                     'defect_name' => $defectNames[$i],
                     'defect_qty_a' => $defectQtysA[$i],

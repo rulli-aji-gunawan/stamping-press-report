@@ -66,7 +66,14 @@ class ProductionController extends Controller
                 'model_year' => 'nullable|string',
                 'spm' => 'required|numeric',
                 'item_name' => 'required|string',
-                'coil_no' => 'required|string',
+                'coil_no' => 'nullable|string', // Ubah menjadi nullable karena akan di-generate
+
+                // Validasi untuk bolster data
+                'bolster_1' => 'nullable|string|in:LH,RH',
+                'bolster_2' => 'nullable|string|in:LH,RH',
+                'bolster_3' => 'nullable|string|in:LH,RH',
+                'bolster_4' => 'nullable|string|in:LH,RH',
+
                 'plan_a' => 'required|integer',
                 'plan_b' => 'required|integer',
                 'ok_a' => 'required|integer',
@@ -80,6 +87,13 @@ class ProductionController extends Controller
                 'rework_exp' => 'nullable|string',
                 'scrap_exp' => 'nullable|string',
                 'trial_sample_exp' => 'nullable|string',
+
+                // Validasi untuk material ticket data
+                'which-side-material' => 'nullable|array',
+                'material_ticket_no_text' => 'nullable|array',
+                'material_ticket_no_r' => 'nullable|array',
+                'material_ticket_no_s' => 'nullable|array',
+                'material_ticket_no_p' => 'nullable|array',
 
                 // Validasi untuk production problems dinamis
                 'production_problems' => 'nullable|array',
@@ -100,6 +114,49 @@ class ProductionController extends Controller
             ]);
 
             Log::info('Validation passed', ['validatedData' => $validatedData]);
+
+            // Generate coil_no dari material ticket data
+            $coilNumbers = [];
+            $whichSides = $request->input('which-side-material', []);
+            $ticketTexts = $request->input('material_ticket_no_text', []);
+            $ticketRs = $request->input('material_ticket_no_r', []);
+            $ticketSs = $request->input('material_ticket_no_s', []);
+            $ticketPs = $request->input('material_ticket_no_p', []);
+
+            // Pastikan array memiliki minimal 1 elemen dan tidak kosong
+            if (!empty($whichSides) && !empty($ticketTexts)) {
+                for ($i = 0; $i < count($whichSides); $i++) {
+                    $whichSide = isset($whichSides[$i]) ? $whichSides[$i] : '';
+                    $ticketText = isset($ticketTexts[$i]) ? $ticketTexts[$i] : '';
+                    $ticketR = isset($ticketRs[$i]) ? $ticketRs[$i] : '';
+                    $ticketS = isset($ticketSs[$i]) ? $ticketSs[$i] : '';
+                    $ticketP = isset($ticketPs[$i]) ? $ticketPs[$i] : '';
+
+                    // Hanya tambahkan jika ada data minimal which-side dan ticket text
+                    if (!empty($whichSide) && !empty($ticketText)) {
+                        // Format: "which-side : material_ticket_no_text-material_ticket_no_r-material_ticket_no_s-material_ticket_no_p"
+                        $coilPart = $whichSide . ' : ' . $ticketText;
+
+                        // Tambahkan R, S, P jika ada
+                        if (!empty($ticketR)) {
+                            $coilPart .= '-' . $ticketR;
+                        }
+                        if (!empty($ticketS)) {
+                            $coilPart .= '-' . $ticketS;
+                        }
+                        if (!empty($ticketP)) {
+                            $coilPart .= '-' . $ticketP;
+                        }
+
+                        $coilNumbers[] = $coilPart;
+                    }
+                }
+            }
+
+            // Gabungkan dengan semicolon dan spasi
+            $validatedData['coil_no'] = implode(' ; ', $coilNumbers);
+
+            Log::info('Generated coil_no', ['coil_no' => $validatedData['coil_no']]);
 
             $date = $validatedData['date'];
             $carbonDate = \Carbon\Carbon::parse($date);
@@ -299,12 +356,109 @@ class ProductionController extends Controller
         try {
             // Validasi input
             $validatedData = $request->validate([
-                // ... validasi lainnya
+                'reporter' => 'required|string',
+                'group' => 'required|string',
+                'date' => 'required|date',
+                'shift' => 'required|string',
+                'line' => 'required|string',
+                'start_time' => 'required|date_format:H:i',
+                'finish_time' => 'required|date_format:H:i',
+                'total_prod_time' => 'required|integer',
+                'model' => 'required|string',
+                'model_year' => 'nullable|string',
+                'spm' => 'required|numeric',
+                'item_name' => 'required|string',
+                'coil_no' => 'nullable|string',
+
+                // Validasi untuk bolster data
+                'bolster_1' => 'nullable|string|in:LH,RH',
+                'bolster_2' => 'nullable|string|in:LH,RH',
+                'bolster_3' => 'nullable|string|in:LH,RH',
+                'bolster_4' => 'nullable|string|in:LH,RH',
+
+                'plan_a' => 'required|integer',
+                'plan_b' => 'required|integer',
+                'ok_a' => 'required|integer',
+                'ok_b' => 'required|integer',
+                'rework_a' => 'required|integer',
+                'rework_b' => 'required|integer',
+                'scrap_a' => 'required|integer',
+                'scrap_b' => 'required|integer',
+                'sample_a' => 'required|integer',
+                'sample_b' => 'required|integer',
+                'rework_exp' => 'nullable|string',
+                'scrap_exp' => 'nullable|string',
+                'trial_sample_exp' => 'nullable|string',
+
+                // Validasi untuk material ticket data
+                'which-side-material' => 'nullable|array',
+                'material_ticket_no_text' => 'nullable|array',
+                'material_ticket_no_r' => 'nullable|array',
+                'material_ticket_no_s' => 'nullable|array',
+                'material_ticket_no_p' => 'nullable|array',
+
+                // Validasi untuk production problems
                 'production_problems' => 'nullable|array',
                 'production_problems.*.id' => 'nullable|integer',
                 'production_problems.*.delete_picture' => 'nullable|boolean',
-                // ... validasi lainnya
+                'production_problems.*.time_from' => 'required|date_format:H:i',
+                'production_problems.*.time_until' => 'required|date_format:H:i',
+                'production_problems.*.total_time' => 'required|integer',
+                'production_problems.*.process_name' => 'required|string',
+                'production_problems.*.dt_category' => 'required|string',
+                'production_problems.*.downtime_type' => 'nullable|string',
+                'production_problems.*.dt_classification' => 'required|string',
+                'production_problems.*.problem_description' => 'required|string',
+                'production_problems.*.root_cause' => 'required|string',
+                'production_problems.*.counter_measure' => 'required|string',
+                'production_problems.*.pic' => 'required|string',
+                'production_problems.*.status' => 'required|string',
+                'production_problems.*.problem_picture_data' => 'nullable|string',
+                'production_problems.*.problem_picture_name' => 'nullable|string',
             ]);
+
+            // Generate coil_no dari material ticket data
+            $coilNumbers = [];
+            $whichSides = $request->input('which-side-material', []);
+            $ticketTexts = $request->input('material_ticket_no_text', []);
+            $ticketRs = $request->input('material_ticket_no_r', []);
+            $ticketSs = $request->input('material_ticket_no_s', []);
+            $ticketPs = $request->input('material_ticket_no_p', []);
+
+            // Pastikan array memiliki minimal 1 elemen dan tidak kosong
+            if (!empty($whichSides) && !empty($ticketTexts)) {
+                for ($i = 0; $i < count($whichSides); $i++) {
+                    $whichSide = isset($whichSides[$i]) ? $whichSides[$i] : '';
+                    $ticketText = isset($ticketTexts[$i]) ? $ticketTexts[$i] : '';
+                    $ticketR = isset($ticketRs[$i]) ? $ticketRs[$i] : '';
+                    $ticketS = isset($ticketSs[$i]) ? $ticketSs[$i] : '';
+                    $ticketP = isset($ticketPs[$i]) ? $ticketPs[$i] : '';
+
+                    // Hanya tambahkan jika ada data minimal which-side dan ticket text
+                    if (!empty($whichSide) && !empty($ticketText)) {
+                        // Format: "which-side : material_ticket_no_text-material_ticket_no_r-material_ticket_no_s-material_ticket_no_p"
+                        $coilPart = $whichSide . ' : ' . $ticketText;
+
+                        // Tambahkan R, S, P jika ada
+                        if (!empty($ticketR)) {
+                            $coilPart .= '-' . $ticketR;
+                        }
+                        if (!empty($ticketS)) {
+                            $coilPart .= '-' . $ticketS;
+                        }
+                        if (!empty($ticketP)) {
+                            $coilPart .= '-' . $ticketP;
+                        }
+
+                        $coilNumbers[] = $coilPart;
+                    }
+                }
+            }
+
+            // Gabungkan dengan semicolon dan spasi
+            $validatedData['coil_no'] = implode(' ; ', $coilNumbers);
+
+            Log::info('Generated coil_no for update', ['coil_no' => $validatedData['coil_no']]);
 
             $production = TableProduction::findOrFail($id);
 

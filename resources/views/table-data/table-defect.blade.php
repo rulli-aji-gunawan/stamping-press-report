@@ -131,6 +131,18 @@
                             <p>Area</p>
                         </th>
                         <th id="tbl-data-defect">
+                            <p>Bolster 1</p>
+                        </th>
+                        <th id="tbl-data-defect">
+                            <p>Bolster 2</p>
+                        </th>
+                        <th id="tbl-data-defect">
+                            <p>Bolster 3</p>
+                        </th>
+                        <th id="tbl-data-defect">
+                            <p>Bolster 4</p>
+                        </th>
+                        <th id="tbl-data-defect">
                             <p>Created at</p>
                         </th>
                         <th id="tbl-data-defect">
@@ -198,6 +210,18 @@
                             <td class="tbl-data-defect" id="defect-area">
                                 <p>{{ $table_defect->defect_area }}</p>
                             </td>
+                            <td class="tbl-data-defect" id="bolster">
+                                <p>{{ $table_defect->bolster_1 }}</p>
+                            </td>
+                            <td class="tbl-data-defect" id="bolster">
+                                <p>{{ $table_defect->bolster_2 }}</p>
+                            </td>
+                            <td class="tbl-data-defect" id="bolster">
+                                <p>{{ $table_defect->bolster_3 }}</p>
+                            </td>
+                            <td class="tbl-data-defect" id="bolster">
+                                <p>{{ $table_defect->bolster_4 }}</p>
+                            </td>
                             <td class="tbl-data-defect" id="data-time">
                                 <p>{{ \Carbon\Carbon::parse($table_defect->created_at)->format('Y-m-d H:i') }}</p>
                             </td>
@@ -209,7 +233,8 @@
 
                                 <a href="{{ route('table_defect.edit', $table_defect->table_production_id) }}"
                                     class="table-defect-btn" id="btn-edit">
-                                    Edit or Delete
+                                    <i class="bx bx-edit" style="color: blue"></i>
+                                    <i class="bx bx-trash" style="color: red"></i>
                                 </a>
                             </td>
                         </tr>

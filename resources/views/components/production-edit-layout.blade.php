@@ -186,12 +186,174 @@
                                 </select>
 
                             </td>
+                        </tr>
+
+                        {{-- Material Ticket Number Section --}}
+                        <tr>
+                            <td class="td-right-gen">
+                                <label>Material Ticket No. :</label>
+                            </td>
+                            <th>
+                                <select class="which-side-material" name="which-side-material[]"
+                                    id="which-side-material">
+                                    <option value="">--</option>
+                                    <option value="Single">Single</option>
+                                    <option value="LH">LH</option>
+                                    <option value="OTR">OTR</option>
+                                    <option value="T/G">T/G</option>
+                                    <option value="">--</option>
+                                    <option value="RH">RH</option>
+                                    <option value="INR">INR</option>
+                                    <option value="S/P">S/P</option>
+                                    <option value="RNE">RNE</option>
+                                </select>
+                            </th>
+                            <td>
+                                <input type="text" name="material_ticket_no_text[]" id="material_ticket_no_text"
+                                    placeholder="...ticket no." required>
+                            </td>
+                            <td>
+                                <select name="material_ticket_no_r[]" id="material_ticket_no_r">
+                                    <option value="">--</option>
+                                    <option value="R1">R1</option>
+                                    <option value="R2">R2</option>
+                                    <option value="R3">R3</option>
+                                    <option value="R4">R4</option>
+                                    <option value="R5">R5</option>
+                                    <option value="R6">R6</option>
+                                    <option value="R7">R7</option>
+                                    <option value="R8">R8</option>
+                                    <option value="R9">R9</option>
+                                    <option value="R10">R10</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="material_ticket_no_s[]" id="material_ticket_no_s">
+                                    <option value="">--</option>
+                                    <option value="S00">S00</option>
+                                    <option value="S01">S01</option>
+                                    <option value="S02">S02</option>
+                                    <option value="S03">S03</option>
+                                    <option value="S04">S04</option>
+                                    <option value="S05">S05</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="material_ticket_no_p[]" id="material_ticket_no_p">
+                                    <option value="">--</option>
+                                    <option value="P1">P1</option>
+                                    <option value="P2">P2</option>
+                                    <option value="P3">P3</option>
+                                    <option value="P4">P4</option>
+                                    <option value="P5">P5</option>
+                                    <option value="P6">P6</option>
+                                    <option value="P7">P7</option>
+                                    <option value="P8">P8</option>
+                                    <option value="P9">P9</option>
+                                    <option value="P10">P10</option>
+                                    <option value="P11">P11</option>
+                                    <option value="P12">P12</option>
+                                    <option value="P13">P13</option>
+                                    <option value="P14">P14</option>
+                                    <option value="P15">P15</option>
+                                    <option value="P16">P16</option>
+                                    <option value="P17">P17</option>
+                                    <option value="P18">P18</option>
+                                    <option value="P19">P19</option>
+                                    <option value="P20">P20</option>
+                                    <option value="P21">P21</option>
+                                    <option value="P22">P22</option>
+                                    <option value="P23">P23</option>
+                                    <option value="P24">P24</option>
+                                    <option value="P25">P25</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="td-right-gen"></td>
+                            <td colspan="5" style="text-align: left; padding: 5px;">
+                                <button type="button" id="btn-addMaterialTicketNumber"
+                                    style="background: #4CAF50; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
+                                    Add Material Ticket
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
                             <td class="td-right-gen">
                                 <label for="coil_no">Coil No. :</label>
                             </td>
-                            <td colspan="2">
+                            <td colspan="5">
                                 <input type="text" name="coil_no" id="coil_no"
-                                    value="{{ $production->coil_no }}" placeholder="...input coil no." required>
+                                    value="{{ $production->coil_no }}"
+                                    placeholder="Auto-generated from material ticket" readonly>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="td-right-gen">
+                                <label>Bolster :</label>
+                            </td>
+                            <td colspan="5">
+                                <table id="bolster-table">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="">Bolster No.1</th>
+                                            <th colspan="">Bolster No.2</th>
+                                            <th colspan="">Bolster No.3</th>
+                                            <th colspan="">Bolster No.4</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <select name="bolster_1" id="bolster_1">
+                                                    <option value="">--</option>
+                                                    <option value="LH"
+                                                        {{ $production->bolster_1 == 'LH' ? 'selected' : '' }}>LH
+                                                    </option>
+                                                    <option value="RH"
+                                                        {{ $production->bolster_1 == 'RH' ? 'selected' : '' }}>RH
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select name="bolster_2" id="bolster_2">
+                                                    <option value="">--</option>
+                                                    <option value="LH"
+                                                        {{ $production->bolster_2 == 'LH' ? 'selected' : '' }}>LH
+                                                    </option>
+                                                    <option value="RH"
+                                                        {{ $production->bolster_2 == 'RH' ? 'selected' : '' }}>RH
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select name="bolster_3" id="bolster_3">
+                                                    <option value="">--</option>
+                                                    <option value="LH"
+                                                        {{ $production->bolster_3 == 'LH' ? 'selected' : '' }}>LH
+                                                    </option>
+                                                    <option value="RH"
+                                                        {{ $production->bolster_3 == 'RH' ? 'selected' : '' }}>RH
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select name="bolster_4" id="bolster_4">
+                                                    <option value="">--</option>
+                                                    <option value="LH"
+                                                        {{ $production->bolster_4 == 'LH' ? 'selected' : '' }}>LH
+                                                    </option>
+                                                    <option value="RH"
+                                                        {{ $production->bolster_4 == 'RH' ? 'selected' : '' }}>RH
+                                                    </option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </td>
                         </tr>
                         <tr class="tbl-qty">
@@ -1000,6 +1162,218 @@
             }
         });
     });
+</script>
+
+<script>
+    // Material Ticket dan Auto-generate Coil Number functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        let materialTicketRowCounter = 1;
+
+        // Fungsi untuk generate coil_no dari material ticket data
+        function generateCoilNumber() {
+            const coilNumbers = [];
+
+            // Ambil semua rows material ticket
+            const materialTicketRows = document.querySelectorAll(
+                'tr:has(select[name="which-side-material[]"])');
+
+            materialTicketRows.forEach(function(row) {
+                const whichSide = row.querySelector('select[name="which-side-material[]"]').value;
+                const ticketText = row.querySelector('input[name="material_ticket_no_text[]"]').value;
+                const ticketR = row.querySelector('select[name="material_ticket_no_r[]"]').value;
+                const ticketS = row.querySelector('select[name="material_ticket_no_s[]"]').value;
+                const ticketP = row.querySelector('select[name="material_ticket_no_p[]"]').value;
+
+                if (whichSide && ticketText) {
+                    // Format: "which-side : material_ticket_no_text-material_ticket_no_r-material_ticket_no_s-material_ticket_no_p"
+                    let coilPart = whichSide + ' : ' + ticketText;
+
+                    // Tambahkan R, S, P jika ada
+                    if (ticketR) {
+                        coilPart += '-' + ticketR;
+                    }
+                    if (ticketS) {
+                        coilPart += '-' + ticketS;
+                    }
+                    if (ticketP) {
+                        coilPart += '-' + ticketP;
+                    }
+
+                    coilNumbers.push(coilPart);
+                }
+            });
+
+            // Update field coil_no
+            const coilNoField = document.getElementById('coil_no');
+            if (coilNoField) {
+                coilNoField.value = coilNumbers.join(' ; ');
+            }
+        }
+
+        // Event listeners untuk auto-generate coil number
+        document.addEventListener('change', function(e) {
+            if (e.target.matches('select[name="which-side-material[]"]') ||
+                e.target.matches('select[name="material_ticket_no_r[]"]') ||
+                e.target.matches('select[name="material_ticket_no_s[]"]') ||
+                e.target.matches('select[name="material_ticket_no_p[]"]')) {
+                generateCoilNumber();
+            }
+        });
+
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('input[name="material_ticket_no_text[]"]')) {
+                generateCoilNumber();
+            }
+        });
+
+        // Add material ticket row functionality
+        document.getElementById('btn-addMaterialTicketNumber').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const table = document.getElementById('tbl-form-input-data-production');
+            const newRow = document.createElement('tr');
+            newRow.classList.add('material-ticket-row');
+            newRow.id = `material-ticket-row-${materialTicketRowCounter}`;
+
+            newRow.innerHTML = `
+                <td class="td-right-gen">
+                    <label></label>
+                </td>
+                <th>
+                    <select class="which-side-material" name="which-side-material[]" id="which-side-material-${materialTicketRowCounter}">
+                        <option value="">--</option>
+                        <option value="Single">Single</option>
+                        <option value="LH">LH</option>
+                        <option value="OTR">OTR</option>
+                        <option value="T/G">T/G</option>
+                        <option value="">--</option>
+                        <option value="RH">RH</option>
+                        <option value="INR">INR</option>
+                        <option value="S/P">S/P</option>
+                        <option value="RNE">RNE</option>
+                    </select>
+                </th>
+                <td>
+                    <input type="text" name="material_ticket_no_text[]" class="material_ticket_no_text" id="material_ticket_no_text-${materialTicketRowCounter}"
+                        placeholder="...ticket no." required>
+                </td>
+                <td>
+                    <select name="material_ticket_no_r[]" class="general-select" id="material_ticket_no_r-${materialTicketRowCounter}">
+                        <option value="">--</option>
+                        <option value="R1">R1</option>
+                        <option value="R2">R2</option>
+                        <option value="R3">R3</option>
+                        <option value="R4">R4</option>
+                        <option value="R5">R5</option>
+                        <option value="R6">R6</option>
+                        <option value="R7">R7</option>
+                        <option value="R8">R8</option>
+                        <option value="R9">R9</option>
+                        <option value="R10">R10</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="material_ticket_no_s[]" class="general-select" id="material_ticket_no_s-${materialTicketRowCounter}">
+                        <option value="">--</option>
+                        <option value="S00">S00</option>
+                        <option value="S01">S01</option>
+                        <option value="S02">S02</option>
+                        <option value="S03">S03</option>
+                        <option value="S04">S04</option>
+                        <option value="S05">S05</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="material_ticket_no_p[]" id="material_ticket_no_p-${materialTicketRowCounter}">
+                        <option value="">--</option>
+                        <option value="P1">P1</option>
+                        <option value="P2">P2</option>
+                        <option value="P3">P3</option>
+                        <option value="P4">P4</option>
+                        <option value="P5">P5</option>
+                        <option value="P6">P6</option>
+                        <option value="P7">P7</option>
+                        <option value="P8">P8</option>
+                        <option value="P9">P9</option>
+                        <option value="P10">P10</option>
+                        <option value="P11">P11</option>
+                        <option value="P12">P12</option>
+                        <option value="P13">P13</option>
+                        <option value="P14">P14</option>
+                        <option value="P15">P15</option>
+                        <option value="P16">P16</option>
+                        <option value="P17">P17</option>
+                        <option value="P18">P18</option>
+                        <option value="P19">P19</option>
+                        <option value="P20">P20</option>
+                        <option value="P21">P21</option>
+                        <option value="P22">P22</option>
+                        <option value="P23">P23</option>
+                        <option value="P24">P24</option>
+                        <option value="P25">P25</option>
+                    </select>
+                    <button type="button" class="btn-remove-material-ticket" onclick="removeMaterialTicketRow('material-ticket-row-${materialTicketRowCounter}')">
+                        <i class="bx bx-trash"></i> Remove
+                    </button>
+                </td>
+            `;
+
+            // Insert sebelum row coil_no
+            const coilRow = document.querySelector('tr:has(input[name="coil_no"])');
+            coilRow.parentNode.insertBefore(newRow, coilRow);
+
+            materialTicketRowCounter++;
+        });
+
+        // Initial generation saat page load
+        generateCoilNumber();
+    });
+
+    // Fungsi untuk menghapus row material ticket
+    function removeMaterialTicketRow(rowId) {
+        const row = document.getElementById(rowId);
+        if (row) {
+            row.remove();
+            // Re-generate coil number setelah hapus row
+            setTimeout(function() {
+                const coilNumbers = [];
+                const materialTicketRows = document.querySelectorAll(
+                    'tr:has(select[name="which-side-material[]"])');
+
+                materialTicketRows.forEach(function(row) {
+                    const whichSide = row.querySelector('select[name="which-side-material[]"]').value;
+                    const ticketText = row.querySelector('input[name="material_ticket_no_text[]"]')
+                        .value;
+                    const ticketR = row.querySelector('select[name="material_ticket_no_r[]"]').value;
+                    const ticketS = row.querySelector('select[name="material_ticket_no_s[]"]').value;
+                    const ticketP = row.querySelector('select[name="material_ticket_no_p[]"]').value;
+
+                    if (whichSide && ticketText) {
+                        // Format: "which-side : material_ticket_no_text-material_ticket_no_r-material_ticket_no_s-material_ticket_no_p"
+                        let coilPart = whichSide + ' : ' + ticketText;
+
+                        // Tambahkan R, S, P jika ada
+                        if (ticketR) {
+                            coilPart += '-' + ticketR;
+                        }
+                        if (ticketS) {
+                            coilPart += '-' + ticketS;
+                        }
+                        if (ticketP) {
+                            coilPart += '-' + ticketP;
+                        }
+
+                        coilNumbers.push(coilPart);
+                    }
+                });
+
+                const coilNoField = document.getElementById('coil_no');
+                if (coilNoField) {
+                    coilNoField.value = coilNumbers.join(' ; ');
+                }
+            }, 100);
+        }
+    }
 </script>
 
 @if ($errors->any())

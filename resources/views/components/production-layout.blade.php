@@ -48,16 +48,16 @@
                                 <label for="group">Group :</label>
                             </td>
                             <td>
-                                <select id="group" name="group" required>
+                                <select class="general-select" id="group" name="group" required>
                                     <option value="">-</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                 </select>
                             </td>
-                            <th rowspan="2" class="td-right-gen">
+                            <th rowspan="" class="td-right-gen">
                                 <label for="line">Press Line :</label>
                             </th>
-                            <td rowspan="2">
+                            <td rowspan="">
                                 <select id="line" name="line" required>
                                     <option value="">-</option>
                                     <option value="Line-A">Line-A</option>
@@ -74,26 +74,10 @@
                                 <label for="shift">Shift :</label>
                             </td>
                             <td>
-                                <select name="shift" id="shift" required>
+                                <select class="general-select" name="shift" id="shift" required>
                                     <option value="">-</option>
                                     <option value="day">Day</option>
                                     <option value="night">Night</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label for="start_time" class="td-right-gen">Start Time :</label>
-                            </th>
-                            <td>
-                                <input type="time" id="production-time" name="start_time" required>
-                            </td>
-                            <th><label for="model" class="td-right-gen">Model :</label></th>
-                            <td>
-                                <select name="model" id="model" required>
-                                    <option value="">---</option>
-                                    @foreach ($models as $model)
-                                        <option value="{{ $model }}">{{ $model }}</option>
-                                    @endforeach
                                 </select>
                             </td>
                             <td class="td-right-gen">
@@ -105,17 +89,18 @@
                             </td>
                         </tr>
                         <tr>
-                            <th><label for="finish_time" class="td-right-gen">Finish Time :</label>
+                            <th><label for="start_time" class="td-right-gen">Start Time :</label>
                             </th>
                             <td>
-                                <input type="time" id="production-time" name="finish_time" required>
+                                <input type="time" id="production-time" name="start_time" required>
                             </td>
-                            <td class="td-right-gen">
-                                <label class="model_year" for="model_year">Model Year :</label>
-                            </td>
+                            <th><label for="model" class="td-right-gen">Model :</label></th>
                             <td>
-                                <select name="model_year" id="model_year" required>
-                                    <option value="">----</option>
+                                <select class="general-select" name="model" id="model" required>
+                                    <option value="">---</option>
+                                    @foreach ($models as $model)
+                                        <option value="{{ $model }}">{{ $model }}</option>
+                                    @endforeach
                                 </select>
                             </td>
                             <td class="td-right-gen">
@@ -128,20 +113,32 @@
                             </td>
                         </tr>
                         <tr>
+                            <th><label for="finish_time" class="td-right-gen">Finish Time :</label>
+                            </th>
+                            <td>
+                                <input type="time" id="production-time" name="finish_time" required>
+                            </td>
+                            <td class="td-right-gen">
+                                <label class="model_year" for="model_year">Model Year :</label>
+                            </td>
+                            <td>
+                                <select class="general-select" name="model_year" id="model_year" required>
+                                    <option value="">----</option>
+                                </select>
+                            </td>
+
+                        </tr>
+                        <tr>
                             <th><label for="item_name" class="td-right-gen">Item Name :</label></th>
                             <td colspan="3" class="items">
                                 <select name="item_name" id="item_name" required>
                                     <option value="">MODEL-PNL,ITEM NAME</option>
                                 </select>
                             </td>
-                            <td class="td-right-gen">
-                                <label for="coil_no">Coil No. :</label>
-                            </td>
-                            <td colspan="2">
-                                <input type="text" name="coil_no" id="coil_no" placeholder="...input coil no."
-                                    required>
-                            </td>
+
+
                         </tr>
+
                         <tr class="tbl-qty">
                             <th class="td-right-gen">Qty :</th>
                             <td class="label-act-qty" id="plan">
@@ -264,8 +261,99 @@
                                     placeholder="...input trial or sample purpose">
                             </td>
                         </tr>
+                        <tr>
+                            <td class="td-right-gen">
+                                <label for="coil_no">Material Ticket No. :</label>
+                            </td>
+                            <td colspan="5">
+                                <input type="text" name="coil_no" id="coil_no"
+                                    placeholder="Auto-generated from material ticket" readonly required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td-right-gen">
+                                <button type="button" id="btn-addMaterialTicketNumber"
+                                    style="background: #4CAF50; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
+                                    Add Ticket
+                                </button>
+                            </td>
+                            <th>
+                                <select class="general-select" name="which-side-material[]" id="which-side-material">
+                                    <option value="">--</option>
+                                    <option value="Single">Single</option>
+                                    <option value="LH">LH</option>
+                                    <option value="OTR">OTR</option>
+                                    <option value="T/G">T/G</option>
+                                    <option value="">--</option>
+                                    <option value="RH">RH</option>
+                                    <option value="INR">INR</option>
+                                    <option value="S/P">S/P</option>
+                                    <option value="RNE">RNE</option>
+                                </select>
+                            </th>
+                            <td>
+                                <input type="text" class="material_ticket_no_text"
+                                    name="material_ticket_no_text[]" id="material_ticket_no_text"
+                                    placeholder="...ticket no." required>
+                            </td>
+                            <td colspan="3">
+                                <select name="material_ticket_no_r[]" class="material-ticket-no"
+                                    id="material_ticket_no_r">
+                                    <option value="">--</option>
+                                    <option value="R1">R1</option>
+                                    <option value="R2">R2</option>
+                                    <option value="R3">R3</option>
+                                    <option value="R4">R4</option>
+                                    <option value="R5">R5</option>
+                                    <option value="R6">R6</option>
+                                    <option value="R7">R7</option>
+                                    <option value="R8">R8</option>
+                                    <option value="R9">R9</option>
+                                    <option value="R10">R10</option>
+                                </select>
+                                <select name="material_ticket_no_s[]" class="material-ticket-no"
+                                    id="material_ticket_no_s">
+                                    <option value="">--</option>
+                                    <option value="S00">S00</option>
+                                    <option value="S01">S01</option>
+                                    <option value="S02">S02</option>
+                                    <option value="S03">S03</option>
+                                    <option value="S04">S04</option>
+                                    <option value="S05">S05</option>
+                                </select>
+                                <select name="material_ticket_no_p[]" class="material-ticket-no"
+                                    id="material_ticket_no_p">
+                                    <option value="">--</option>
+                                    <option value="P1">P1</option>
+                                    <option value="P2">P2</option>
+                                    <option value="P3">P3</option>
+                                    <option value="P4">P4</option>
+                                    <option value="P5">P5</option>
+                                    <option value="P6">P6</option>
+                                    <option value="P7">P7</option>
+                                    <option value="P8">P8</option>
+                                    <option value="P9">P9</option>
+                                    <option value="P10">P10</option>
+                                    <option value="P11">P11</option>
+                                    <option value="P12">P12</option>
+                                    <option value="P13">P13</option>
+                                    <option value="P14">P14</option>
+                                    <option value="P15">P15</option>
+                                    <option value="P16">P16</option>
+                                    <option value="P17">P17</option>
+                                    <option value="P18">P18</option>
+                                    <option value="P19">P19</option>
+                                    <option value="P20">P20</option>
+                                    <option value="P21">P21</option>
+                                    <option value="P22">P22</option>
+                                    <option value="P23">P23</option>
+                                    <option value="P24">P24</option>
+                                    <option value="P25">P25</option>
+                                </select>
+                            </td>
                         </tr>
                     </table>
+
                     <!-- Form utama sudah ada di atas, jadi kosong di sini -->
                 </div>
                 <div class="area-mapping-col">
@@ -294,6 +382,46 @@
                             </tbody>
                         </table>
                         <img id="product-image" src="" alt="Product Image" alt="Product Image">
+                    </div>
+                    <div>
+                        <table id="bolster-table">
+                            <thead>
+                                <tr>
+                                    <th colspan="">Bolster No.1</th>
+                                    <th colspan="">Bolster No.2</th>
+                                    <th colspan="">Bolster No.3</th>
+                                    <th colspan="">Bolster No.4</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select name="bolster_1" id="bolster_1">
+                                            <option value="LH">LH</option>
+                                            <option value="RH">RH</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="bolster_2" id="bolster_2">
+                                            <option value="LH">LH</option>
+                                            <option value="RH">RH</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="bolster_3" id="bolster_3">
+                                            <option value="LH">LH</option>
+                                            <option value="RH">RH</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="bolster_4" id="bolster_4">
+                                            <option value="LH">LH</option>
+                                            <option value="RH">RH</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="area-mapping-table">
@@ -629,4 +757,244 @@
     @if (session('success'))
         alert("{{ session('success') }}");
     @endif
+</script>
+
+<script>
+    // Fungsi untuk menambahkan row material ticket number
+    document.addEventListener('DOMContentLoaded', function() {
+        let materialTicketRowCounter = 1; // Counter untuk ID unik
+
+        document.getElementById('btn-addMaterialTicketNumber').addEventListener('click', function(e) {
+            e.preventDefault(); // Mencegah submit form
+
+            // Cari table yang berisi material ticket
+            const table = document.getElementById('tbl-form-input-data-production');
+            const tbody = table.querySelector('tbody') ||
+                table; // Jika ada tbody gunakan, jika tidak gunakan table langsung
+
+            // Buat row baru
+            const newRow = document.createElement('tr');
+            newRow.classList.add(
+                'material-ticket-row'); // Tambahkan class untuk styling jika diperlukan
+            newRow.id = `material-ticket-row-${materialTicketRowCounter}`;
+
+            // HTML untuk row baru
+            newRow.innerHTML = `
+                <td class="td-right-gen">
+                    <label></label>
+                </td>
+                <th>
+                    <select class="general-select" name="which-side-material[]" id="which-side-material-${materialTicketRowCounter}">
+                        <option value="">--</option>
+                        <option value="Single">Single</option>
+                        <option value="LH">LH</option>
+                        <option value="OTR">OTR</option>
+                        <option value="T/G">T/G</option>
+                        <option value="">--</option>
+                        <option value="RH">RH</option>
+                        <option value="INR">INR</option>
+                        <option value="S/P">S/P</option>
+                        <option value="RNE">RNE</option>
+                    </select>
+                </th>
+                <td>
+                    <input type="text" name="material_ticket_no_text[]" class="material_ticket_no_text" id="material_ticket_no_text-${materialTicketRowCounter}"
+                        placeholder="...ticket no." required>
+                </td>
+                <td colspan="3">
+                    <select name="material_ticket_no_r[]" class="material-ticket-no" id="material_ticket_no_r-${materialTicketRowCounter}">
+                        <option value="">--</option>
+                        <option value="R1">R1</option>
+                        <option value="R2">R2</option>
+                        <option value="R3">R3</option>
+                        <option value="R4">R4</option>
+                        <option value="R5">R5</option>
+                        <option value="R6">R6</option>
+                        <option value="R7">R7</option>
+                        <option value="R8">R8</option>
+                        <option value="R9">R9</option>
+                        <option value="R10">R10</option>
+                    </select>
+
+                    <select name="material_ticket_no_s[]" class="material-ticket-no" id="material_ticket_no_s-${materialTicketRowCounter}">
+                        <option value="">--</option>
+                        <option value="S00">S00</option>
+                        <option value="S01">S01</option>
+                        <option value="S02">S02</option>
+                        <option value="S03">S03</option>
+                        <option value="S04">S04</option>
+                        <option value="S05">S05</option>
+                    </select>
+
+                    <select name="material_ticket_no_p[]" class="material-ticket-no" id="material_ticket_no_p-${materialTicketRowCounter}">
+                        <option value="">--</option>
+                        <option value="P1">P1</option>
+                        <option value="P2">P2</option>
+                        <option value="P3">P3</option>
+                        <option value="P4">P4</option>
+                        <option value="P5">P5</option>
+                        <option value="P6">P6</option>
+                        <option value="P7">P7</option>
+                        <option value="P8">P8</option>
+                        <option value="P9">P9</option>
+                        <option value="P10">P10</option>
+                        <option value="P11">P11</option>
+                        <option value="P12">P12</option>
+                        <option value="P13">P13</option>
+                        <option value="P14">P14</option>
+                        <option value="P15">P15</option>
+                        <option value="P16">P16</option>
+                        <option value="P17">P17</option>
+                        <option value="P18">P18</option>
+                        <option value="P19">P19</option>
+                        <option value="P20">P20</option>
+                        <option value="P21">P21</option>
+                        <option value="P22">P22</option>
+                        <option value="P23">P23</option>
+                        <option value="P24">P24</option>
+                        <option value="P25">P25</option>
+                    </select>
+
+                    <button type="button" class="btn-remove-material-ticket" onclick="removeMaterialTicketRow('material-ticket-row-${materialTicketRowCounter}')">
+                        <i class="bx bx-trash"></i>
+                    </button>
+                </td>
+
+            `;
+
+            // Cari row terakhir material ticket atau row button untuk menentukan posisi
+            const buttonRow = document.querySelector('.btn-row');
+            const parentElement = buttonRow.parentNode;
+            const tableElement = parentElement.querySelector('#tbl-form-input-data-production');
+
+            // Insert row baru sebelum button row (setelah row material ticket terakhir)
+            tableElement.appendChild(newRow);
+
+            // Increment counter
+            materialTicketRowCounter++;
+
+            // Update nama fields yang sudah ada menjadi array jika belum
+            updateOriginalFieldsToArray();
+        });
+
+        // Fungsi untuk update field original menjadi array
+        function updateOriginalFieldsToArray() {
+            const originalFields = [
+                'which-side-material',
+                'material_ticket_no_text',
+                'material_ticket_no_r',
+                'material_ticket_no_s',
+                'material_ticket_no_p'
+            ];
+
+            originalFields.forEach(fieldName => {
+                const field = document.getElementById(fieldName);
+                if (field && !field.name.includes('[]')) {
+                    field.name = field.name + '[]';
+                }
+            });
+        }
+
+        // Fungsi untuk generate coil_no dari material ticket data (Format baru)
+        function generateCoilNumber() {
+            const coilNumbers = [];
+
+            // Ambil semua rows material ticket
+            const materialTicketRows = document.querySelectorAll(
+                'tr:has(select[name="which-side-material[]"])');
+
+            materialTicketRows.forEach(function(row) {
+                const whichSide = row.querySelector('select[name="which-side-material[]"]').value;
+                const ticketText = row.querySelector('input[name="material_ticket_no_text[]"]').value;
+                const ticketR = row.querySelector('select[name="material_ticket_no_r[]"]').value;
+                const ticketS = row.querySelector('select[name="material_ticket_no_s[]"]').value;
+                const ticketP = row.querySelector('select[name="material_ticket_no_p[]"]').value;
+
+                if (whichSide && ticketText) {
+                    // Format: "which-side : material_ticket_no_text-material_ticket_no_r-material_ticket_no_s-material_ticket_no_p"
+                    let coilPart = whichSide + ' : ' + ticketText;
+
+                    // Tambahkan R, S, P jika ada
+                    if (ticketR) {
+                        coilPart += '-' + ticketR;
+                    }
+                    if (ticketS) {
+                        coilPart += '-' + ticketS;
+                    }
+                    if (ticketP) {
+                        coilPart += '-' + ticketP;
+                    }
+
+                    coilNumbers.push(coilPart);
+                }
+            });
+
+            // Update field coil_no
+            const coilNoField = document.getElementById('coil_no');
+            if (coilNoField) {
+                coilNoField.value = coilNumbers.join(' ; ');
+            }
+        }
+
+        // Event listeners untuk auto-generate coil number
+        document.addEventListener('change', function(e) {
+            if (e.target.matches('select[name="which-side-material[]"]') ||
+                e.target.matches('select[name="material_ticket_no_r[]"]') ||
+                e.target.matches('select[name="material_ticket_no_s[]"]') ||
+                e.target.matches('select[name="material_ticket_no_p[]"]')) {
+                generateCoilNumber();
+            }
+        });
+
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('input[name="material_ticket_no_text[]"]')) {
+                generateCoilNumber();
+            }
+        });
+
+        // Initial generation saat page load
+        generateCoilNumber();
+    });
+
+    // Fungsi untuk menghapus row material ticket
+    function removeMaterialTicketRow(rowId) {
+        const row = document.getElementById(rowId);
+        if (row) {
+            row.remove();
+            // Re-generate coil number setelah hapus row
+            setTimeout(function() {
+                const coilNumbers = [];
+                const materialTicketRows = document.querySelectorAll(
+                    'tr:has(select[name="which-side-material[]"])');
+
+                materialTicketRows.forEach(function(row) {
+                    const whichSide = row.querySelector('select[name="which-side-material[]"]').value;
+                    const ticketText = row.querySelector('input[name="material_ticket_no_text[]"]')
+                        .value;
+                    const ticketR = row.querySelector('select[name="material_ticket_no_r[]"]').value;
+                    const ticketS = row.querySelector('select[name="material_ticket_no_s[]"]').value;
+                    const ticketP = row.querySelector('select[name="material_ticket_no_p[]"]').value;
+
+                    if (whichSide && ticketText) {
+                        let coilPart = whichSide + ' : ' + ticketText;
+                        if (ticketR) {
+                            coilPart += '-' + ticketR;
+                        }
+                        if (ticketS) {
+                            coilPart += '-' + ticketS;
+                        }
+                        if (ticketP) {
+                            coilPart += '-' + ticketP;
+                        }
+                        coilNumbers.push(coilPart);
+                    }
+                });
+
+                const coilNoField = document.getElementById('coil_no');
+                if (coilNoField) {
+                    coilNoField.value = coilNumbers.join(' ; ');
+                }
+            }, 100);
+        }
+    }
 </script>

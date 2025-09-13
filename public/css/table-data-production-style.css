@@ -89,7 +89,7 @@ a#btn-edit {
     border: none;
     color: #fff;
     height: 20px;
-    background-color: var(--color_Blue);
+    background-color: transparent;
     cursor: pointer;
 }
 
@@ -101,7 +101,7 @@ button#btn-delete {
     border: none;
     color: #fff;
     height: 20px;
-    background-color: var(--color_LightRed);
+    background-color: transparent;
     cursor: pointer;
 }
 
@@ -113,17 +113,6 @@ button#btn-delete {
     opacity: 1;
     transition: opacity 0.5s ease;
 }
-
-/* .filter-table {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 200%;
-    padding: 4px, 5px;
-    gap: 15px;
-    border: solid 1px var(--color_Light1);
-} */
 
 .filter-table input,
 .filter-table select {

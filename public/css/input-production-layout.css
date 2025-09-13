@@ -37,7 +37,8 @@
 .container {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 32px;;
+    margin-top: 32px;
+    ;
     /* background-color: inherit; */
     background-color: var(--color_Light4);
     justify-content: space-between;
@@ -59,9 +60,9 @@
     /* max-width: 800px; */
     display: inline-block;
     border-collapse: collapse;
-    margin-bottom: 36px;
+    /* margin-bottom: 36px; */
     /* hanya untuk check border*/
-    border: 1px solid var(--color_Green1);
+    /* border: 1px solid var(--color_Green1); */
 }
 
 #tbl-form-input-data-production th,
@@ -69,7 +70,7 @@
     padding: 4px;
     width: 120px;
     /* hanya untuk check border*/
-    border: 1px solid var(--color_LightRed);
+    /* border: 1px solid var(--color_LightRed); */
 }
 
 #tbl-form-input-data-production th {
@@ -118,12 +119,16 @@
 }
 
 #tbl-form-input-data-production select {
-    min-width: 96px;
+    /* min-width: 96px; */
     border-radius: 5px;
     border: 1px solid var(--color_Light2);
     /* background: var(--color_LightYellow1); */
     /* border: none; */
     /* margin-right: 26px; */
+}
+
+.general-select {
+    min-width: 100%;
 }
 
 #tbl-form-input-data-production select.which-side-a,
@@ -135,8 +140,16 @@
     padding-left: 36px;
 }
 
+#tbl-form-input-data-production select.which-side-material {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--color_Green2);
+    padding-left: 36px;
+}
+
 #item_name {
-    width: calc(100% - 16px);
+    width: 100%;
     padding-left: 10px;
     border: 1px solid var(--color_Light2);
     border-radius: 5px;
@@ -175,26 +188,6 @@
     font-weight: 600;
     border-radius: 5px;
 }
-
-/* #plan p {
-    background: var(--color_Light3);
-}
-
-#ok p {
-    background: var(--color_LightGreen1);
-}
-
-#rework p {
-    background: #fff1aa;
-}
-
-#ng p {
-    background: #ffaab8
-}
-
-#sample p {
-    background: var(--color_Blue);
-} */
 
 .input-qty {
     border: 1px solid var(--color_Light2);
@@ -249,6 +242,38 @@
     color: var(--color_Green1);
     font-size: 1.1rem;
     /* border: 1px solid var(--color_Green2); */
+}
+
+#tbl-form-input-data-production .material_ticket_no_text,
+#tbl-form-input-data-production .general-select {
+    width: 100%;
+    border: 1px solid var(--color_Light2);
+    /* border: none; */
+    border-radius: 5px;
+    padding-left: 10px;
+    /* background: var(--color_LightYellow1); */
+}
+
+#tbl-form-input-data-production .material-ticket-no {
+    width: 60px;
+    border: 1px solid var(--color_Light2);
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-right: 5px;
+    /* background: var(--color_LightYellow1); */
+}
+
+.btn-delete-material-ticket {
+    max-width: 36px;
+}
+
+.btn-remove-material-ticket {
+    background-color: var(--color_LightRed);
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
 
@@ -361,36 +386,36 @@ td .problem-picture-link a {
 }
 
 .img-preview-container {
-  display: flex;
-  padding: 2px;
-  align-items: center;
-  /* border: 1px solid var(--color_Light2);
+    display: flex;
+    padding: 2px;
+    align-items: center;
+    /* border: 1px solid var(--color_Light2);
   border-radius: 4px; */
-  gap: 6px;
+    gap: 6px;
 }
 
 .btn-delete-image {
-  width: auto;
-  height: 1.5rem;
-  padding: 0 5px;
-  border-radius: 3px;
-  background: var(--color_LightRed);
-  color: #fff;
-  font-size: .65rem;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
+    width: auto;
+    height: 1.5rem;
+    padding: 0 5px;
+    border-radius: 3px;
+    background: var(--color_LightRed);
+    color: #fff;
+    font-size: .65rem;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
 }
 
 .btn-delete-image:hover {
-  background-color: #d32f2f;
+    background-color: #d32f2f;
 }
 
 .no-image {
-  color: #999;
-  font-style: italic;
-  font-size: 0.9em;
+    color: #999;
+    font-style: italic;
+    font-size: 0.9em;
 }
 
 td .problem-img-preview {
@@ -636,6 +661,38 @@ td .no-problem-img {
 .area-mapping-table {
     /* min-width: 120px; */
     width: 340px;
+}
+
+table#bolster-table {
+    width: 340px;
+    border-collapse: collapse;
+    background: #f8f8f8;
+    border-radius: 5px;
+    overflow: hidden;
+    border: solid 1px var(--color_Light2);
+}
+
+table#bolster-table th {
+    background: #176d8c;
+    font-size: 0.8rem;
+    color: #fff;
+    font-weight: 400;
+    padding: 4px;
+    border: 0.5px solid var(--color_Light2);
+    overflow: hidden;
+    text-align: center;
+}
+
+table#bolster-table select {
+    width: 90%;
+    text-align: center;
+    padding: 2px;
+    font-size: 0.8rem;
+    text-align: center;
+    border: 1px solid var(--color_Light2);
+    border-radius: 4px;
+    border-collapse: collapse;
+    margin: 4px 4px 4px 4px;
 }
 
 #area-defect-table {

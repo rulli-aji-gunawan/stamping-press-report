@@ -33,19 +33,6 @@
     --color_LightRed: #e24a64;
 }
 
-/* .container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-top: 36px;
-    background-color: var(--color_Light4);
-    justify-content: space-between;
-    align-items: start;
-    padding: 20px 20px 20px 60px;
-    gap: 16px;
-    width: 100%;
-} */
-
 .tbl-data-downtime td#number:hover,
 .tbl-data-downtime #linked-number:hover {
     cursor: pointer;
@@ -63,13 +50,6 @@
     font-weight: 500;
     /* border: solid 1px var(--color_LightRed); */
 }
-
-/* .tbl-data-downtime #linked-number:hover {
-    cursor: pointer;
-    color: var(--color_Light3);
-    background-color: var(--color_Green1);
-    font-weight: bolder;
-} */
 
 .tbl-data-downtime td#action-for-table-downtime {
     display: flex;
@@ -94,7 +74,7 @@
     border: none;
     color: #fff;
     height: 20px;
-    background-color: var(--color_Blue);
+    background-color: transparent;
 }
 
 .tbl-data-downtime button#btn-delete {
@@ -160,7 +140,9 @@
 .tbl-data-downtime #total-downtime,
 .tbl-data-downtime #model-year,
 .tbl-data-downtime #model,
-.tbl-data-downtime #line {
+.tbl-data-downtime #line,
+.tbl-data-downtime #bolster,
+.tbl-data-downtime #action-for-table-downtime{
     min-width: 40px;
     justify-items: center;
 }
@@ -171,7 +153,6 @@
     justify-items: center;
 }
 
-.tbl-data-downtime #action-for-table-downtime,
 .tbl-data-downtime #reporter,
 .tbl-data-downtime #coil-no {
     min-width: 80px;
