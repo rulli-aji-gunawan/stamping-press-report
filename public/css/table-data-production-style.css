@@ -226,7 +226,8 @@ button#btn-delete {
 }
 
 .tbl-data-production #item-name {
-    min-width: 180px;
+    min-width: 120px;
+    text-wrap: nowrap;
 }
 
 .tbl-data-production #reporter {
@@ -237,8 +238,9 @@ button#btn-delete {
 .tbl-data-production #created-at,
 .tbl-data-production #updated-at,
 .tbl-data-production #coil-number {
-    min-width: 120px;
+    min-width: 100px;
     justify-items: center;
+    text-wrap: nowrap;
 }
 
 .tbl-data-production #rework-exp,

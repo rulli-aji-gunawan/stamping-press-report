@@ -133,7 +133,7 @@
 
 #tbl-form-input-data-production select.which-side-a,
 #tbl-form-input-data-production select.which-side-b {
-    width: 40%;
+    /* width: 40%; */
     background: none;
     border: none;
     color: var(--color_Green2);
