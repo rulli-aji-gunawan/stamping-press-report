@@ -338,7 +338,7 @@
                             <td colspan="5">
                                 <input type="text" name="coil_no" id="coil_no"
                                     value="{{ $production->coil_no }}"
-                                    placeholder="Auto-generated from material ticket" readonly>
+                                    placeholder="Auto-generated from material ticket">
                             </td>
                         </tr>
 
@@ -1159,13 +1159,14 @@
     document.addEventListener('DOMContentLoaded', function() {
         let materialTicketRowCounter = 1;
 
-        // Fungsi untuk generate coil_no dari material ticket data
+        // Fungsi global untuk generate coil number berdasarkan material ticket
         function generateCoilNumber() {
             const coilNumbers = [];
 
-            // Ambil semua rows material ticket
+            // Ambil semua row material ticket
             const materialTicketRows = document.querySelectorAll(
-                'tr:has(select[name="which-side-material[]"])');
+                'tr:has(select[name="which-side-material[]"])'
+            );
 
             materialTicketRows.forEach(function(row) {
                 const whichSide = row.querySelector('select[name="which-side-material[]"]').value;
@@ -1176,56 +1177,59 @@
 
                 if (whichSide && ticketText) {
                     // Format: "which-side : material_ticket_no_text-material_ticket_no_r-material_ticket_no_s-material_ticket_no_p"
-                    let coilPart = whichSide + ' : ' + ticketText;
+                    let coilNumber = `${whichSide} : ${ticketText}`;
 
-                    // Tambahkan R, S, P jika ada
-                    if (ticketR) {
-                        coilPart += '-' + ticketR;
-                    }
-                    if (ticketS) {
-                        coilPart += '-' + ticketS;
-                    }
-                    if (ticketP) {
-                        coilPart += '-' + ticketP;
+                    // Tambahkan ticket numbers jika ada
+                    const ticketParts = [ticketR, ticketS, ticketP].filter(part => part && part !== '');
+                    if (ticketParts.length > 0) {
+                        coilNumber += `-${ticketParts.join('-')}`;
                     }
 
-                    coilNumbers.push(coilPart);
+                    coilNumbers.push(coilNumber);
                 }
             });
 
-            // Update field coil_no
+            // Update field coil_no dengan hasil yang digenerate
             const coilNoField = document.getElementById('coil_no');
             if (coilNoField) {
-                coilNoField.value = coilNumbers.join(' ; ');
+                coilNoField.value = coilNumbers.join(' | ');
             }
         }
 
-        // Event listeners untuk auto-generate coil number
-        document.addEventListener('change', function(e) {
-            if (e.target.matches('select[name="which-side-material[]"]') ||
-                e.target.matches('select[name="material_ticket_no_r[]"]') ||
-                e.target.matches('select[name="material_ticket_no_s[]"]') ||
-                e.target.matches('select[name="material_ticket_no_p[]"]')) {
-                generateCoilNumber();
-            }
-        });
+        // Fungsi untuk update original fields ke array format jika diperlukan
+        function updateOriginalFieldsToArray() {
+            // This function can be expanded if needed to handle array field name updates
+            console.log('Original fields updated to array format');
+        }
 
-        document.addEventListener('input', function(e) {
-            if (e.target.matches('input[name="material_ticket_no_text[]"]')) {
-                generateCoilNumber();
-            }
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Event listeners untuk auto-generate coil number
+            document.addEventListener('change', function(e) {
+                if (e.target.matches('select[name="which-side-material[]"]') ||
+                    e.target.matches('select[name="material_ticket_no_r[]"]') ||
+                    e.target.matches('select[name="material_ticket_no_s[]"]') ||
+                    e.target.matches('select[name="material_ticket_no_p[]"]')) {
+                    generateCoilNumber();
+                }
+            });
 
-        // Fungsi untuk menambahkan row material ticket number
-        document.getElementById('btn-addMaterialTicketNumber').addEventListener('click', function(e) {
-            e.preventDefault();
+            document.addEventListener('input', function(e) {
+                if (e.target.matches('input[name="material_ticket_no_text[]"]')) {
+                    generateCoilNumber();
+                }
+            });
 
-            const table = document.getElementById('tbl-form-input-data-production');
-            const newRow = document.createElement('tr');
-            newRow.classList.add('material-ticket-row');
-            newRow.id = `material-ticket-row-${materialTicketRowCounter}`;
+            // Fungsi untuk menambahkan row material ticket number
+            document.getElementById('btn-addMaterialTicketNumber').addEventListener('click', function(
+                e) {
+                e.preventDefault();
 
-            newRow.innerHTML = `
+                const table = document.getElementById('tbl-form-input-data-production');
+                const newRow = document.createElement('tr');
+                newRow.classList.add('material-ticket-row');
+                newRow.id = `material-ticket-row-${materialTicketRowCounter}`;
+
+                newRow.innerHTML = `
                 <td class="td-right-gen">
                     <label></label>
                 </td>
@@ -1306,70 +1310,104 @@
                 </td>
             `;
 
-            // Cari row terakhir material ticket atau row button untuk menentukan posisi
-            const buttonRow = document.querySelector('.btn-row');
-            const parentElement = buttonRow.parentNode;
-            const tableElement = parentElement.querySelector('#tbl-form-input-data-production');
+                // Cari row terakhir material ticket atau row button untuk menentukan posisi
+                const buttonRow = document.querySelector('.btn-row');
+                const parentElement = buttonRow.parentNode;
+                const tableElement = parentElement.querySelector(
+                    '#tbl-form-input-data-production');
 
-            // Insert row baru sebelum button row (setelah row material ticket terakhir)
-            tableElement.appendChild(newRow);
+                // Insert row baru sebelum button row (setelah row material ticket terakhir)
+                tableElement.appendChild(newRow);
 
-            // Increment counter
-            materialTicketRowCounter++;
+                // Increment counter
+                materialTicketRowCounter++;
 
-            // Update nama fields yang sudah ada menjadi array jika belum
-            updateOriginalFieldsToArray();
+                // Update nama fields yang sudah ada menjadi array jika belum
+                updateOriginalFieldsToArray();
+
+                // Auto-generate coil number setelah menambah row baru
+                setTimeout(function() {
+                    generateCoilNumber();
+                }, 100);
+            });
+
+            // Initial generation saat page load
+            generateCoilNumber();
         });
 
-        // Initial generation saat page load
-        generateCoilNumber();
-    });
-
-    // Fungsi untuk menghapus row material ticket
-    function removeMaterialTicketRow(rowId) {
-        const row = document.getElementById(rowId);
-        if (row) {
-            row.remove();
-            // Re-generate coil number setelah hapus row
-            setTimeout(function() {
-                const coilNumbers = [];
-                const materialTicketRows = document.querySelectorAll(
-                    'tr:has(select[name="which-side-material[]"])');
-
-                materialTicketRows.forEach(function(row) {
-                    const whichSide = row.querySelector('select[name="which-side-material[]"]').value;
-                    const ticketText = row.querySelector('input[name="material_ticket_no_text[]"]')
-                        .value;
-                    const ticketR = row.querySelector('select[name="material_ticket_no_r[]"]').value;
-                    const ticketS = row.querySelector('select[name="material_ticket_no_s[]"]').value;
-                    const ticketP = row.querySelector('select[name="material_ticket_no_p[]"]').value;
-
-                    if (whichSide && ticketText) {
-                        // Format: "which-side : material_ticket_no_text-material_ticket_no_r-material_ticket_no_s-material_ticket_no_p"
-                        let coilPart = whichSide + ' : ' + ticketText;
-
-                        // Tambahkan R, S, P jika ada
-                        if (ticketR) {
-                            coilPart += '-' + ticketR;
-                        }
-                        if (ticketS) {
-                            coilPart += '-' + ticketS;
-                        }
-                        if (ticketP) {
-                            coilPart += '-' + ticketP;
-                        }
-
-                        coilNumbers.push(coilPart);
-                    }
-                });
-
-                const coilNoField = document.getElementById('coil_no');
-                if (coilNoField) {
-                    coilNoField.value = coilNumbers.join(' ; ');
-                }
-            }, 100);
+        // Fungsi untuk menghapus row material ticket
+        function removeMaterialTicketRow(rowId) {
+            const row = document.getElementById(rowId);
+            if (row) {
+                row.remove();
+                // Re-generate coil number setelah hapus row
+                setTimeout(function() {
+                    generateCoilNumber();
+                }, 100);
+            }
         }
-    }
+    });
+</script>
+
+<script>
+    // Parse existing coil_no to material ticket fields (Display Only)
+    document.addEventListener('DOMContentLoaded', function() {
+        const coilNo = "{{ $production->coil_no }}";
+
+        if (coilNo) {
+            // Parse coil_no format: "which-side : material_ticket_no_text-material_ticket_no_r-material_ticket_no_s-material_ticket_no_p ; ..."
+            const coilParts = coilNo.split(' ; ');
+
+            if (coilParts.length > 0 && coilParts[0].trim() !== '') {
+                // Ambil bagian pertama untuk display
+                const firstPart = coilParts[0].trim();
+
+                // Split by colon to get which-side and the rest
+                const colonParts = firstPart.split(' : ');
+
+                if (colonParts.length >= 2) {
+                    // Set which-side
+                    const whichSideSelect = document.getElementById('which-side-material');
+                    if (whichSideSelect && colonParts[0]) {
+                        whichSideSelect.value = colonParts[0];
+                    }
+
+                    // Parse the rest (text-R-S-P)
+                    const ticketParts = colonParts[1].split('-');
+
+                    // Set ticket text
+                    const ticketTextInput = document.getElementById('material_ticket_no_text');
+                    if (ticketTextInput && ticketParts[0]) {
+                        ticketTextInput.value = ticketParts[0];
+                    }
+
+                    // Set R value if exists
+                    if (ticketParts.length >= 2) {
+                        const ticketRSelect = document.getElementById('material_ticket_no_r');
+                        if (ticketRSelect && ticketParts[1]) {
+                            ticketRSelect.value = ticketParts[1];
+                        }
+                    }
+
+                    // Set S value if exists
+                    if (ticketParts.length >= 3) {
+                        const ticketSInput = document.getElementById('material_ticket_no_s');
+                        if (ticketSInput && ticketParts[2]) {
+                            ticketSInput.value = ticketParts[2];
+                        }
+                    }
+
+                    // Set P value if exists
+                    if (ticketParts.length >= 4) {
+                        const ticketPSelect = document.getElementById('material_ticket_no_p');
+                        if (ticketPSelect && ticketParts[3]) {
+                            ticketPSelect.value = ticketParts[3];
+                        }
+                    }
+                }
+            }
+        }
+    });
 </script>
 
 @if ($errors->any())

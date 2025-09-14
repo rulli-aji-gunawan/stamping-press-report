@@ -124,9 +124,6 @@
                             <p>SPM</p>
                         </th>
                         <th id="tbl-data-production">
-                            <p>Coil Number</p>
-                        </th>
-                        <th id="tbl-data-production">
                             <p>Plan-A</p>
                         </th>
                         <th id="tbl-data-production">
@@ -178,6 +175,9 @@
                             <p>Bolster 4</p>
                         </th>
                         <th id="tbl-data-production">
+                            <p>Coil Number</p>
+                        </th>
+                        <th id="tbl-data-production">
                             <p>Created at</p>
                         </th>
                         <th id="tbl-data-production">
@@ -195,18 +195,6 @@
                 <tbody>
                     @forelse  ($table_productions as $index => $table_production)
                         <tr>
-                            {{-- <td id="action-for-table-data-production">
-
-                                <a href="{{ route('table_production.edit', $table_production->id) }}"
-                                    class="table-production-btn" id="btn-edit">
-                                    Edit
-                                </a>
-
-                                <button class="delete-table-production-btn" id="btn-delete"
-                                    data_id="{{ $table_production->id }}" item_name="{{ $table_production->item_name }}"
-                                    production_date="{{ $table_production->date }}">Delete</button>
-                            </td> --}}
-
                             <td class="table-data-production" id="number">
                                 <a href="{{ route('table_production.edit', $table_production->id) }}"
                                     id="linked-number">
@@ -251,9 +239,6 @@
                             </td>
                             <td class="table-data-production" id="spm">
                                 <p>{{ $table_production->spm }}</p>
-                            </td>
-                            <td class="table-data-production" id="coil-number">
-                                <p>{{ $table_production->coil_no }}</p>
                             </td>
                             <td class="table-data-production" id="qty">
                                 <p>{{ $table_production->plan_a }}</p>
@@ -305,6 +290,9 @@
                             </td>
                             <td class="table-data-production" id="bolster">
                                 <p>{{ $table_production->bolster_4 }}</p>
+                            </td>
+                            <td class="table-data-production" id="coil-number">
+                                <p>{{ $table_production->coil_no }}</p>
                             </td>
                             <td class="table-data-production" id="created-at">
                                 <p>{{ \Carbon\Carbon::parse($table_production->created_at)->format('Y-m-d H:i') }}</p>

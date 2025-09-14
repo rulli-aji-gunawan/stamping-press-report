@@ -113,9 +113,6 @@
                             <p>Item Name</p>
                         </th>
                         <th id="tbl-data-defect">
-                            <p>Coil Number</p>
-                        </th>
-                        <th id="tbl-data-defect">
                             <p>Problem Category</p>
                         </th>
                         <th id="tbl-data-defect">
@@ -141,6 +138,9 @@
                         </th>
                         <th id="tbl-data-defect">
                             <p>Bolster 4</p>
+                        </th>
+                        <th id="tbl-data-defect">
+                            <p>Coil Number</p>
                         </th>
                         <th id="tbl-data-defect">
                             <p>Created at</p>
@@ -192,9 +192,6 @@
                             <td class="tbl-data-defect" id="item-name">
                                 <p>{{ $table_defect->item_name }}</p>
                             </td>
-                            <td class="tbl-data-defect" id="coil-no">
-                                <p>{{ $table_defect->coil_no }}</p>
-                            </td>
                             <td class="tbl-data-defect" id="defect-category">
                                 <p>{{ $table_defect->defect_category }}</p>
                             </td>
@@ -221,6 +218,9 @@
                             </td>
                             <td class="tbl-data-defect" id="bolster">
                                 <p>{{ $table_defect->bolster_4 }}</p>
+                            </td>
+                            <td class="tbl-data-defect" id="coil-no">
+                                <p>{{ $table_defect->coil_no }}</p>
                             </td>
                             <td class="tbl-data-defect" id="data-time">
                                 <p>{{ \Carbon\Carbon::parse($table_defect->created_at)->format('Y-m-d H:i') }}</p>

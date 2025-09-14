@@ -157,6 +157,7 @@
 .tbl-data-downtime #coil-no {
     min-width: 80px;
     padding-left: 5px;
+    text-wrap: nowrap;
 }
 
 .tbl-data-downtime #time-from,

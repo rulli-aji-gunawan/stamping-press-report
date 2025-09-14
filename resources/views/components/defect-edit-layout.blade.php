@@ -71,10 +71,10 @@
                                     <option value="B" {{ $production->group == 'B' ? 'selected' : '' }}>B</option>
                                 </select>
                             </td>
-                            <th rowspan="2" class="td-right-gen">
+                            <th rowspan="" class="td-right-gen">
                                 <label for="line">Press Line :</label>
                             </th>
-                            <td rowspan="2">
+                            <td rowspan="">
                                 <select id="line" name="line" required disabled>
                                     <option value="">-</option>
                                     <option value="Line-A" {{ $production->line == 'Line-A' ? 'selected' : '' }}>Line-A
@@ -102,6 +102,18 @@
                                     </option>
                                 </select>
                             </td>
+                            <td class="td-right-gen">
+                                <label for="total_prod_time">Total Time :</label>
+                            </td>
+                            <td>
+                                <input type="number" name="show_total_prod_time" id="show_total_prod_time"
+                                    value="{{ $production->total_prod_time }}" placeholder="...minutes" min="0"
+                                    step="1"
+                                    oninput="document.getElementById('total_prod_time').value = this.value;" required
+                                    disabled>
+                                <input type="hidden" name="total_prod_time" id="total_prod_time"
+                                    value="{{ $production->total_prod_time }}">
+                            </td>
                         </tr>
                         <tr>
                             <th><label for="start_time" class="td-right-gen">Start Time :</label></th>
@@ -123,16 +135,12 @@
                                 </select>
                             </td>
                             <td class="td-right-gen">
-                                <label for="total_prod_time">Total Time :</label>
+                                <label for="spm">SPM :</label>
                             </td>
                             <td>
-                                <input type="number" name="show_total_prod_time" id="show_total_prod_time"
-                                    value="{{ $production->total_prod_time }}" placeholder="...minutes" min="0"
-                                    step="1"
-                                    oninput="document.getElementById('total_prod_time').value = this.value;" required
-                                    disabled>
-                                <input type="hidden" name="total_prod_time" id="total_prod_time"
-                                    value="{{ $production->total_prod_time }}">
+                                <input type="number" name="spm" id="spm" min="00.0" max="15.0"
+                                    step="00.1" value="{{ $production->spm }}" placeholder="00.0"
+                                    oninput="limitInputLength(this, 4)" required disabled>
                             </td>
                         </tr>
                         <tr>
@@ -156,14 +164,7 @@
                                     @endforeach
                                 </select>
                             </td>
-                            <td class="td-right-gen">
-                                <label for="spm">SPM :</label>
-                            </td>
-                            <td>
-                                <input type="number" name="spm" id="spm" min="00.0" max="15.0"
-                                    step="00.1" value="{{ $production->spm }}" placeholder="00.0"
-                                    oninput="limitInputLength(this, 4)" required disabled>
-                            </td>
+
                         </tr>
                         <tr>
                             <th><label for="item_name" class="td-right-gen">Item Name :</label></th>
@@ -200,164 +201,6 @@
                             </td>
                         </tr>
 
-                        {{-- Material Ticket Number Section (Display Only) --}}
-                        <tr>
-                            <td class="td-right-gen">
-                                <label>Material Ticket No. :</label>
-                            </td>
-                            <th>
-                                <select class="which-side-material" name="which-side-material[]"
-                                    id="which-side-material" disabled>
-                                    <option value="">--</option>
-                                    <option value="Single">Single</option>
-                                    <option value="LH">LH</option>
-                                    <option value="OTR">OTR</option>
-                                    <option value="T/G">T/G</option>
-                                    <option value="">--</option>
-                                    <option value="RH">RH</option>
-                                    <option value="INR">INR</option>
-                                    <option value="S/P">S/P</option>
-                                    <option value="RNE">RNE</option>
-                                </select>
-                            </th>
-                            <td>
-                                <input type="text" name="material_ticket_no_text[]" id="material_ticket_no_text"
-                                    placeholder="...ticket no." readonly>
-                            </td>
-                            <td>
-                                <select name="material_ticket_no_r[]" id="material_ticket_no_r" disabled>
-                                    <option value="">--</option>
-                                    <option value="R1">R1</option>
-                                    <option value="R2">R2</option>
-                                    <option value="R3">R3</option>
-                                    <option value="R4">R4</option>
-                                    <option value="R5">R5</option>
-                                    <option value="R6">R6</option>
-                                    <option value="R7">R7</option>
-                                    <option value="R8">R8</option>
-                                    <option value="R9">R9</option>
-                                    <option value="R10">R10</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="material_ticket_no_s[]" id="material_ticket_no_s" disabled>
-                                    <option value="">--</option>
-                                    <option value="S00">S00</option>
-                                    <option value="S01">S01</option>
-                                    <option value="S02">S02</option>
-                                    <option value="S03">S03</option>
-                                    <option value="S04">S04</option>
-                                    <option value="S05">S05</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="material_ticket_no_p[]" id="material_ticket_no_p" disabled>
-                                    <option value="">--</option>
-                                    <option value="P1">P1</option>
-                                    <option value="P2">P2</option>
-                                    <option value="P3">P3</option>
-                                    <option value="P4">P4</option>
-                                    <option value="P5">P5</option>
-                                    <option value="P6">P6</option>
-                                    <option value="P7">P7</option>
-                                    <option value="P8">P8</option>
-                                    <option value="P9">P9</option>
-                                    <option value="P10">P10</option>
-                                    <option value="P11">P11</option>
-                                    <option value="P12">P12</option>
-                                    <option value="P13">P13</option>
-                                    <option value="P14">P14</option>
-                                    <option value="P15">P15</option>
-                                    <option value="P16">P16</option>
-                                    <option value="P17">P17</option>
-                                    <option value="P18">P18</option>
-                                    <option value="P19">P19</option>
-                                    <option value="P20">P20</option>
-                                    <option value="P21">P21</option>
-                                    <option value="P22">P22</option>
-                                    <option value="P23">P23</option>
-                                    <option value="P24">P24</option>
-                                    <option value="P25">P25</option>
-                                </select>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="td-right-gen">
-                                <label for="coil_no">Coil No. :</label>
-                            </td>
-                            <td colspan="5">
-                                <input type="text" name="coil_no" id="coil_no"
-                                    value="{{ $production->coil_no }}"
-                                    placeholder="Auto-generated from material ticket" readonly>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="td-right-gen">
-                                <label>Bolster :</label>
-                            </td>
-                            <td colspan="5">
-                                <table id="bolster-table">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="">Bolster No.1</th>
-                                            <th colspan="">Bolster No.2</th>
-                                            <th colspan="">Bolster No.3</th>
-                                            <th colspan="">Bolster No.4</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <select name="bolster_1" id="bolster_1">
-                                                    <option value="">--</option>
-                                                    <option value="LH"
-                                                        {{ $production->bolster_1 == 'LH' ? 'selected' : '' }}>LH
-                                                    </option>
-                                                    <option value="RH"
-                                                        {{ $production->bolster_1 == 'RH' ? 'selected' : '' }}>RH
-                                                    </option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select name="bolster_2" id="bolster_2">
-                                                    <option value="">--</option>
-                                                    <option value="LH"
-                                                        {{ $production->bolster_2 == 'LH' ? 'selected' : '' }}>LH
-                                                    </option>
-                                                    <option value="RH"
-                                                        {{ $production->bolster_2 == 'RH' ? 'selected' : '' }}>RH
-                                                    </option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select name="bolster_3" id="bolster_3">
-                                                    <option value="">--</option>
-                                                    <option value="LH"
-                                                        {{ $production->bolster_3 == 'LH' ? 'selected' : '' }}>LH
-                                                    </option>
-                                                    <option value="RH"
-                                                        {{ $production->bolster_3 == 'RH' ? 'selected' : '' }}>RH
-                                                    </option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select name="bolster_4" id="bolster_4">
-                                                    <option value="">--</option>
-                                                    <option value="LH"
-                                                        {{ $production->bolster_4 == 'LH' ? 'selected' : '' }}>LH
-                                                    </option>
-                                                    <option value="RH"
-                                                        {{ $production->bolster_4 == 'RH' ? 'selected' : '' }}>RH
-                                                    </option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
                         <tr class="tbl-qty">
                             <th class="td-right-gen">Qty :</th>
                             <td class="label-act-qty" id="plan">
@@ -499,6 +342,99 @@
                                     placeholder="...input trial or sample purpose">
                             </td>
                         </tr>
+                        <tr>
+                            <td class="td-right-gen">
+                                <label>Material Ticket No. :</label>
+                            </td>
+                            <td colspan="5">
+                                <input type="text" name="coil_no" id="coil_no"
+                                    value="{{ $production->coil_no }}"
+                                    placeholder="Auto-generated from material ticket" readonly>
+                            </td>
+                        </tr>
+                        {{-- Material Ticket Number Section (Display Only) --}}
+                        <tr>
+                            <td class="td-right-gen">
+                                <label>-</label>
+                            </td>
+                            <th>
+                                <select class="general-select" name="which-side-material[]" id="which-side-material"
+                                    disabled>
+                                    <option value="">--</option>
+                                    <option value="Single">Single</option>
+                                    <option value="LH">LH</option>
+                                    <option value="OTR">OTR</option>
+                                    <option value="T/G">T/G</option>
+                                    <option value="">--</option>
+                                    <option value="RH">RH</option>
+                                    <option value="INR">INR</option>
+                                    <option value="S/P">S/P</option>
+                                    <option value="RNE">RNE</option>
+                                </select>
+                            </th>
+                            <td>
+                                <input type="text" name="material_ticket_no_text[]"
+                                    class="material_ticket_no_text" id="material_ticket_no_text"
+                                    placeholder="...ticket no." disabled>
+                            </td>
+                            <td colspan="3">
+                                <select name="material_ticket_no_r[]" class="material-ticket-no"
+                                    id="material_ticket_no_r" disabled>
+                                    <option value="">--</option>
+                                    <option value="R1">R1</option>
+                                    <option value="R2">R2</option>
+                                    <option value="R3">R3</option>
+                                    <option value="R4">R4</option>
+                                    <option value="R5">R5</option>
+                                    <option value="R6">R6</option>
+                                    <option value="R7">R7</option>
+                                    <option value="R8">R8</option>
+                                    <option value="R9">R9</option>
+                                    <option value="R10">R10</option>
+                                </select>
+
+                                <select name="material_ticket_no_s[]" class="material-ticket-no"
+                                    id="material_ticket_no_s" disabled>
+                                    <option value="">--</option>
+                                    <option value="S00">S00</option>
+                                    <option value="S01">S01</option>
+                                    <option value="S02">S02</option>
+                                    <option value="S03">S03</option>
+                                    <option value="S04">S04</option>
+                                    <option value="S05">S05</option>
+                                </select>
+
+                                <select name="material_ticket_no_p[]" class="material-ticket-no"
+                                    id="material_ticket_no_p" disabled>
+                                    <option value="">--</option>
+                                    <option value="P1">P1</option>
+                                    <option value="P2">P2</option>
+                                    <option value="P3">P3</option>
+                                    <option value="P4">P4</option>
+                                    <option value="P5">P5</option>
+                                    <option value="P6">P6</option>
+                                    <option value="P7">P7</option>
+                                    <option value="P8">P8</option>
+                                    <option value="P9">P9</option>
+                                    <option value="P10">P10</option>
+                                    <option value="P11">P11</option>
+                                    <option value="P12">P12</option>
+                                    <option value="P13">P13</option>
+                                    <option value="P14">P14</option>
+                                    <option value="P15">P15</option>
+                                    <option value="P16">P16</option>
+                                    <option value="P17">P17</option>
+                                    <option value="P18">P18</option>
+                                    <option value="P19">P19</option>
+                                    <option value="P20">P20</option>
+                                    <option value="P21">P21</option>
+                                    <option value="P22">P22</option>
+                                    <option value="P23">P23</option>
+                                    <option value="P24">P24</option>
+                                    <option value="P25">P25</option>
+                                </select>
+                            </td>
+                        </tr>
                     </table>
                 </div>
 
@@ -530,6 +466,68 @@
                             </tbody>
                         </table>
                         <img id="product-image" src="" alt="Product Image" alt="Product Image">
+                    </div>
+                    <div>
+                        <td colspan="5">
+                            <table id="bolster-table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="">Bolster No.1</th>
+                                        <th colspan="">Bolster No.2</th>
+                                        <th colspan="">Bolster No.3</th>
+                                        <th colspan="">Bolster No.4</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select name="bolster_1" id="bolster_1">
+                                                <option value="">--</option>
+                                                <option value="LH"
+                                                    {{ $production->bolster_1 == 'LH' ? 'selected' : '' }}>LH
+                                                </option>
+                                                <option value="RH"
+                                                    {{ $production->bolster_1 == 'RH' ? 'selected' : '' }}>RH
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="bolster_2" id="bolster_2">
+                                                <option value="">--</option>
+                                                <option value="LH"
+                                                    {{ $production->bolster_2 == 'LH' ? 'selected' : '' }}>LH
+                                                </option>
+                                                <option value="RH"
+                                                    {{ $production->bolster_2 == 'RH' ? 'selected' : '' }}>RH
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="bolster_3" id="bolster_3">
+                                                <option value="">--</option>
+                                                <option value="LH"
+                                                    {{ $production->bolster_3 == 'LH' ? 'selected' : '' }}>LH
+                                                </option>
+                                                <option value="RH"
+                                                    {{ $production->bolster_3 == 'RH' ? 'selected' : '' }}>RH
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="bolster_4" id="bolster_4">
+                                                <option value="">--</option>
+                                                <option value="LH"
+                                                    {{ $production->bolster_4 == 'LH' ? 'selected' : '' }}>LH
+                                                </option>
+                                                <option value="RH"
+                                                    {{ $production->bolster_4 == 'RH' ? 'selected' : '' }}>RH
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
                     </div>
                 </div>
                 <div class="area-mapping-table">

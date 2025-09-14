@@ -190,7 +190,8 @@ button#btn-delete {
 .tbl-data-production #number,
 .tbl-data-production #shift,
 .tbl-data-production #group,
-.tbl-data-production #total-time {
+.tbl-data-production #total-time,
+.tbl-data-production #action-for-table-data-production {
     min-width: 40px;
     justify-items: center;
 }
@@ -225,8 +226,7 @@ button#btn-delete {
 .tbl-data-production #created-at,
 .tbl-data-production #updated-at,
 .tbl-data-production #coil-number {
-    min-width: 100px;
-    justify-items: center;
+    min-width: 80px;
     text-wrap: nowrap;
 }
 

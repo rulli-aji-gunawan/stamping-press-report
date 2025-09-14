@@ -105,9 +105,6 @@
                             <p>Item Name</p>
                         </th>
                         <th id="tbl-data-downtime">
-                            <p>Coil Number</p>
-                        </th>
-                        <th id="tbl-data-downtime">
                             <p>Time From</p>
                         </th>
                         <th id="tbl-data-downtime">
@@ -159,6 +156,9 @@
                             <p>Bolster 4</p>
                         </th>
                         <th id="tbl-data-downtime">
+                            <p>Coil Number</p>
+                        </th>
+                        <th id="tbl-data-downtime">
                             <p>Created at</p>
                         </th>
                         <th id="tbl-data-downtime">
@@ -208,9 +208,6 @@
                             </td>
                             <td class="tbl-data-downtime" id="item-name">
                                 <p>{{ $table_downtime->item_name }}</p>
-                            </td>
-                            <td class="tbl-data-downtime" id="coil-no">
-                                <p>{{ $table_downtime->coil_no }}</p>
                             </td>
                             <td class="tbl-data-downtime" id="time-from">
                                 <p>{{ $table_downtime->time_from }}</p>
@@ -269,6 +266,9 @@
                             </td>
                             <td class="tbl-data-downtime" id="bolster">
                                 <p>{{ $table_downtime->bolster_4 }}</p>
+                            </td>
+                            <td class="tbl-data-downtime" id="coil-no">
+                                <p>{{ $table_downtime->coil_no }}</p>
                             </td>
                             <td class="tbl-data-downtime" id="data-time">
                                 <p>{{ \Carbon\Carbon::parse($table_downtime->created_at)->format('Y-m-d H:i') }}</p>
