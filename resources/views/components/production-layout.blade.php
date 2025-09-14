@@ -271,12 +271,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="td-right-gen">
+                            <th class="td-right-gen">
                                 <button type="button" id="btn-addMaterialTicketNumber"
                                     style="background: #4CAF50; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
                                     Add Ticket
                                 </button>
-                            </td>
+                            </th>
                             <th>
                                 <select class="general-select" name="which-side-material[]" id="which-side-material">
                                     <option value="">--</option>
@@ -383,6 +383,7 @@
                         </table>
                         <img id="product-image" src="" alt="Product Image" alt="Product Image">
                     </div>
+                    
                     <div>
                         <table id="bolster-table">
                             <thead>
@@ -397,24 +398,28 @@
                                 <tr>
                                     <td>
                                         <select name="bolster_1" id="bolster_1">
+                                            <option value="">--</option>
                                             <option value="LH">LH</option>
                                             <option value="RH">RH</option>
                                         </select>
                                     </td>
                                     <td>
                                         <select name="bolster_2" id="bolster_2">
+                                            <option value="">--</option>
                                             <option value="LH">LH</option>
                                             <option value="RH">RH</option>
                                         </select>
                                     </td>
                                     <td>
                                         <select name="bolster_3" id="bolster_3">
+                                            <option value="">--</option>
                                             <option value="LH">LH</option>
                                             <option value="RH">RH</option>
                                         </select>
                                     </td>
                                     <td>
                                         <select name="bolster_4" id="bolster_4">
+                                            <option value="">--</option>
                                             <option value="LH">LH</option>
                                             <option value="RH">RH</option>
                                         </select>
