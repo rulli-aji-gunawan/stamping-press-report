@@ -102,7 +102,6 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    padding: 3px 5px;
     border: 0.05px solid var(--color_Light1);
 }
 
@@ -111,12 +110,14 @@
     width: 100%;
     text-align: center;
     align-self: center;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     justify-content: center;
     border: none;
     height: 20px;
+    font-size: 1.8rem;
     gap: 5px;
     background-color: transparent;
+    /* border: 0.1px solid var(--color_Orange1); */
 }
 
 #userModal {
@@ -159,7 +160,7 @@
 .tbl-data-defect #model-year,
 .tbl-data-defect #model,
 .tbl-data-defect #line {
-    width: 50px;
+    min-width: 40px;
     justify-items: center;
     text-wrap: nowrap;
 }

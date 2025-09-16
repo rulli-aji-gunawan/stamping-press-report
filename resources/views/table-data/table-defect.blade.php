@@ -233,8 +233,8 @@
 
                                 <a href="{{ route('table_defect.edit', $table_defect->table_production_id) }}"
                                     class="table-defect-btn" id="btn-edit">
-                                    <i class="bx bx-edit" style="color: blue"></i>
-                                    <i class="bx bx-trash" style="color: red"></i>
+                                    <i class="bx bx-edit" style="color: blue; font-size: 1rem;"></i>
+                                    <i class="bx bx-trash" style="color: red; font-size: 1rem;"></i>
                                 </a>
                             </td>
                         </tr>

@@ -1359,7 +1359,7 @@
 
                 table.appendChild(newRow);
                 materialTicketRowCounter++;
-            });
+
     }
 
     // Remove material ticket row function
