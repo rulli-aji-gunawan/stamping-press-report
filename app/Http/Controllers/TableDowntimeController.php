@@ -299,26 +299,61 @@ class TableDowntimeController extends Controller
             // Ambil data production problems
             $productionProblems = $request->input('production_problems', []);
 
+            // Ambil ID downtime yang ada di request untuk tracking
+            $submittedDowntimeIds = [];
+
+            // Step 1: Update atau create downtime sesuai data yang dikirim
             foreach ($productionProblems as $index => $problem) {
+                // Data umum yang harus ada di setiap downtime record
+                $sharedData = [
+                    'reporter' => $validatedData['reporter'],
+                    'group' => $validatedData['group'],
+                    'date' => $validatedData['date'],
+                    'shift' => $validatedData['shift'],
+                    'line' => $validatedData['line'],
+                    'model' => $validatedData['model'],
+                    'model_year' => $validatedData['model_year'] ?? null,
+                    'item_name' => $validatedData['item_name'],
+                    'coil_no' => $validatedData['coil_no'],
+                ];
+
                 // Jika ada ID, berarti ini update record yang sudah ada
-                if (isset($problem['id'])) {
+                if (isset($problem['id']) && !empty($problem['id'])) {
                     $downtimeId = $problem['id'];
                     $downtime = \App\Models\TableDowntime::find($downtimeId);
 
-                    if ($downtime) {
-                        // Update logic for downtime problems...
-                        $downtime->update($problem);
+                    if ($downtime && $downtime->table_production_id == $production->id) {
+                        // Merge problem data dengan common data untuk update
+                        $updateData = array_merge($problem, $sharedData);
+                        unset($updateData['id']); // Remove ID dari update data
+
+                        $downtime->update($updateData);
+                        $submittedDowntimeIds[] = $downtimeId;
                     }
                 }
-                // Jika tidak ada ID, berarti ini data baru
+                // Jika tidak ada ID atau ID kosong, berarti ini data baru
                 else {
-                    // Create new downtime record...
-                    $production->tableDowntimes()->create($problem);
+                    // Create new downtime record
+                    $downtimeData = array_merge($problem, $sharedData);
+                    unset($downtimeData['id']); // Pastikan tidak ada ID field
+
+                    $newDowntime = $production->tableDowntimes()->create($downtimeData);
+                    $submittedDowntimeIds[] = $newDowntime->id;
                 }
             }
 
+            // Step 2: Hapus downtime yang tidak ada dalam submission (sudah dihapus user dari form)
+            if (!empty($submittedDowntimeIds)) {
+                $production->tableDowntimes()
+                    ->whereNotIn('id', $submittedDowntimeIds)
+                    ->delete();
+            } else {
+                // Jika tidak ada production problems yang dikirim, hapus semua downtime
+                $production->tableDowntimes()->delete();
+            }
+
             DB::commit();
-            return redirect()->route('downtime.edit', $id)->with('success', 'Data downtime berhasil diupdate');
+            return redirect()->route('table_downtime', $id)->with('success', 'Data downtime berhasil diupdate');
         } catch (\Exception $e) {
             DB::rollback();
             Log::error('Error in downtime update method', [
@@ -326,7 +361,7 @@ class TableDowntimeController extends Controller
                 'trace' => $e->getTraceAsString()
             ]);
 
-            return redirect()->route('downtime.edit', $id)->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
+            return redirect()->route('table_downtime.edit', $id)->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }
 
