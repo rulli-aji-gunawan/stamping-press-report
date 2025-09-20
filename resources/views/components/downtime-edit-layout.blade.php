@@ -65,7 +65,7 @@
                                 <label for="group">Group :</label>
                             </th>
                             <td>
-                                <select id="group" name="group" required>
+                                <select id="group" name="group"  required>
                                     <option value="">-</option>
                                     <option value="A" {{ $production->group == 'A' ? 'selected' : '' }}>A</option>
                                     <option value="B" {{ $production->group == 'B' ? 'selected' : '' }}>B</option>

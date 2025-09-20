@@ -102,6 +102,7 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+    padding: 3px;
     border: 0.05px solid var(--color_Light1);
 }
 
@@ -114,7 +115,6 @@
     justify-content: center;
     border: none;
     height: 20px;
-    font-size: 1.8rem;
     gap: 5px;
     background-color: transparent;
     /* border: 0.1px solid var(--color_Orange1); */
@@ -154,13 +154,12 @@
     background-color: var(--color_Green4);
 }
 
-.tbl-data-defect #number,
 .tbl-data-defect #shift,
 .tbl-data-defect #group,
 .tbl-data-defect #model-year,
 .tbl-data-defect #model,
 .tbl-data-defect #line {
-    min-width: 40px;
+    width: 20px;
     justify-items: center;
     text-wrap: nowrap;
 }
@@ -191,6 +190,7 @@
     text-wrap: nowrap;
 }
 
+.tbl-data-defect #number,
 .tbl-data-defect #action-for-table-defect,
 .tbl-data-defect #defect-category,
 .tbl-data-defect #defect-name,

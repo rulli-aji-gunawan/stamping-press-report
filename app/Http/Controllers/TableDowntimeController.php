@@ -221,12 +221,18 @@ class TableDowntimeController extends Controller
                 'item_name' => 'required|string',
                 'coil_no' => 'nullable|string',
 
+                // Validasi untuk bolster data
+                'bolster_1' => 'nullable|string|in:LH,RH',
+                'bolster_2' => 'nullable|string|in:LH,RH',
+                'bolster_3' => 'nullable|string|in:LH,RH',
+                'bolster_4' => 'nullable|string|in:LH,RH',
+
                 // Validasi untuk material ticket data
-                'which-side-material' => 'nullable|array',
-                'material_ticket_no_text' => 'nullable|array',
-                'material_ticket_no_r' => 'nullable|array',
-                'material_ticket_no_s' => 'nullable|array',
-                'material_ticket_no_p' => 'nullable|array',
+                // 'which-side-material' => 'nullable|array',
+                // 'material_ticket_no_text' => 'nullable|array',
+                // 'material_ticket_no_r' => 'nullable|array',
+                // 'material_ticket_no_s' => 'nullable|array',
+                // 'material_ticket_no_p' => 'nullable|array',
 
                 // Validasi untuk production problems
                 'production_problems' => 'nullable|array',
@@ -293,6 +299,24 @@ class TableDowntimeController extends Controller
 
             $production = TableProduction::findOrFail($id);
 
+            $date = $validatedData['date'];
+            $carbonDate = \Carbon\Carbon::parse($date);
+            $year = $carbonDate->year;
+            $month = $carbonDate->month;
+
+            // Hitung tahun fiskal
+            if ($month >= 4) {
+                $fyYear = $year;
+            } else {
+                $fyYear = $year - 1;
+            }
+
+            // Hitung urutan bulan fiskal (April = 1, Maret = 12)
+            $fiscalMonth = $month >= 4 ? $month - 3 : $month + 9;
+
+            // Format: FY2025-1, FY2025-2, dst
+            $validatedData['fy_n'] = 'FY' . $fyYear . '-' . $fiscalMonth;
+
             // Update data produksi
             $production->update($validatedData);
 
@@ -314,7 +338,12 @@ class TableDowntimeController extends Controller
                     'model' => $validatedData['model'],
                     'model_year' => $validatedData['model_year'] ?? null,
                     'item_name' => $validatedData['item_name'],
-                    'coil_no' => $validatedData['coil_no'],
+                    'fy_n' => $production->fy_n,
+                    'coil_no' => $production->coil_no,
+                    'bolster_1' => $production->bolster_1,
+                    'bolster_2' => $production->bolster_2,
+                    'bolster_3' => $production->bolster_3,
+                    'bolster_4' => $production->bolster_4,
                 ];
 
                 // Jika ada ID, berarti ini update record yang sudah ada
