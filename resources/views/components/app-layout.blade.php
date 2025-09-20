@@ -68,7 +68,8 @@
             <li class="dropdown">
                 <div class="title">
                     <a href="#" class="link">
-                        <i class='bx bxs-keyboard'></i>
+                        {{-- <i class='bx bxs-keyboard'></i> --}}
+                        <i class='bx bx-task'></i>
                         <span class="name">Input Report</span>
                     </a>
                     <i class='bx bxs-chevron-down'></i>
