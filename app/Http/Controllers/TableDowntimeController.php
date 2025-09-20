@@ -8,15 +8,17 @@ use Illuminate\Http\Request;
 use App\Models\TableDowntime;
 use App\Models\InputProduction;
 use App\Models\TableProduction;
+use Doctrine\DBAL\Schema\Table;
 use App\Models\DowntimeCategory;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Exports\TableDowntimeExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\DowntimeClassification;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreTableDowntimeRequest;
 use App\Http\Requests\UpdateTableDowntimeRequest;
-use Doctrine\DBAL\Schema\Table;
 
 class TableDowntimeController extends Controller
 {
@@ -391,6 +393,58 @@ class TableDowntimeController extends Controller
             ]);
 
             return redirect()->route('table_downtime.edit', $id)->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
+        }
+    }
+
+    public function export(Request $request)
+    {
+        try {
+            $query = TableDowntime::query();
+
+            // Gunakan filter yang sama dengan method index
+            if ($request->filled('date_from')) {
+                $query->where('date', '>=', $request->date_from);
+            }
+            if ($request->filled('date_until')) {
+                $query->where('date', '<=', $request->date_until);
+            }
+            if ($request->filled('fy_n')) {
+                $query->where('fy_n', $request->fy_n);
+            }
+            if ($request->filled('reporter')) {
+                $query->where('reporter', 'like', '%' . $request->reporter . '%');
+            }
+            if ($request->filled('line')) {
+                $query->where('line', $request->line);
+            }
+            if ($request->filled('model')) {
+                $query->where('model', $request->model);
+            }
+            if ($request->filled('item_name')) {
+                $query->where('item_name', 'like', '%' . $request->item_name . '%');
+            }
+
+            // Urutkan data berdasarkan tanggal
+            $query->orderBy('date', 'desc');
+
+            // Log info untuk debug
+            Log::info('Exporting downtime data to Excel', [
+                'filters' => $request->all(),
+                'count' => $query->count()
+            ]);
+
+            // Generate nama file dengan timestamp
+            $fileName = 'downtime_data_' . date('Y-m-d_His') . '.xlsx';
+
+            // Export ke Excel
+            return Excel::download(new TableDowntimeExport($query->get()), $fileName);
+        } catch (\Exception $e) {
+            Log::error('Error exporting downtime data', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return back()->with('error', 'Failed to export data: ' . $e->getMessage());
         }
     }
 

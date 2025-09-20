@@ -2,16 +2,17 @@
 
 namespace App\Exports;
 
-use App\Models\TableProduction;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Carbon\Carbon;
+use App\Models\TableDowntime;
+use App\Models\TableProduction;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class TableProductionExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithStyles
+class TableDowntimeExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithStyles
 {
     protected $query;
 
@@ -22,7 +23,7 @@ class TableProductionExport implements FromCollection, WithHeadings, WithMapping
 
     public function collection()
     {
-        return $this->query ?: TableProduction::all();
+        return $this->query ?: TableDowntime::all();
     }
 
     public function headings(): array
@@ -38,23 +39,19 @@ class TableProductionExport implements FromCollection, WithHeadings, WithMapping
             'Model Year',
             'Model',
             'Item Name',
-            'Start Time',
-            'Finish Time',
-            'Total Time',
-            'SPM',
-            'Plan-A',
-            'Plan-B',
-            'OK-A',
-            'OK-B',
-            'Rework-A',
-            'Rework-B',
-            'Scrap-A',
-            'Scrap-B',
-            'Sample-A',
-            'Sample-B',
-            'Rework Explanation',
-            'Scrap Explanation',
-            'Trial Sample Explanation',
+            'Time From',
+            'Time Until',
+            'Total Downtime',
+            'Process',
+            'DT Category',
+            'DT Type',
+            'DT Classification',
+            'Problem Description',
+            'Root Cause',
+            'Counter Measure',
+            'PIC',
+            'Status',
+            'Problem Picture',
             'Bolster-1',
             'Bolster-2',
             'Bolster-3',
@@ -81,23 +78,19 @@ class TableProductionExport implements FromCollection, WithHeadings, WithMapping
             $row->model_year,
             $row->model,
             $row->item_name,
-            Carbon::parse($row->start_time)->format('H:i'),
-            Carbon::parse($row->finish_time)->format('H:i'),
-            $row->total_prod_time,
-            $row->spm,
-            $row->plan_a,
-            $row->plan_b,
-            $row->ok_a,
-            $row->ok_b,
-            $row->rework_a,
-            $row->rework_b,
-            $row->scrap_a,
-            $row->scrap_b,
-            $row->sample_a,
-            $row->sample_b,
-            $row->rework_exp,
-            $row->scrap_exp,
-            $row->trial_sample_exp,
+            Carbon::parse($row->time)->format('H:i'),
+            Carbon::parse($row->time_until)->format('H:i'),
+            $row->total_time,
+            $row->process_name,
+            $row->dt_category,
+            $row->dt_type,
+            $row->dt_classification,
+            $row->problem_description,
+            $row->root_cause,
+            $row->counter_measure,
+            $row->pic,
+            $row->status,
+            $row->problem_picture,
             $row->bolster_1,
             $row->bolster_2,
             $row->bolster_3,
@@ -112,10 +105,10 @@ class TableProductionExport implements FromCollection, WithHeadings, WithMapping
     {
         return [
             1 => ['font' => ['bold' => true, 'size' => 12]],
-            'A1:AH1' => [
+            'A1:AD1' => [
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                    'startColor' => ['rgb' => '1C6D3F']
+                    'startColor' => ['rgb' => 'B22234']
                 ],
                 'font' => ['color' => ['rgb' => 'FFFFFF']]
             ],

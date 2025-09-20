@@ -160,6 +160,8 @@ Route::middleware('auth', 'web')->group(function () {
 
     Route::delete('table-data/table-downtime/{table_downtime}/delete', [Controllers\TableDowntimeController::class, 'delete'])->name('table_downtime.delete');
 
+    Route::get('/table-data/table-downtime/export', [Controllers\TableDowntimeController::class, 'export'])->name('table_downtime.export');
+
     // Routing for table defect
 
     Route::get('/table-data/table-defect', [Controllers\TableDefectController::class, 'index'])->name('table_defect');
@@ -176,6 +178,8 @@ Route::middleware('auth', 'web')->group(function () {
 
     Route::post('/delete-problem-picture/{id}', [Controllers\ProductionController::class, 'deleteProblemPicture'])
         ->name('delete.problem.picture');
+
+    Route::get('/table-data/table-defect/export', [Controllers\TableDefectController::class, 'export'])->name('table_defect.export');
 });
 
 Route::post('/logout', [Controllers\AuthController::class, 'logout'])

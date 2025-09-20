@@ -2,16 +2,18 @@
 
 namespace App\Exports;
 
-use App\Models\TableProduction;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use App\Models\TableDefect;
 use Carbon\Carbon;
+use App\Models\TableDowntime;
+use App\Models\TableProduction;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class TableProductionExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithStyles
+class TableDefectExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithStyles
 {
     protected $query;
 
@@ -22,7 +24,7 @@ class TableProductionExport implements FromCollection, WithHeadings, WithMapping
 
     public function collection()
     {
-        return $this->query ?: TableProduction::all();
+        return $this->query ?: TableDefect::all();
     }
 
     public function headings(): array
@@ -38,23 +40,11 @@ class TableProductionExport implements FromCollection, WithHeadings, WithMapping
             'Model Year',
             'Model',
             'Item Name',
-            'Start Time',
-            'Finish Time',
-            'Total Time',
-            'SPM',
-            'Plan-A',
-            'Plan-B',
-            'OK-A',
-            'OK-B',
-            'Rework-A',
-            'Rework-B',
-            'Scrap-A',
-            'Scrap-B',
-            'Sample-A',
-            'Sample-B',
-            'Rework Explanation',
-            'Scrap Explanation',
-            'Trial Sample Explanation',
+            'Defect Category',
+            'Defect Name',
+            'Qty-A',
+            'Qty-B',
+            'Area',
             'Bolster-1',
             'Bolster-2',
             'Bolster-3',
@@ -81,23 +71,11 @@ class TableProductionExport implements FromCollection, WithHeadings, WithMapping
             $row->model_year,
             $row->model,
             $row->item_name,
-            Carbon::parse($row->start_time)->format('H:i'),
-            Carbon::parse($row->finish_time)->format('H:i'),
-            $row->total_prod_time,
-            $row->spm,
-            $row->plan_a,
-            $row->plan_b,
-            $row->ok_a,
-            $row->ok_b,
-            $row->rework_a,
-            $row->rework_b,
-            $row->scrap_a,
-            $row->scrap_b,
-            $row->sample_a,
-            $row->sample_b,
-            $row->rework_exp,
-            $row->scrap_exp,
-            $row->trial_sample_exp,
+            $row->defect_category,
+            $row->defect_name,
+            $row->defect_qty_a,
+            $row->defect_qty_b,
+            $row->defect_area,
             $row->bolster_1,
             $row->bolster_2,
             $row->bolster_3,
@@ -112,10 +90,10 @@ class TableProductionExport implements FromCollection, WithHeadings, WithMapping
     {
         return [
             1 => ['font' => ['bold' => true, 'size' => 12]],
-            'A1:AH1' => [
+            'A1:V1' => [
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                    'startColor' => ['rgb' => '1C6D3F']
+                    'startColor' => ['rgb' => 'FF3D00']
                 ],
                 'font' => ['color' => ['rgb' => 'FFFFFF']]
             ],

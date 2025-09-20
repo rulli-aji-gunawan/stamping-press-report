@@ -59,6 +59,11 @@
 
             <button type="submit" class="btn btn-primary">Filter</button>
             <a id="reset-filters" href="{{ route('table_downtime') }}" class="btn btn-secondary">Reset Filter</a>
+
+            <a href="{{ route('table_downtime.export') }}?{{ http_build_query(request()->all()) }}"
+                class="btn btn-success">
+                <i class='bx bx-download'></i> Export to Excel
+            </a>
         </form>
 
         <div class="table-scroll-indicator">
