@@ -120,11 +120,17 @@ Route::middleware('auth', 'web')->group(function () {
         ->name('input.production');
     // ->middleware('web');
 
+    Route::get('/master-data/model-items/all', [Controllers\ModelItemController::class, 'getAll'])->name('models.getAll');
+
+    Route::get('/api/items/{model}', [ModelItemController::class, 'getItemsByModel']);
+
     Route::get('/master-data/process-name/all', [Controllers\ProcessNameController::class, 'getAll'])->name('process.getAll');
 
     Route::get('/master-data/downtime-category/all', [Controllers\DowntimeCategoryController::class, 'getAll'])->name('downtime_categories.getAll');
 
     Route::get('/get-downtime-type/{category_id}', [Controllers\DowntimeCategoryController::class, 'getDowntimeType']);
+
+    Route::get('/master-data/downtime-classification/all', [Controllers\DowntimeClassificationController::class, 'getAll'])->name('dt_classifications.getAll');
 
 
     // Routing for table production

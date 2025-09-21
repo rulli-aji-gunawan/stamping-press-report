@@ -39,10 +39,29 @@
         </div>
     </header>
 
+    <!-- Admin Error Popup -->
+    @if (session('error_popup'))
+        <div id="adminErrorPopup" class="error-popup-overlay">
+            <div class="error-popup-content">
+                <div class="error-popup-header">
+                    <i class='bx bx-error-circle'></i>
+                    <h3>Access Denied</h3>
+                    <span class="close-popup" onclick="closeErrorPopup()">&times;</span>
+                </div>
+                <div class="error-popup-body">
+                    <p>{{ session('error_popup') }}</p>
+                </div>
+                <div class="error-popup-footer">
+                    <button type="button" class="btn-error-ok" onclick="closeErrorPopup()">OK</button>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="sidebar close">
         <!-- ========== Logo ============  -->
         <a href="#" class="logo-box">
-            <i><img src="../images/icon-1.png" alt="Logo"></i>
+            <i><img src="{{ asset('images/icon-1.png') }}" alt="Logo"></i>
             {{-- <i class='bx bxl-xing'></i> --}}
             <div class="logo-name">MMKI Stamping</div>
         </a>
@@ -118,7 +137,8 @@
                     <a href="{{ route('downtime_categories') }}" class="link">DT Category</a>
                     <a href="{{ route('dt_classifications') }}" class="link">DT Classification</a>
 
-                    <a href="#" class="disabled-link" style="text-decoration: line-through">Defects Category</a>
+                    <a href="#" class="disabled-link" style="text-decoration: line-through">Defects
+                        Category</a>
                 </div>
             </li>
         </ul>
@@ -153,5 +173,34 @@
                 e.preventDefault();
                 window.location.href = '/';
             });
+    });
+</script>
+
+<script>
+    function closeErrorPopup() {
+        const popup = document.getElementById('adminErrorPopup');
+        if (popup) {
+            popup.style.opacity = '0';
+            setTimeout(() => {
+                popup.remove();
+            }, 200);
+        }
+    }
+
+    // Auto-close after 5 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+        const popup = document.getElementById('adminErrorPopup');
+        if (popup) {
+            setTimeout(() => {
+                closeErrorPopup();
+            }, 5000);
+        }
+    });
+
+    // Close on overlay click
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('error-popup-overlay')) {
+            closeErrorPopup();
+        }
     });
 </script>

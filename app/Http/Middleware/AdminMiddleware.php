@@ -18,9 +18,10 @@ class AdminMiddleware
         if (auth()->check() && auth()->user()->is_admin) {
             return $next($request);
         }
-        return back()->withErrors([
-            'email' => 'The email you are input not registered yet.',
-            'password' => 'The password you are input not registered yet.',
+        // Return with flash message untuk popup
+        return redirect()->back()->with([
+            'error_popup' => 'Access Denied: You need admin privileges to access this feature.',
+            'error_type' => 'admin_access_denied'
         ]);
     }
 }
