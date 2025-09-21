@@ -42,7 +42,8 @@
     <div class="sidebar close">
         <!-- ========== Logo ============  -->
         <a href="#" class="logo-box">
-            <i class='bx bxl-xing'></i>
+            <i><img src="../images/icon-1.png" alt="Logo"></i>
+            {{-- <i class='bx bxl-xing'></i> --}}
             <div class="logo-name">MMKI Stamping</div>
         </a>
 
@@ -77,7 +78,7 @@
                 <div class="submenu">
                     <a href="/input-report" class="submenu-title">Input Report</a>
                     <a href="/input-report/production" class="link">Production</a>
-                    <a href="#" class="link">Tooling</a>
+                    <a href="#" class="disabled-link" style="text-decoration: line-through">Tooling</a>
                 </div>
             </li>
 
@@ -95,7 +96,8 @@
                     <a href="{{ route('table_production') }}" class="link">Tabel Production</a>
                     <a href="{{ route('table_downtime') }}" class="link">Tabel Downtime</a>
                     <a href="{{ route('table_defect') }}" class="link">Tabel Defect</a>
-                    <a href="#" class="link">Tabel Tooling</a>
+
+                    <a href="#" class="disabled-link" style="text-decoration: line-through">Tabel Tooling</a>
                 </div>
             </li>
 
@@ -104,10 +106,9 @@
             <li class="dropdown">
                 <div class="title">
                     <a href="#" class="link">
-                        <i class='bx bx-edit'></i>
+                        <i class='bx bx-cog'></i>
                         <span class="name">Master Data</span>
                     </a>
-                    <i class='bx bxs-chevron-down'></i>
                 </div>
                 <div class="submenu">
                     <a href="#" class="submenu-title">Master Data</a>
@@ -117,7 +118,7 @@
                     <a href="{{ route('downtime_categories') }}" class="link">DT Category</a>
                     <a href="{{ route('dt_classifications') }}" class="link">DT Classification</a>
 
-                    <a href="#" class="link">Defects Category</a>
+                    <a href="#" class="disabled-link" style="text-decoration: line-through">Defects Category</a>
                 </div>
             </li>
         </ul>
@@ -132,24 +133,25 @@
     document.getElementById('link-logout').addEventListener('submit', function(e) {
         // Cek apakah user masih terautentikasi
         fetch('/api/check-auth', {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (!data.authenticated) {
-                // Jika tidak terautentikasi, batalkan form submission dan redirect ke home
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                        'content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.authenticated) {
+                    // Jika tidak terautentikasi, batalkan form submission dan redirect ke home
+                    e.preventDefault();
+                    window.location.href = '/';
+                }
+                // Jika terautentikasi, biarkan form submit berjalan normal
+            })
+            .catch(() => {
+                // Jika terjadi error, arahkan ke home
                 e.preventDefault();
                 window.location.href = '/';
-            }
-            // Jika terautentikasi, biarkan form submit berjalan normal
-        })
-        .catch(() => {
-            // Jika terjadi error, arahkan ke home
-            e.preventDefault();
-            window.location.href = '/';
-        });
+            });
     });
 </script>

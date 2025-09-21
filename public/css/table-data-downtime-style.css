@@ -46,9 +46,9 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-    text-decoration: none;
-    font-weight: 500;
-    /* border: solid 1px var(--color_LightRed); */
+    text-decoration: underline;
+    text-underline-position: auto;
+    color: var(--color_Blue);
 }
 
 .tbl-data-downtime td#action-for-table-downtime {

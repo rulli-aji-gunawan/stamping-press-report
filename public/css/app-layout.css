@@ -135,7 +135,8 @@ header form:hover,
     border: 2px solid yellow;
 }
 
-.logo-box i {
+.logo-box i,
+.logo-box img {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -150,7 +151,8 @@ header form:hover,
     border-radius: 100%;
 }
 
-.sidebar.close .logo-box i {
+.sidebar.close .logo-box i,
+.sidebar.close .logo-box img {
     display: flex;
     /* align-items: center;
     justify-content: center; */

@@ -85,7 +85,9 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-position: auto;
+    color: var(--color_Blue);
     font-weight: 500;
 }
 

@@ -85,6 +85,59 @@ function updateModelRow(modelId, modelData) {
 
 }
 
+function loadModelForEdit(modelId) {
+    // Fetch model data via AJAX
+    fetch(`${getModelItemUrl}/${modelId}`)
+        .then(response => response.json())
+        .then(data => {
+            // Populate form fields
+            document.getElementById('editModelId').value = data.id;
+            document.getElementById('editModelCode').value = data.model_code;
+            document.getElementById('editModelYear').value = data.model_year;
+            document.getElementById('editItemName').value = data.item_name;
+            
+            // Handle current image display
+            const currentPictureSection = document.getElementById('currentPictureSection');
+            const currentImage = document.getElementById('currentProductImage');
+            const deleteCheckbox = document.getElementById('deleteCurrentPicture');
+            
+            if (data.product_picture && data.product_picture !== '') {
+                // Show current image section
+                currentPictureSection.style.display = 'block';
+                currentImage.src = `/storage/product_pictures/${data.product_picture}`;
+                deleteCheckbox.checked = false;
+                
+                // Update form action with correct ID
+                document.getElementById('editModelForm').action = `{{ route('models.edit', '') }}/${data.id}`;
+            } else {
+                // Hide current image section if no image
+                currentPictureSection.style.display = 'none';
+            }
+            
+            // Reset file input
+            document.getElementById('editProductPicture').value = '';
+        })
+        .catch(error => {
+            console.error('Error loading model data:', error);
+            alert('Error loading model data');
+        });
+}
+
+// Add event listener for edit buttons
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.edit-model-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const modelId = this.getAttribute('data_id');
+            loadModelForEdit(modelId);
+            openEditForm();
+        });
+    });
+});
+
+function openEditForm() {
+    document.getElementById('editForm').style.display = 'block';
+}
+
 function closeForm() {
     document.getElementById('editForm').style.display = 'none';
 }
