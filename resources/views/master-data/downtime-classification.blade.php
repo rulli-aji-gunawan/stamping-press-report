@@ -54,7 +54,8 @@
                     <td id="action">
                         <p><button id="btn-editMasterData" class="edit-downtime-classification-btn"
                                 data_id="{{ $dt_classification->id }}"
-                                dt_classification="{{ $dt_classification->dt_classification }}"><i class='bx bx-edit'></i></button>
+                                dt_classification="{{ $dt_classification->dt_classification }}"><i
+                                    class='bx bx-edit'></i></button>
 
                             <button class="delete-downtime-classification-btn" data_id="{{ $dt_classification->id }}"
                                 dt_classification="{{ $dt_classification->dt_classification }}"
@@ -88,10 +89,12 @@
         <label for="dt_classification">Downtime Classification</label>
         <input type="text" placeholder="Input Downtime Classification" name="downtime_classification"
             id="dt_classification" required>
+
         <div class="form-buttons">
             <button type="submit" class="btn-add" onclick="updateDowntimeClassificationRow()">Add</button>
-            <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
+            <button type="button" class="btn-cancel" onclick="closePopup()">Cancel</button>
         </div>
+
     </form>
 </div>
 
@@ -106,7 +109,7 @@
         <div class="editDowntimeClassification">
             <h3>Edit Downtime Classification</h3>
         </div>
-        <span class="close-popup" onclick="closeForm()">close</span>
+        <span class="close-popup" onclick="closePopup()">close</span>
 
         <input type="hidden" id="editDowntimeClassificationId" name="id">
 
@@ -118,7 +121,7 @@
             <button type="submit" class="btn-update" onclick="updateDowntimeClassificationRow()">Update</button>
             <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
         </div>
-        
+
     </form>
 </div>
 

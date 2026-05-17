@@ -127,6 +127,7 @@
                         <i class='bx bx-cog'></i>
                         <span class="name">Master Data</span>
                     </a>
+                    <i class='bx bxs-chevron-down'></i>
                 </div>
                 <div class="submenu">
                     <a href="#" class="submenu-title">Master Data</a>

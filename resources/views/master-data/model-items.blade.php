@@ -162,6 +162,7 @@
 </div>
 
 <script src="../js/sidebar.js"></script>
+<script src="../js/add-model-item.js"></script>
 <script src="../js/edit-model-item.js"></script>
 <script src="../js/delete-model-item.js"></script>
 
@@ -171,4 +172,3 @@
 <script>
     var getModelItemUrl = '{{ route('models.getAll') }}';
 </script>
-<script src="../js/add-model-item.js"></script>
