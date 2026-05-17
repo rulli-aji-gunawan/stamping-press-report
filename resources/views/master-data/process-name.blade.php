@@ -54,11 +54,12 @@
                     <td id="action">
                         <p>
                             <button id="btn-editMasterData" class="edit-process-name-btn"
-                                data_id="{{ $process_name->id }}"
-                                process_name="{{ $process_name->process_name }}"><i class='bx bx-edit'></i></button>
+                                data_id="{{ $process_name->id }}" process_name="{{ $process_name->process_name }}"><i
+                                    class='bx bx-edit'></i></button>
 
                             <button class="delete-process-name-btn" data_id="{{ $process_name->id }}"
-                                process_name="{{ $process_name->process_name }}" id="btn-delMasterData"><i class='bx bx-trash'></i></button>
+                                process_name="{{ $process_name->process_name }}" id="btn-delMasterData"><i
+                                    class='bx bx-trash'></i></button>
                         </p>
                     </td>
                 </tr>
@@ -112,8 +113,10 @@
         <label for="process_name">Process Name</label>
         <input type="text" name="process_name" id="editProcessName" required>
 
-        <button type="submit" class="btn-update" onclick="updateProcessNameRow()">Update</button>
-        <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
+        <div class="form-buttons">
+            <button type="submit" class="btn-update" onclick="updateProcessNameRow()">Update</button>
+            <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
+        </div>
     </form>
 </div>
 

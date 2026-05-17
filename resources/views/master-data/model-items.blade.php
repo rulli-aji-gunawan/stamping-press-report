@@ -71,8 +71,8 @@
                     </td>
                     <td id="action">
                         <p>
-                            <button id="btn-editMasterData" class="edit-model-btn"
-                                data_id="{{ $model_item->id }}"><i class='bx bx-edit'></i></button>
+                            <button id="btn-editMasterData" class="edit-model-btn" data_id="{{ $model_item->id }}"><i
+                                    class='bx bx-edit'></i></button>
 
                             <button class="delete-model-btn" data_id="{{ $model_item->id }}"
                                 model_code="{{ $model_item->model_code }}" item_name="{{ $model_item->item_name }}"
@@ -149,6 +149,9 @@
         <input type="text" name="item_name" id="editItemName" required>
 
         <label for="editProductPicture">Panel Sketch (upload ulang jika perlu)</label>
+        <div id="currentPictureDisplay" style="display:none; margin-bottom:6px;">
+            <small>File saat ini: <span id="currentPictureName"></span></small>
+        </div>
         <input type="file" name="product_picture" id="editProductPicture" accept="image/*">
 
         <div class="form-buttons">

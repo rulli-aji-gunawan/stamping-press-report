@@ -63,8 +63,8 @@
 
                             <button class="delete-downtime-category-btn" data_id="{{ $downtime_category->id }}"
                                 downtime_name="{{ $downtime_category->downtime_name }}"
-                                downtime_type="{{ $downtime_category->downtime_type }}"
-                                id="btn-delMasterData"><i class='bx bx-trash'></i></button>
+                                downtime_type="{{ $downtime_category->downtime_type }}" id="btn-delMasterData"><i
+                                    class='bx bx-trash'></i></button>
                         </p>
                     </td>
                 </tr>
@@ -135,8 +135,10 @@
             <option value="Non Productive Time">Non Productive Time</option>
         </select>
 
-        <button type="submit" class="btn-update" onclick="updateDowntimeCategoryRow()">Update</button>
-        <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
+        <div class="form-buttons">
+            <button type="submit" class="btn-update" onclick="updateDowntimeCategoryRow()">Update</button>
+            <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
+        </div>
     </form>
 </div>
 

@@ -1,8 +1,3 @@
-// import '../../resources/js/app';
-// import '../../resources/views/app-layout';
-
-// alert('ini adalah halaman dashboard');
-
 const listItems = document.querySelectorAll(".sidebar-list li");
 
 listItems.forEach((item) => {

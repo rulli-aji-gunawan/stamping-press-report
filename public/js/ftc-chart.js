@@ -163,7 +163,7 @@ window.initFTCDashboardChart = function (ftcData, currentFY) {
         data: {
             labels: fyLabels,
             datasets: [{
-                label: 'FTC (First Through Capability)',
+                label: 'FTC (First Time Capability)',
                 data: data,
                 backgroundColor: 'rgb(225, 170, 54, 0.35)',
                 borderColor: 'rgb(225, 170, 54, 1)',

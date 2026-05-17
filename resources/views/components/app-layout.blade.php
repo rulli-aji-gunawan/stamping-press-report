@@ -62,7 +62,6 @@
         <!-- ========== Logo ============  -->
         <a href="#" class="logo-box">
             <i><img src="{{ asset('images/icon-1.png') }}" alt="Logo"></i>
-            {{-- <i class='bx bxl-xing'></i> --}}
             <div class="logo-name">MMKI Stamping</div>
         </a>
 
@@ -97,7 +96,7 @@
                 <div class="submenu">
                     <a href="/input-report" class="submenu-title">Input Report</a>
                     <a href="/input-report/production" class="link">Production</a>
-                    <a href="#" class="disabled-link" style="text-decoration: line-through">Tooling</a>
+                    {{-- <a href="#" class="disabled-link" style="text-decoration: line-through">Tooling</a> --}}
                 </div>
             </li>
 
@@ -116,7 +115,7 @@
                     <a href="{{ route('table_downtime') }}" class="link">Tabel Downtime</a>
                     <a href="{{ route('table_defect') }}" class="link">Tabel Defect</a>
 
-                    <a href="#" class="disabled-link" style="text-decoration: line-through">Tabel Tooling</a>
+                    {{-- <a href="#" class="disabled-link" style="text-decoration: line-through">Tabel Tooling</a> --}}
                 </div>
             </li>
 
@@ -136,9 +135,8 @@
                     <a href="{{ route('process') }}" class="link">Process Name</a>
                     <a href="{{ route('downtime_categories') }}" class="link">DT Category</a>
                     <a href="{{ route('dt_classifications') }}" class="link">DT Classification</a>
-
-                    <a href="#" class="disabled-link" style="text-decoration: line-through">Defects
-                        Category</a>
+                    {{-- <a href="#" class="disabled-link" style="text-decoration: line-through">Defects
+                        Category</a> --}}
                 </div>
             </li>
         </ul>

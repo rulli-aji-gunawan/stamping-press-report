@@ -56,11 +56,12 @@
                     </td>
                     <td id="action">
                         <p>
-                            <button id="btn-editMasterData" class="edit-user-btn"
-                                data-id="{{ $user->id }}"><i class='bx bx-edit'></i></button>
+                            <button id="btn-editMasterData" class="edit-user-btn" data-id="{{ $user->id }}"><i
+                                    class='bx bx-edit'></i></button>
 
                             <button class="delete-user-btn" data-id="{{ $user->id }}"
-                                user-name="{{ $user->name }}" id="btn-delMasterData"><i class='bx bx-trash'></i></button>
+                                user-name="{{ $user->name }}" id="btn-delMasterData"><i
+                                    class='bx bx-trash'></i></button>
                         </p>
                     </td>
                 </tr>
@@ -136,8 +137,10 @@
             <option value="1">Admin</option>
         </select>
 
-        <button type="submit" class="btn-update" onclick="updateUserRow()">Update</button>
-        <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
+        <div class="form-buttons">
+            <button type="submit" class="btn-update" onclick="updateUserRow()">Update</button>
+            <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
+        </div>
     </form>
 </div>
 

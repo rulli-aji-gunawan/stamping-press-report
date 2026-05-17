@@ -50,7 +50,15 @@ header {
     /* border: 1px solid; */
 }
 
-.logo-box i {
+.logo-box img {
+    border: 2px solid var(--color_Light2);
+    border-radius: 100%;
+}
+
+.logo-box i,
+.logo-box img {
+    display: flex;
+    align-items: center;
     font-size: 28px;
     height: 32px;
     width: 32px;
@@ -58,8 +66,6 @@ header {
     text-align: center;
     line-height: 32px;
     transition: all .5s ease;
-    border: 2px solid var(--color_Light2);
-    border-radius: 100%;
 }
 
 .logo-name {

@@ -16,7 +16,7 @@
     <!-- ============ Header ============ -->
     <header>
         <div class="logo-box">
-            <i class='bx bxl-xing'></i>
+            <i><img src="{{ asset('images/icon-1.png') }}" alt="Logo"></i>
             <div class="logo-name">MMKI-Stamping</div>
         </div>
         <p class="page-title">{{ $slot }}</p>
