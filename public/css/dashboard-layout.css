@@ -68,6 +68,10 @@
     /* border: 1px solid var(--color_Green1); */
 }
 
+#dateFilter {
+    border: 1px solid var(--color_DarkGrey);
+}
+
 #clearDateFilter {
     border: 1px solid var(--color_Light2);
     width: 1.5rem;
