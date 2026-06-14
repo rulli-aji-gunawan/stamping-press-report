@@ -269,15 +269,15 @@ function addRow() {
             </select>
         </td>
         <td>
-            <textarea rows="1" name="production_problems[${rowCount}][problem_description]"
+            <textarea rows="1" name="production_problems[${rowCount}][problem_description]" required
                 placeholder="...input problem description"></textarea>
         </td>
         <td>
-            <textarea rows="1" name="production_problems[${rowCount}][root_cause]"
+            <textarea rows="1" name="production_problems[${rowCount}][root_cause]" required
                 placeholder="...input root causes analysis"></textarea>
         </td>
         <td>
-            <textarea rows="1" name="production_problems[${rowCount}][counter_measure]"
+            <textarea rows="1" name="production_problems[${rowCount}][counter_measure]" required
                 placeholder="...input action or countermeasure"></textarea>
         </td>
         <td>
