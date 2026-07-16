@@ -15,6 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (!auth()->user()->hasRole('admin')) {
+        abort(403, 'Access denied');
+    }
         $users = User::query()->limit(100)->get();
         return view('master-data.user', [
             'users' => $users
@@ -40,12 +43,15 @@ class UserController extends Controller
             'email' => ['required', 'min:15', 'max:255', 'email', 'unique:users'],
             'password' => ['required', 'min:3'],
             'is_admin' => ['required'],
+            'role' => ['required'],
         ]);
 
         // Store input data
-        User::create($request->only('name', 'email', 'email-verivied_at', 'password', 'is_admin'));
+        User::create($request->only('name', 'email', 'email_verified_at', 'password', 'is_admin', 'role'));
         return redirect('/master-data/user');
     }
+
+    
 
     /**
      * Display the specified resource.

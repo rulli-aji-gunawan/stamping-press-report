@@ -29,6 +29,8 @@
                 <th id="tbl-user-head-admin">
                     <p>Is Admin</p>
                 </th>
+                <th id="tbl-user-head-role">
+                    <p>Role</p>
                 <th id="tbl-user-head-time">
                     <p>Registered at</p>
                 </th>
@@ -51,6 +53,8 @@
                     <td>
                         <p>{{ $user->is_admin }}</p>
                     </td>
+                    <td>
+                        <p>{{ $user->role }}</p>
                     <td>
                         <p>{{ \Carbon\Carbon::parse($user->created_at)->format('Y-m-d | H:i') }}</p>
                     </td>
@@ -99,6 +103,13 @@
             <option value="0">User</option>
             <option value="1">Admin</option>
         </select>
+        <label for="role">Role</label>
+        <select name="role" class="form-control" required id="role">
+            <option value="">Select</option>
+            <option value="admin">Admin</option>
+            <option value="foreman">Foreman</option>
+            <option value="manager">Manager</option>
+        </select>
         <div class="form-buttons">
             <button type="submit" class="btn-add">Add</button>
             <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
@@ -136,6 +147,12 @@
             <option value="0">User</option>
             <option value="1">Admin</option>
         </select>
+        <select name="role" class="form-control" required id="editRole">
+            <option value="admin">Admin</option>
+            <option value="foreman">Foreman</option>
+            <option value="manager">Manager</option>
+        </select>
+
 
         <div class="form-buttons">
             <button type="submit" class="btn-update" onclick="updateUserRow()">Update</button>

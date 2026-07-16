@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('editPassword').value = user.password;
                     const userType = document.getElementById('editAdmin');
                     userType.value = user.is_admin ? "1" : "0";
+                    document.getElementById('editRole').value = user.role; // Set role value
 
                     document.getElementById('editForm').style.display = 'block';
                 })
@@ -59,6 +60,7 @@ function updateUserRow(userId, userData) {
         row.querySelector('td:nth-child(2) p').textContent = userData.name;
         row.querySelector('td:nth-child(3) p').textContent = userData.email;
         row.querySelector('td:nth-child(4) p').textContent = userData.is_admin ? 'Yes' : 'No';
+        row.querySelector('td:nth-child(5) p').textContent = userData.role; // Update role column
         row.querySelector('td:nth-child(5) p').textContent = new Date(userData.updated_at).toLocaleString();
         // Update kolom lain sesuai kebutuhan
     }

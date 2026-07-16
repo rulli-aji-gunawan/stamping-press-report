@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'role',
     ];
 
     /**
@@ -45,5 +46,10 @@ class User extends Authenticatable
             // 'created_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
     }
 }
