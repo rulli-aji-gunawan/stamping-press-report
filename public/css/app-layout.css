@@ -342,6 +342,7 @@ header form:hover,
     position: relative;
     left: 180px;
     width: calc(100% - 180px);
+    padding-top: 48px;
     transition: all .5s ease;
     opacity: 1;
 }
@@ -523,10 +524,23 @@ header form:hover,
         width: 240px;
         height: 100vh;
         top: 0;
+        z-index: 98;
+        pointer-events: none;
     }
 
     .sidebar.mobile-open {
         transform: translateX(0);
+        z-index: 101;
+        pointer-events: auto;
+    }
+
+    /* Pastikan header selalu di atas sidebar yang tertutup */
+    /* Header: satu baris, tidak wrap */
+    header {
+        z-index: 100;
+        height: 48px;
+        flex-wrap: nowrap;
+        padding: 0 4px 0 0;
     }
 
     /* Konten utama full width, tidak lagi digeser oleh sidebar */
@@ -546,13 +560,6 @@ header form:hover,
     /* Sembunyikan desktop toggle-sidebar di mobile */
     .home .toggle-sidebar {
         display: none;
-    }
-
-    /* Header: satu baris, tidak wrap */
-    header {
-        height: 48px;
-        flex-wrap: nowrap;
-        padding: 0 4px 0 0;
     }
 
     /* Sembunyikan teks welcome di mobile */
