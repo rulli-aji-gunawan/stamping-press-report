@@ -102,7 +102,7 @@ header form:hover,
     position: fixed;
     top: 48px;
     left: 0;
-    height: calc(100vh - 48px);
+    height: 100%;
     width: 180px;
     font-size: .8rem;
     background-color: var(--color_Green1);
@@ -340,9 +340,9 @@ header form:hover,
 /* =============== Home Section =============== */
 .home {
     position: relative;
+    /* top: 36px; */
     left: 180px;
-    width: calc(100% - 180px);
-    padding-top: 48px;
+    /* width: calc(100% - 180px); */
     transition: all .5s ease;
     opacity: 1;
 }
@@ -355,13 +355,13 @@ header form:hover,
 
 .home .toggle-sidebar {
     position: fixed;
-    height: 48px;
+    height: 60px;
     display: flex;
-    top: 48px;
+    top: 50px;
     padding-left: 8px;
     align-items: center;
     width: fit-content;
-    z-index: 99;
+    z-index: 100;
     cursor: pointer;
 }
 
@@ -478,117 +478,13 @@ header form:hover,
 }
 
 
-/* Tombol hamburger - hanya tampil di mobile */
-.mobile-toggle-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--color_Light1);
-    font-size: 22px;
-    padding: 8px 10px;
-    cursor: pointer;
-    flex-shrink: 0;
-    touch-action: manipulation;
-}
-
-/* Overlay gelap saat sidebar mobile terbuka */
-.sidebar-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 99;
-}
-
-.sidebar-overlay.active {
-    display: block;
-}
-
 /* ============ Responsive / Breakpoints ========== */
 @media (max-width: 1080px) {}
 
 /* For Medium Devices */
-@media (max-width: 774px) {
+@media (max-width: 774px) {}
 
-    .mobile-toggle-btn {
-        display: block;
-    }
-
-    /* Sidebar disembunyikan total di luar layar */
-    .sidebar,
-    .sidebar.close {
-        transform: translateX(-100%);
-        width: 240px;
-        height: 100vh;
-        top: 0;
-        z-index: 98;
-        pointer-events: none;
-    }
-
-    .sidebar.mobile-open {
-        transform: translateX(0);
-        z-index: 101;
-        pointer-events: auto;
-    }
-
-    /* Pastikan header selalu di atas sidebar yang tertutup */
-    /* Header: satu baris, tidak wrap */
-    header {
-        z-index: 100;
-        height: 48px;
-        flex-wrap: nowrap;
-        padding: 0 4px 0 0;
-    }
-
-    /* Konten utama full width, tidak lagi digeser oleh sidebar */
-    .home,
-    .sidebar.close~.home {
-        left: 0;
-        width: 100%;
-    }
-
-    /* Saat sidebar mobile terbuka, tampilkan nama menu (bukan icon-only) */
-    .sidebar.mobile-open .logo-name,
-    .sidebar.mobile-open .title .name,
-    .sidebar.mobile-open .title .bxs-chevron-down {
-        display: block;
-    }
-
-    /* Sembunyikan desktop toggle-sidebar di mobile */
-    .home .toggle-sidebar {
-        display: none;
-    }
-
-    /* Sembunyikan teks welcome di mobile */
-    .welcome {
-        display: none;
-    }
-
-    .page-title {
-        flex: 1;
-        font-size: 13px;
-        justify-content: center;
-        text-align: center;
-        margin: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .right-header {
-        flex: none;
-        padding: 0 6px;
-    }
-}
-
-@media (max-width: 560px) {
-    .logo-name {
-        font-size: 0.85rem;
-    }
-}
+@media (max-width: 560px) {}
 
 /* For Small Devices */
 @media (max-width: 360px) {}

@@ -29,9 +29,6 @@
     @endif
 
     <header>
-        <button id="mobile-sidebar-toggle" class="mobile-toggle-btn">
-            <i class='bx bx-menu'></i>
-        </button>
         <p class="welcome">Hi {{ auth()->user()->name }}</p>
         <p class="page-title">{{ $slot }}</p>
         <div class="right-header">
@@ -146,13 +143,14 @@
         </ul>
     </div>
 
-    <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
 </body>
 
-{{-- Mendeteksi apakah session masih aktif sebelum melakukan proses logout --}}
+
+// Mendeteksi apakah session masih aktif sebelum melakukan proses logout
 <script>
     document.getElementById('link-logout').addEventListener('submit', function(e) {
+        // Cek apakah user masih terautentikasi
         fetch('/api/check-auth', {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
@@ -163,11 +161,14 @@
             .then(response => response.json())
             .then(data => {
                 if (!data.authenticated) {
+                    // Jika tidak terautentikasi, batalkan form submission dan redirect ke home
                     e.preventDefault();
                     window.location.href = '/';
                 }
+                // Jika terautentikasi, biarkan form submit berjalan normal
             })
             .catch(() => {
+                // Jika terjadi error, arahkan ke home
                 e.preventDefault();
                 window.location.href = '/';
             });
@@ -179,17 +180,23 @@
         const popup = document.getElementById('adminErrorPopup');
         if (popup) {
             popup.style.opacity = '0';
-            setTimeout(() => popup.remove(), 200);
+            setTimeout(() => {
+                popup.remove();
+            }, 200);
         }
     }
 
+    // Auto-close after 5 seconds
     document.addEventListener('DOMContentLoaded', function() {
         const popup = document.getElementById('adminErrorPopup');
         if (popup) {
-            setTimeout(() => closeErrorPopup(), 5000);
+            setTimeout(() => {
+                closeErrorPopup();
+            }, 5000);
         }
     });
 
+    // Close on overlay click
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('error-popup-overlay')) {
             closeErrorPopup();
