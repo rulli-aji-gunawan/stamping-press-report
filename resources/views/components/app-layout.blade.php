@@ -29,6 +29,9 @@
     @endif
 
     <header>
+        <button id="mobile-sidebar-toggle" class="mobile-toggle-btn">
+            <i class='bx bx-menu'></i>
+        </button>
         <p class="welcome">Hi {{ auth()->user()->name }}</p>
         <p class="page-title">{{ $slot }}</p>
         <div class="right-header">
@@ -143,6 +146,7 @@
         </ul>
     </div>
 
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
 </body>
 
@@ -201,5 +205,35 @@
         if (e.target.classList.contains('error-popup-overlay')) {
             closeErrorPopup();
         }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggleBtn = document.getElementById('mobile-sidebar-toggle');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('mobile-open');
+                overlay.classList.toggle('active');
+            });
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('active');
+            });
+        }
+
+        // Tutup sidebar mobile otomatis kalau user resize ke desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 774) {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('active');
+            }
+        });
     });
 </script>
