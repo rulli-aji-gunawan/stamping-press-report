@@ -150,11 +150,9 @@
 
 </body>
 
-
-// Mendeteksi apakah session masih aktif sebelum melakukan proses logout
+{{-- Mendeteksi apakah session masih aktif sebelum melakukan proses logout --}}
 <script>
     document.getElementById('link-logout').addEventListener('submit', function(e) {
-        // Cek apakah user masih terautentikasi
         fetch('/api/check-auth', {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
@@ -165,14 +163,11 @@
             .then(response => response.json())
             .then(data => {
                 if (!data.authenticated) {
-                    // Jika tidak terautentikasi, batalkan form submission dan redirect ke home
                     e.preventDefault();
                     window.location.href = '/';
                 }
-                // Jika terautentikasi, biarkan form submit berjalan normal
             })
             .catch(() => {
-                // Jika terjadi error, arahkan ke home
                 e.preventDefault();
                 window.location.href = '/';
             });
@@ -184,56 +179,20 @@
         const popup = document.getElementById('adminErrorPopup');
         if (popup) {
             popup.style.opacity = '0';
-            setTimeout(() => {
-                popup.remove();
-            }, 200);
+            setTimeout(() => popup.remove(), 200);
         }
     }
 
-    // Auto-close after 5 seconds
     document.addEventListener('DOMContentLoaded', function() {
         const popup = document.getElementById('adminErrorPopup');
         if (popup) {
-            setTimeout(() => {
-                closeErrorPopup();
-            }, 5000);
+            setTimeout(() => closeErrorPopup(), 5000);
         }
     });
 
-    // Close on overlay click
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('error-popup-overlay')) {
             closeErrorPopup();
         }
-    });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const sidebar = document.querySelector('.sidebar');
-        const toggleBtn = document.getElementById('mobile-sidebar-toggle');
-        const overlay = document.getElementById('sidebar-overlay');
-
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', function() {
-                sidebar.classList.toggle('mobile-open');
-                overlay.classList.toggle('active');
-            });
-        }
-
-        if (overlay) {
-            overlay.addEventListener('click', function() {
-                sidebar.classList.remove('mobile-open');
-                overlay.classList.remove('active');
-            });
-        }
-
-        // Tutup sidebar mobile otomatis kalau user resize ke desktop
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 774) {
-                sidebar.classList.remove('mobile-open');
-                overlay.classList.remove('active');
-            }
-        });
     });
 </script>

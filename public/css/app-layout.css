@@ -102,7 +102,7 @@ header form:hover,
     position: fixed;
     top: 48px;
     left: 0;
-    height: 100%;
+    height: calc(100vh - 48px);
     width: 180px;
     font-size: .8rem;
     background-color: var(--color_Green1);
@@ -340,9 +340,8 @@ header form:hover,
 /* =============== Home Section =============== */
 .home {
     position: relative;
-    /* top: 36px; */
     left: 180px;
-    /* width: calc(100% - 180px); */
+    width: calc(100% - 180px);
     transition: all .5s ease;
     opacity: 1;
 }
@@ -519,7 +518,9 @@ header form:hover,
     .sidebar,
     .sidebar.close {
         transform: translateX(-100%);
-        width: 220px;
+        width: 240px;
+        height: 100vh;
+        top: 0;
     }
 
     .sidebar.mobile-open {
@@ -540,21 +541,29 @@ header form:hover,
         display: block;
     }
 
-    /* Header wrap rapi kalau judul kepanjangan */
+    /* Header: satu baris, tidak wrap */
     header {
-        height: auto;
-        min-height: 48px;
-        flex-wrap: wrap;
-        padding: 6px 0;
+        height: 48px;
+        flex-wrap: nowrap;
+        padding: 0 8px;
     }
 
-    .welcome,
-    .page-title,
-    .right-header {
-        flex: 100%;
+    /* Sembunyikan teks welcome di mobile */
+    .welcome {
+        display: none;
+    }
+
+    .page-title {
+        flex: 1;
+        font-size: 13px;
         justify-content: center;
         text-align: center;
-        margin: 2px 0;
+        margin: 0;
+    }
+
+    .right-header {
+        flex: none;
+        padding: 0;
     }
 }
 
