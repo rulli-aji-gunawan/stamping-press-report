@@ -354,13 +354,13 @@ header form:hover,
 
 .home .toggle-sidebar {
     position: fixed;
-    height: 60px;
+    height: 48px;
     display: flex;
-    top: 50px;
+    top: 48px;
     padding-left: 8px;
     align-items: center;
     width: fit-content;
-    z-index: 100;
+    z-index: 99;
     cursor: pointer;
 }
 
@@ -484,8 +484,10 @@ header form:hover,
     border: none;
     color: var(--color_Light1);
     font-size: 22px;
-    margin-left: 10px;
+    padding: 8px 10px;
     cursor: pointer;
+    flex-shrink: 0;
+    touch-action: manipulation;
 }
 
 /* Overlay gelap saat sidebar mobile terbuka */
@@ -541,11 +543,16 @@ header form:hover,
         display: block;
     }
 
+    /* Sembunyikan desktop toggle-sidebar di mobile */
+    .home .toggle-sidebar {
+        display: none;
+    }
+
     /* Header: satu baris, tidak wrap */
     header {
         height: 48px;
         flex-wrap: nowrap;
-        padding: 0 8px;
+        padding: 0 4px 0 0;
     }
 
     /* Sembunyikan teks welcome di mobile */
@@ -559,11 +566,14 @@ header form:hover,
         justify-content: center;
         text-align: center;
         margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .right-header {
         flex: none;
-        padding: 0;
+        padding: 0 6px;
     }
 }
 

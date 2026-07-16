@@ -1,16 +1,16 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const sidebar = document.querySelector(".sidebar");
-  const listItems = document.querySelectorAll(".sidebar-list li");
-  const toggleSidebar = document.querySelector(".toggle-sidebar");
-  const logo = document.querySelector(".logo-box");
-  const mobileToggleBtn = document.getElementById("mobile-sidebar-toggle");
-  const overlay = document.getElementById("sidebar-overlay");
+(function () {
+  var sidebar = document.querySelector(".sidebar");
+  var listItems = document.querySelectorAll(".sidebar-list li");
+  var toggleSidebar = document.querySelector(".toggle-sidebar");
+  var logo = document.querySelector(".logo-box");
+  var mobileToggleBtn = document.getElementById("mobile-sidebar-toggle");
+  var overlay = document.getElementById("sidebar-overlay");
 
   // -- Dropdown items
-  listItems.forEach((item) => {
-    item.addEventListener("click", () => {
-      const isActive = item.classList.contains("active");
-      listItems.forEach((el) => el.classList.remove("active"));
+  listItems.forEach(function (item) {
+    item.addEventListener("click", function () {
+      var isActive = item.classList.contains("active");
+      listItems.forEach(function (el) { el.classList.remove("active"); });
       if (!isActive) item.classList.add("active");
     });
   });
@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (toggleSidebar) {
-    toggleSidebar.addEventListener("click", () => {
+    toggleSidebar.addEventListener("click", function () {
       if (isDesktop()) sidebar.classList.toggle("close");
     });
   }
 
   if (logo) {
-    logo.addEventListener("click", () => {
+    logo.addEventListener("click", function () {
       if (isDesktop()) sidebar.classList.toggle("close");
     });
   }
@@ -46,10 +46,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (mobileToggleBtn) {
-    mobileToggleBtn.addEventListener("click", () => {
-      sidebar.classList.contains("mobile-open")
-        ? closeMobileSidebar()
-        : openMobileSidebar();
+    mobileToggleBtn.addEventListener("click", function () {
+      if (sidebar.classList.contains("mobile-open")) {
+        closeMobileSidebar();
+      } else {
+        openMobileSidebar();
+      }
     });
   }
 
@@ -58,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Tutup sidebar mobile saat resize ke desktop
-  window.addEventListener("resize", () => {
+  window.addEventListener("resize", function () {
     if (isDesktop()) closeMobileSidebar();
   });
-});
+})();
