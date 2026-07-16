@@ -88,5 +88,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         // Tambahkan ini
         'json' => \App\Http\Middleware\JsonMiddleware::class,
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
+
     ];
 }
