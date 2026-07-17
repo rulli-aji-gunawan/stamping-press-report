@@ -23,8 +23,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    width: 100%;
     margin-top: 12px;
     justify-content: center;
+    align-items: center;
     /* border: solid 1px var(--color_Light2); */
 }
 
@@ -59,7 +61,7 @@
 #modelFilter,
 #itemFilter,
 #lineFilter,
-#groupFilter {
+#groupFilter{
     height: 2rem;
     border-radius: 4px;
     justify-content: left;
@@ -81,6 +83,16 @@
     background: var(--color_Orange1);
     color: var(--color_Light3);
     cursor: pointer;
+}
+
+#resetDateFilter  {
+    width: auto;
+    margin-left: -10px;
+    border-radius: 4px;
+    justify-content: left;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color_DarkGrey);
 }
 
 #sphChart,

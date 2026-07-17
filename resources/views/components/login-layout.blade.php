@@ -21,7 +21,7 @@
         </div>
         <p class="page-title">{{ $slot }}</p>
         <div class="right-header">
-            <a href="/" class="link-to-home">Back to home</a>
+            <a href="/" class="link-to-home">⇦ Back to home</a>
         </div>
     </header>
 

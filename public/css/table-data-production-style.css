@@ -4,12 +4,13 @@
 /* Globals  */
 * {
     font-family: 'Poppins', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
+    text-wrap: nowrap;
 }
 
 /* Variables  */
@@ -246,15 +247,17 @@ button#btn-delete {
     background: var(--color_DarkGrey);
     color: #fff;
     padding: 20px 5px 20px 5px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 500;
 }
 
 .tbl-data-production td p {
     display: flex;
     align-items: center;
+    width: 100%;
+    height: 100%;
     padding: 4px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: var(--color_Green1);
 }
 
@@ -262,7 +265,7 @@ button#btn-delete {
     display: flex;
     align-items: center;
     padding: 4px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: var(--color_Green1);
 }
 

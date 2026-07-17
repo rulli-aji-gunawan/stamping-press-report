@@ -4,7 +4,7 @@
 /* Globals  */
 * {
     font-family: 'Poppins', sans-serif;
-    font-size: .8rem;
+    font-size: 1.0rem;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -36,11 +36,11 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin-top: 28px;
+    /* margin-top: 28px; */
     background-color: inherit;
     justify-content: space-between;
     align-items: start;
-    padding: 20px 40px 20px 40px;
+    padding: 10px 40px 20px 40px;
     gap: 12px;
     width: 100%;
     /* border: 1px solid var(--color_Green1); */
@@ -94,8 +94,10 @@
     background: var(--color_Green1);
     color: var(--color_Light3);
     font-weight: 400;
-    font-size: 0.8rem;
-    height: 24px;
+    font-size: 1.0rem;
+    height: auto;
+    width: auto;
+    padding: 4px 6px;
     cursor: pointer;
 }
 
@@ -186,23 +188,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 22px;
+    height: auto;
     background: var(--color_DarkGrey);
     border: none;
     color: #fff;
     padding: 8px;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
 .tbl-master-data td p {
     display: flex;
     align-items: center;
-    height: 20px;
+    height: auto;
     color: var(--color_Green1);
     padding: 8px;
     gap: 5px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 200;
 }
 

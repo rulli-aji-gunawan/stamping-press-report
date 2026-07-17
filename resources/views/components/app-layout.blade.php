@@ -94,7 +94,7 @@
                     <i class='bx bxs-chevron-down'></i>
                 </div>
                 <div class="submenu">
-                    <a href="/input-report" class="submenu-title">Input Report</a>
+                    <a href="#" class="submenu-title">Input Report</a>
                     <a href="/input-report/production" class="link">Production</a>
                     {{-- <a href="#" class="disabled-link" style="text-decoration: line-through">Tooling</a> --}}
                 </div>

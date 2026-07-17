@@ -2,7 +2,7 @@
 
 <main>
     <div class="container">
-        <h3>Login as registered user or admin</h3>
+        <h3>Please login as registered user or admin</h3>
         <form id="login-form" method="post">
             @csrf
             <input type="email" name="email" placeholder="Email">

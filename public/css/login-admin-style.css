@@ -32,11 +32,12 @@ header {
     display: flex;
     top: 0;
     left: 0;
-    height: 48px;
-    font-size: .9rem;
+    height: 80px;
+    align-items: center;
+    font-size: 1.0rem;
     width: 100%;
     background-color: var(--color_Green1);
-    align-items: center;
+    box-shadow: 0 5px 5px -2px var(--color_Green2);
     transition: all .5s ease;
     z-index: 100;
 }

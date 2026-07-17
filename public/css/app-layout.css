@@ -28,23 +28,23 @@
 
 /* =============== Header =============== */
 header {
-    position: fixed;
     display: flex;
+    position: fixed;
     top: 0;
     left: 0;
-    height: 48px;
-    font-size: .8rem;
+    height: 70px;
+    align-items: center;
+    font-size: 1.0rem;
     width: 100%;
     background-color: var(--color_Green1);
-    align-items: center;
+    box-shadow: 0 5px 5px -2px var(--color_Green2);
     transition: all .5s ease;
     z-index: 100;
-    box-shadow: 5px 5px 5px -2px var(--color_Green2);
 }
 
 .welcome {
     flex: 25%;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: var(--color_Light1);
     margin-left: 18px;
     margin-right: auto;
@@ -56,9 +56,10 @@ header {
 .page-title {
     display: flex;
     flex: 50%;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
     color: var(--color_Light1);
+    align-items: center;
     justify-content: center;
     /* hanya untuk check border*/
     /* border: 1px solid var(--color_Light2); */
@@ -69,6 +70,7 @@ header {
     flex: 25%;
     justify-content: end;
     padding: 10px;
+    font-size: 1.0rem;
     /* hanya untuk check border*/
     /* border: 1px solid var(--color_Light2); */
 }
@@ -86,7 +88,7 @@ header button {
     border: 1px solid var(--color_Light2);
     border-radius: 6px;
     padding: 2px 5px 2px 5px;
-    font-size: 12px;
+    font-size: 1.2rem;
 }
 
 header form:hover,
@@ -100,10 +102,10 @@ header form:hover,
 /* =============== Sidebar =============== */
 .sidebar {
     position: fixed;
-    top: 48px;
+    top: 70px;
     left: 0;
     height: 100%;
-    width: 180px;
+    width: 200px;
     font-size: .8rem;
     background-color: var(--color_Green1);
     transition: all .5s ease;
@@ -142,7 +144,7 @@ header form:hover,
     align-items: center;
     justify-content: center;
     position: absolute;
-    font-size: 16px;
+    font-size: 1.2rem;
     height: 32px;
     width: 32px;
     /* line-height: 40px; */
@@ -159,7 +161,7 @@ header form:hover,
     justify-content: center; */
     position: absolute;
     transform: rotate(-180deg);
-    font-size: 16px;
+    font-size: 1.2rem;
     height: 32px;
     width: 32px;
     border-radius: 100%;
@@ -167,7 +169,7 @@ header form:hover,
 
 .logo-name {
     padding-left: 42px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     min-width: max-content;
     transition: all .8s ease;
@@ -225,11 +227,11 @@ header form:hover,
     text-align: center;
     line-height: 50px;
     color: var(--color_Light1);
-    font-size: 18px;
+    font-size: 1.8rem;
 }
 
 .sidebar-list li .title .name {
-    /* font-size: 16px; */
+    font-size: 1.0rem;
     /* font-weight: 400; */
     color: var(--color_Light1);
 }
@@ -246,6 +248,7 @@ header form:hover,
 
 .submenu .submenu-title {
     font-weight: 500;
+    font-size: 1.0rem;
 }
 
 .sidebar-list li.dropdown.active .submenu {
@@ -261,7 +264,7 @@ header form:hover,
 
 .submenu .link {
     color: var(--color_Light1);
-    /* font-size: 15px; */
+    font-size: 1.0rem;
     padding: 5px 0;
     transition: all .5s ease;
 }
@@ -333,14 +336,14 @@ header form:hover,
 .sidebar.close .submenu-title {
     display: block;
     margin-top: 6px;
-    font-style: 16px;
+    font-size: 1.0rem;
     color: yellow;
 }
 
 /* =============== Home Section =============== */
 .home {
     position: relative;
-    /* top: 36px; */
+    top: 60px;
     left: 180px;
     /* width: calc(100% - 180px); */
     transition: all .5s ease;
@@ -357,7 +360,7 @@ header form:hover,
     position: fixed;
     height: 60px;
     display: flex;
-    top: 50px;
+    top: 72px;
     padding-left: 8px;
     align-items: center;
     width: fit-content;
@@ -374,6 +377,7 @@ header form:hover,
 
 .home .toggle-sidebar #hide-toggle {
     font-size: 22px;
+    padding-left: 20px;
     color: var(--color_Green1);
     opacity: 0.6;
 }

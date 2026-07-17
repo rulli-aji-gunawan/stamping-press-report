@@ -36,38 +36,7 @@
         <i class='bx bx-menu' id="show-toggle"></i>
     </div>
     <div class="filter-container">
-        <div>
-            {{-- <label for="fyFilter">FY: </label> --}}
-            <select id="fyFilter">
-                <option value="all" {{ request('fy') == 'all' ? 'selected' : '' }}>All FY</option>
-                @foreach (array_unique(array_map(fn($d) => 'FY' . substr(explode('-', $d['fy_n'])[0], -2), $chartData->toArray())) as $fy)
-                    <option value="{{ $fy }}" {{ $fy == $currentFY ? 'selected' : '' }}>
-                        {{ $fy }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div>
-            {{-- <label for="monthFilter">Month: </label> --}}
-            <select id="monthFilter">
-                <option value="all">All Month</option>
-                @php
-                    $months = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
-                    foreach ($chartData as $data) {
-                        $monthIndex = (intval(explode('-', $data['fy_n'])[1]) - 1) % 12;
-                        $monthNames[$monthIndex] = $months[$monthIndex];
-                    }
-                    ksort($monthNames);
-                @endphp
-                @foreach ($monthNames as $index => $month)
-                    <option value="{{ $index + 1 }}">{{ $month }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div>
-            {{-- <label for="dateFilter">Date: </label> --}}
-            <input type="date" id="dateFilter">
-            <button id="clearDateFilter" class="btn-sm">X</button>
-        </div>
+
         <div>
             {{-- <label for="shiftFilter">Shift: </label> --}}
             <select id="shiftFilter">
@@ -122,6 +91,41 @@
                     @endif
                 @endforeach
             </select>
+        </div>
+        <div>
+            {{-- <label for="fyFilter">FY: </label> --}}
+            <select id="fyFilter">
+                <option value="all" {{ request('fy') == 'all' ? 'selected' : '' }}>All FY</option>
+                @foreach (array_unique(array_map(fn($d) => 'FY' . substr(explode('-', $d['fy_n'])[0], -2), $chartData->toArray())) as $fy)
+                    <option value="{{ $fy }}" {{ $fy == $currentFY ? 'selected' : '' }}>
+                        {{ $fy }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
+            {{-- <label for="monthFilter">Month: </label> --}}
+            <select id="monthFilter">
+                <option value="all">All Month</option>
+                @php
+                    $months = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
+                    foreach ($chartData as $data) {
+                        $monthIndex = (intval(explode('-', $data['fy_n'])[1]) - 1) % 12;
+                        $monthNames[$monthIndex] = $months[$monthIndex];
+                    }
+                    ksort($monthNames);
+                @endphp
+                @foreach ($monthNames as $index => $month)
+                    <option value="{{ $index + 1 }}">{{ $month }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
+            {{-- <label for="dateFilter">Date: </label> --}}
+            <input type="date" id="dateFilter">
+            <button id="clearDateFilter" class="btn-sm">X</button>
+        </div>
+        <div>
+            <p id="resetDateFilter">Reset date filter</p>
         </div>
     </div>
     <div class="dashboard-container">

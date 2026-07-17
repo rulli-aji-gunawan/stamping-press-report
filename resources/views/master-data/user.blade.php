@@ -86,7 +86,7 @@
         <div class="addUser">
             <h3>Add User</h3>
         </div>
-        <span class="close-popup" onclick="closeForm()">close</span>
+        <span class="close-popup" onclick="closeForm()">ⓧ</span>
 
         @if ($errors->any())
             <div
@@ -142,7 +142,7 @@
         <div class="addUser">
             <h3>Edit User</h3>
         </div>
-        <span class="close-popup" onclick="closeForm()">close</span>
+        <span class="close-popup" onclick="closeForm()">ⓧ</span>
 
         <input type="hidden" id="editUserId" name="id">
 
@@ -163,6 +163,7 @@
             <option value="0">User</option>
             <option value="1">Admin</option>
         </select>
+        <label for="role">Role</label>
         <select name="role" class="form-control" required id="editRole">
             <option value="admin">Admin</option>
             <option value="foreman">Foreman</option>

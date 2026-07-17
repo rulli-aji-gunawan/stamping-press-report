@@ -135,7 +135,7 @@
         <div class="addModel">
             <h3>Edit Model</h3>
         </div>
-        <span class="close-popup" onclick="closeForm()">close</span>
+        <span class="close-popup" onclick="closeForm()">ⓧ</span>
 
         <input type="hidden" id="editModelId" name="id">
 
