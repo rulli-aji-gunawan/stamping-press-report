@@ -98,7 +98,7 @@
         <input type="password" placeholder="Input password" name="password" id="password" required>
 
         <label for="is_admin">Authorized as</label>
-        <select name="is_admin" id="select-author" id="is_admin" required>
+        <select name="is_admin" id="is_admin" required>
             <option id="select" value="">Select</option>
             <option value="0">User</option>
             <option value="1">Admin</option>
@@ -108,6 +108,7 @@
             <option value="">Select</option>
             <option value="admin">Admin</option>
             <option value="foreman">Foreman</option>
+            <option value="staff">Staff</option>
             <option value="manager">Manager</option>
         </select>
         <div class="form-buttons">
@@ -150,6 +151,7 @@
         <select name="role" class="form-control" required id="editRole">
             <option value="admin">Admin</option>
             <option value="foreman">Foreman</option>
+            <option value="staff">Staff</option>
             <option value="manager">Manager</option>
         </select>
 
