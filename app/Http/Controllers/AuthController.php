@@ -23,16 +23,16 @@ class AuthController extends Controller
     {
         // Validate
         $request->validate([
-            'name' => ['required', 'min:5', 'max:255'],
-            'email' => ['required', 'min:15', 'max:255', 'email', 'unique:users'],
-            'password' => ['required', 'min:3'],
+            'name' => ['required', 'min:3', 'max:255'],
+            'email' => ['required', 'max:255', 'email', 'unique:users'],
+            'password' => ['required', 'min:6'],
             'is_admin' => ['required'],
             'role' => ['required'],
         ]);
 
         // Store input data
         User::create($request->only('name', 'email', 'email_verified_at', 'password', 'is_admin', 'role'));
-        return redirect('master-data/user');
+        return redirect('master-data/user')->with('success', 'User baru berhasil ditambahkan!');
     }
 
     /**
