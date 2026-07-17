@@ -37,6 +37,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 360px;
+    height: auto;
     z-index: 9;
 }
 
@@ -52,6 +53,8 @@
 
 /* Style form container */
 .form-container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     padding: 10px 20px;
     border: 1px solid var(--color_Green1);

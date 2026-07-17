@@ -11,7 +11,7 @@
 
         {{-- Add Downtime Classification button --}}
         <div class="btn-model">
-            <button id="btn-addMasterData" onclick="openForm()">Add</button>
+            <button id="btn-addMasterData" onclick="openForm()">✛ Add New DT Classification</button>
         </div>
 
         {{-- Table of Downtime Classification --}}
@@ -69,7 +69,7 @@
 
         {{-- Add Downtime Classification button --}}
         <div class="btn-model">
-            <button id="btn-addMasterData" onclick="openForm()">Add</button>
+            <button id="btn-addMasterData" onclick="openForm()">✛ Add New DT Classification</button>
         </div>
 
     </div>

@@ -11,7 +11,7 @@
 
         {{-- Add Downtime category button --}}
         <div class="btn-model">
-            <button id="btn-addMasterData" onclick="openForm()">Add New DT</button>
+            <button id="btn-addMasterData" onclick="openForm()">✛ Add New DT Category</button>
         </div>
 
         {{-- Table of Downtime Category --}}
@@ -73,7 +73,7 @@
 
         {{-- Add Downtime category button --}}
         <div class="btn-model">
-            <button id="btn-addMasterData" onclick="openForm()">Add New DT</button>
+            <button id="btn-addMasterData" onclick="openForm()">✛ Add New DT Category</button>
         </div>
 
     </div>

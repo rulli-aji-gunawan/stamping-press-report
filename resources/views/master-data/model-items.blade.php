@@ -103,7 +103,7 @@
         <div class="addModelItem">
             <h3>Add Model and Item</h3>
         </div>
-        <span class="close-popup" onclick="closeForm()">close</span>
+        <span class="close-popup" onclick="closeForm()">ⓧ</span>
 
         <label for="model_code">Model Code</label>
         <input type="text" onchange="toUpperCase()" placeholder="Input model code" name="model_code" id="model_code"
@@ -171,4 +171,35 @@
 </script>
 <script>
     var getModelItemUrl = '{{ route('models.getAll') }}';
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        @if (session('success'))
+            Swal.fire({
+                title: 'Berhasil!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#1c6d3f',
+                timer: 3000,
+                timerProgressBar: true,
+            });
+        @endif
+
+        @if ($errors->any())
+            openForm();
+            Swal.fire({
+                title: 'Gagal!',
+                html: '<ul style="text-align:left;padding-left:16px;margin:0">' +
+                    '@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach' +
+                    '</ul>',
+                icon: 'error',
+                confirmButtonText: 'Tutup & Perbaiki',
+                confirmButtonColor: '#e24a64',
+            });
+        @endif
+
+    });
 </script>

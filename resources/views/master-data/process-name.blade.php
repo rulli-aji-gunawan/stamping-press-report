@@ -11,7 +11,7 @@
 
         {{-- Add Process Name button --}}
         <div class="btn-model">
-            <button id="btn-addMasterData" onclick="openForm()">Add Process</button>
+            <button id="btn-addMasterData" onclick="openForm()">✛ Add Process Name</button>
         </div>
 
         {{-- Table of Process Name --}}
@@ -68,7 +68,7 @@
 
         {{-- Add Process Name button --}}
         <div class="btn-model">
-            <button id="btn-addMasterData" onclick="openForm()">Add Process</button>
+            <button id="btn-addMasterData" onclick="openForm()">✛ Add Process Name</button>
         </div>
 
     </div>
@@ -83,7 +83,7 @@
         <div class="addProcessname">
             <h3>Add Process Name</h3>
         </div>
-        <span class="close-popup" onclick="closeForm()">close</span>
+        <span class="close-popup" onclick="closeForm()">ⓧ</span>
 
         <label for="process_name">Process Name</label>
         <input type="text" placeholder="Input process name" name="process_name" id="process_name" required>
