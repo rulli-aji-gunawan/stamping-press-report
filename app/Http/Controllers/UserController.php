@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use id;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,9 +12,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (!auth()->user()->hasRole('admin')) {
-        abort(403, 'Access denied');
-    }
+        /** @var \App\Models\User $currentUser */
+        $currentUser = auth()->user();
+        if (!$currentUser->hasRole('admin')) {
+            abort(403, 'Access denied');
+        }
         $users = User::query()->limit(100)->get();
         return view('master-data.user', [
             'users' => $users
@@ -51,7 +50,7 @@ class UserController extends Controller
         return redirect('/master-data/user');
     }
 
-    
+
 
     /**
      * Display the specified resource.
@@ -74,9 +73,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->update($request->all());
+        $user->update($request->only('name', 'email', 'is_admin', 'role'));
         return response()->json(['message' => 'User updated successfully']);
-        return redirect('/master-data/user');
     }
 
     /**
