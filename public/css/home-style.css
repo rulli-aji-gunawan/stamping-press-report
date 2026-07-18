@@ -169,7 +169,7 @@ main .container {
 .continue-button:hover {
     /* font-weight: 600; */
     background: var(--color_Green1);
-    font-weight: 400;
+    font-weight: 500;
     color: yellow;
     cursor: pointer;
 }

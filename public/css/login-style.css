@@ -188,7 +188,7 @@ form button {
 
 form button:hover {
     background: var(--color_Green1);
-    font-weight: 400;
+    font-weight: 500;
     color: yellow;
     cursor: pointer;
 }
