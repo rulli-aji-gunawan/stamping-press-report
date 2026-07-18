@@ -84,7 +84,7 @@
         <div class="addDowntimeClassification">
             <h3>Add Downtime Classification</h3>
         </div>
-        <span class="close-popup" onclick="closePopup()">close</span>
+        <span class="close-popup" onclick="closePopup()">ⓧ</span>
 
         <label for="dt_classification">Downtime Classification</label>
         <input type="text" placeholder="Input Downtime Classification" name="downtime_classification"
@@ -109,7 +109,7 @@
         <div class="editDowntimeClassification">
             <h3>Edit Downtime Classification</h3>
         </div>
-        <span class="close-popup" onclick="closePopup()">close</span>
+        <span class="close-popup" onclick="closePopup()">ⓧ</span>
 
         <input type="hidden" id="editDowntimeClassificationId" name="id">
 

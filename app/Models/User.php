@@ -52,4 +52,41 @@ class User extends Authenticatable
     {
         return $this->role === $role;
     }
+
+    /**
+     * Full admin: can manage (CRUD) master data.
+     * Applies to: admin(is_admin=1), staff(is_admin=1)
+     */
+    public function canManageMasterData(): bool
+    {
+        return (bool) $this->is_admin;
+    }
+
+    /**
+     * Can view master data pages.
+     * Applies to: admin, foreman, staff (all is_admin values). Blocks manager.
+     */
+    public function canViewMasterData(): bool
+    {
+        return in_array($this->role, ['admin', 'foreman', 'staff']);
+    }
+
+    /**
+     * Can write (create/edit/delete) non-master-data.
+     * Applies to everyone except manager.
+     */
+    public function canWrite(): bool
+    {
+        return (bool) $this->is_admin || $this->role !== 'manager';
+    }
+
+    /**
+     * Can write (CRUD) non-user master data (model items, process, DT).
+     * Allows: is_admin=1 (any role), or role=staff (any is_admin).
+     * Blocks: foreman, manager.
+     */
+    public function canManageNonUserMasterData(): bool
+    {
+        return (bool) $this->is_admin || $this->role === 'staff';
+    }
 }

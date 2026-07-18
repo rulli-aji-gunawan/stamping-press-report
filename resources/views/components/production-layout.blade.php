@@ -686,7 +686,7 @@
                     <td><input type="hidden" id="area" name="defect_areas[]" value="${area}">${area}</td>
                     <td><input type="text" id="defect-name" name="defect_names[]" placeholder="Defect" required></td>
                     <td><input type="number" id="defect-qty-a" name="defect_qtys_a[]" min="1" placeholder="Qty-a" required></td>
-                    <td><input type="number" id="defect-qty-b" name="defect_qtys_b[]" min="1" placeholder="Qty-b" nullable></td>
+                    <td><input type="number" id="defect-qty-b" name="defect_qtys_b[]" placeholder="Qty-b" nullable></td>
                     <td>
                         <select id="defect-category" name="defect_categories[]" required>
                             <option value="" disabled selected>Category</option>

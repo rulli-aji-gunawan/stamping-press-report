@@ -11,7 +11,7 @@
 
         {{-- Add user button --}}
         <div class="btn-user">
-            <button id="btn-addMasterData" onclick="openForm()">Add New User</button>
+            <button id="btn-addMasterData" onclick="openForm()">✛ Add New User</button>
         </div>
 
         {{-- Table of User --}}

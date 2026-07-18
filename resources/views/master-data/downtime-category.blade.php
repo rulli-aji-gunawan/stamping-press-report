@@ -88,7 +88,7 @@
         <div class="addDowntimeCategory">
             <h3>Add Downtime Category</h3>
         </div>
-        <span class="close-popup" onclick="closeForm()">close</span>
+        <span class="close-popup" onclick="closeForm()">ⓧ</span>
 
         <label for="downtime_name">Downtime Name</label>
         <input type="text" onchange="toUpperCase()" placeholder="Input downtime name" name="downtime_name"
@@ -118,7 +118,7 @@
         <div class="editDowntimeCategory">
             <h3>Edit Downtime Category</h3>
         </div>
-        <span class="close-popup" onclick="closeForm()">close</span>
+        <span class="close-popup" onclick="closeForm()">ⓧ</span>
 
         <input type="hidden" id="editDowntimeCategoryId" name="id">
 

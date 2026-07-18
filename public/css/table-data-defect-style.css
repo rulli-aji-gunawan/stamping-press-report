@@ -92,6 +92,18 @@
     transition: opacity 0.5s ease;
 }
 
+.table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-overflow-scrolling: touch;
+    /* Untuk smooth scrolling di Safari iOS */
+}
+
+
 .tbl-data-defect {
     width: 100%;
     height: max-content;
@@ -118,12 +130,13 @@
     background-color: var(--color_Green4);
 }
 
+.tbl-data-defect #number,
 .tbl-data-defect #shift,
 .tbl-data-defect #group,
 .tbl-data-defect #model-year,
 .tbl-data-defect #model,
 .tbl-data-defect #line {
-    width: 20px;
+    width: 40px;
     justify-items: center;
     text-wrap: nowrap;
 }

@@ -124,7 +124,7 @@
             <li class="dropdown">
                 <div class="title">
                     <a href="#" class="link">
-                        <i class='bx bx-cog'></i>
+                        <i class='bx bx-key'></i> 
                         <span class="name">Master Data</span>
                     </a>
                     <i class='bx bxs-chevron-down'></i>

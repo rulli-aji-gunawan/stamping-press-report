@@ -16,7 +16,7 @@ Route::middleware('guest')->group(function () {
 });
 
 // ============================================================
-// GROUP 1 - AUTH: Semua user (view-only, dashboard, API)
+// GROUP 1 � AUTH: Semua user (view-only, dashboard, API)
 // ============================================================
 Route::middleware('auth')->group(function () {
 
@@ -31,25 +31,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-downtime-type/{category_id}', [Controllers\DowntimeCategoryController::class, 'getDowntimeType']);
     Route::get('/master-data/downtime-classification/all', [Controllers\DowntimeClassificationController::class, 'getAll'])->name('dt_classifications.getAll');
 
-    // Table Production - view
+    // Table Production � view
     Route::get('/table-data/table-production', [Controllers\TableProductionController::class, 'index'])->name('table_production');
     Route::get('/table-data/table-production/all', [Controllers\TableProductionController::class, 'getAll'])->name('table_production.getAll');
     Route::get('/table-data/table-production/export', [TableProductionController::class, 'export'])->name('table_production.export');
     Route::get('/table-data/table-production/debug-compare', [TableProductionController::class, 'debugCompare']);
 
-    // Table Downtime - view
+    // Table Downtime � view
     Route::get('/table-data/table-downtime', [Controllers\TableDowntimeController::class, 'index'])->name('table_downtime');
     Route::get('/table-data/table-downtime/all', [Controllers\TableDowntimeController::class, 'getAll'])->name('table_downtime.getAll');
     Route::get('/table-data/table-downtime/export', [Controllers\TableDowntimeController::class, 'export'])->name('table_downtime.export');
 
-    // Table Defect - view
+    // Table Defect � view
     Route::get('/table-data/table-defect', [Controllers\TableDefectController::class, 'index'])->name('table_defect');
     Route::get('/table-data/table-defect/all', [Controllers\TableDefectController::class, 'getAll'])->name('table_defect.getAll');
     Route::get('/table-data/table-defect/export', [Controllers\TableDefectController::class, 'export'])->name('table_defect.export');
 });
 
 // ============================================================
-// GROUP 2 - AUTH + WRITE-ACCESS: Non-manager bisa input/edit/delete table data
+// GROUP 2 � AUTH + WRITE-ACCESS: Non-manager (bisa input/edit/delete table data)
 // Berlaku: admin, staff, foreman  |  Blokir: manager
 // ============================================================
 Route::middleware(['auth', 'write-access'])->group(function () {
@@ -58,19 +58,19 @@ Route::middleware(['auth', 'write-access'])->group(function () {
     Route::post('/input-report/production', [Controllers\ProductionController::class, 'store'])->name('input.production');
     Route::post('/delete-problem-picture/{id}', [Controllers\ProductionController::class, 'deleteProblemPicture'])->name('delete.problem.picture');
 
-    // Table Production - write
+    // Table Production � write
     Route::post('/table-data/table-production', [Controllers\TableProductionController::class, 'store'])->name('table_production.add');
     Route::get('/table-data/table-production/{table_production}/edit', [TableProductionController::class, 'edit'])->name('table_production.edit');
     Route::put('/table-data/table-production/{table_production}', [Controllers\TableProductionController::class, 'update'])->name('table_production.update');
     Route::delete('/table-data/table-production/{table_production}/delete', [Controllers\TableProductionController::class, 'delete'])->name('table_production.delete');
 
-    // Table Downtime - write
+    // Table Downtime � write
     Route::post('/table-data/table-downtime', [Controllers\TableDowntimeController::class, 'store'])->name('table_downtime.add');
     Route::get('/table-data/table-downtime/{id}/edit', [Controllers\TableDowntimeController::class, 'edit'])->name('table_downtime.edit');
     Route::put('/table-data/table-downtime/{id}', [Controllers\TableDowntimeController::class, 'update'])->name('table_downtime.update');
     Route::delete('/table-data/table-downtime/{table_downtime}/delete', [Controllers\TableDowntimeController::class, 'delete'])->name('table_downtime.delete');
 
-    // Table Defect - write
+    // Table Defect � write
     Route::post('/table-data/table-defect', [Controllers\TableDefectController::class, 'store'])->name('table_defect.add');
     Route::get('/table-data/table-defect/{id}/edit', [Controllers\TableDefectController::class, 'edit'])->name('table_defect.edit');
     Route::put('/table-data/table-defect/{id}', [Controllers\TableDefectController::class, 'update'])->name('table_defect.update');
@@ -78,10 +78,11 @@ Route::middleware(['auth', 'write-access'])->group(function () {
 });
 
 // ============================================================
-// GROUP 3 - AUTH + MASTER-DATA-VIEW: Bisa LIHAT non-user master data
+// GROUP 3 � AUTH + MASTER-DATA-VIEW: Bisa lihat master data
 // Berlaku: admin, staff, foreman  |  Blokir: manager
 // ============================================================
 Route::middleware(['auth', 'master-data-view'])->group(function () {
+    Route::get('/master-data/user', [Controllers\UserController::class, 'index'])->name('users');
     Route::get('/master-data/model-items', [Controllers\ModelItemController::class, 'index'])->name('models');
     Route::get('/master-data/process-name', [Controllers\ProcessNameController::class, 'index'])->name('process');
     Route::get('/master-data/downtime-category', [Controllers\DowntimeCategoryController::class, 'index'])->name('downtime_categories');
@@ -89,50 +90,40 @@ Route::middleware(['auth', 'master-data-view'])->group(function () {
 });
 
 // ============================================================
-// GROUP 4a - AUTH + MASTER-DATA-MANAGE: Edit non-user master data
-// Berlaku: is_admin=1 (semua role) ATAU role=staff (semua is_admin)
-// Blokir: foreman, manager
+// GROUP 4 � AUTH + ADMIN (is_admin=1): Kelola master data
+// Berlaku: admin(is_admin=1), staff(is_admin=1)
 // ============================================================
-Route::middleware(['auth', 'master-data-manage'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 
-    // Model Items - write
+    // User management
+    Route::post('/master-data/user', [Controllers\AuthController::class, 'register'])->name('users.add');
+    Route::get('/users/{user}/edit', [Controllers\UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [Controllers\UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}/delete', [Controllers\UserController::class, 'delete'])->name('del-user');
+
+    // Model Items management
     Route::post('/master-data/model-items', [Controllers\ModelItemController::class, 'store'])->name('models.add');
     Route::get('/master-data/model-items/{model_item}/edit', [Controllers\ModelItemController::class, 'edit'])->name('models.edit');
     Route::put('/master-data/model-items/{model_item}', [Controllers\ModelItemController::class, 'update'])->name('models.update');
     Route::delete('/master-data/model-items/{model_item}/delete', [Controllers\ModelItemController::class, 'delete'])->name('models.delete');
 
-    // Process Name - write
+    // Process Name management
     Route::post('/master-data/process-name', [Controllers\ProcessNameController::class, 'store'])->name('process.add');
     Route::get('/master-data/process-name/{process_name}/edit', [Controllers\ProcessNameController::class, 'edit'])->name('process.edit');
     Route::put('/master-data/process-name/{process_name}', [Controllers\ProcessNameController::class, 'update'])->name('process.update');
     Route::delete('/master-data/process-name/{process_name}/delete', [Controllers\ProcessNameController::class, 'delete'])->name('process.delete');
 
-    // Downtime Category - write
+    // Downtime Category management
     Route::post('/master-data/downtime-category', [Controllers\DowntimeCategoryController::class, 'store'])->name('downtime_categories.add');
     Route::get('/master-data/downtime-category/{downtime_category}/edit', [Controllers\DowntimeCategoryController::class, 'edit'])->name('downtime_categories.edit');
     Route::put('/master-data/downtime-category/{downtime_category}', [Controllers\DowntimeCategoryController::class, 'update'])->name('downtime_categories.update');
     Route::delete('/master-data/downtime-category/{downtime_category}/delete', [Controllers\DowntimeCategoryController::class, 'delete'])->name('downtime_categories.delete');
 
-    // Downtime Classification - write
+    // Downtime Classification management
     Route::post('/master-data/downtime-classification', [Controllers\DowntimeClassificationController::class, 'store'])->name('dt_classifications.add');
     Route::get('/master-data/downtime-classification/{dt_classification}/edit', [Controllers\DowntimeClassificationController::class, 'edit'])->name('dt_classifications.edit');
     Route::put('/master-data/downtime-classification/{dt_classification}', [Controllers\DowntimeClassificationController::class, 'update'])->name('dt_classifications.update');
     Route::delete('/master-data/downtime-classification/{dt_classification}/delete', [Controllers\DowntimeClassificationController::class, 'delete'])->name('dt_classifications.delete');
-});
-
-// ============================================================
-// GROUP 4b - AUTH + ADMIN (is_admin=1): master-data USER saja
-// Berlaku: admin(is_admin=1), staff(is_admin=1)
-// Blokir: foreman, staff(non-admin), manager -> Access Denied popup
-// ============================================================
-Route::middleware(['auth', 'admin'])->group(function () {
-
-    // User management (view + CRUD - semua dijaga admin middleware)
-    Route::get('/master-data/user', [Controllers\UserController::class, 'index'])->name('users');
-    Route::post('/master-data/user', [Controllers\AuthController::class, 'register'])->name('users.add');
-    Route::get('/users/{user}/edit', [Controllers\UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{user}', [Controllers\UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{user}/delete', [Controllers\UserController::class, 'delete'])->name('del-user');
 });
 
 // ============================================================
@@ -151,3 +142,4 @@ Route::get('/debug-dashboard', function () {
         'model_items'       => DB::table('model_items')->count(),
     ]);
 });
+

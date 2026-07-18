@@ -18,7 +18,7 @@
             <input type="date" name="date_until" value="{{ request('date_until') }}" placeholder="Until Date">
 
             <select name="fy_n">
-                <option value="">-- FY-N --</option>
+                <option value="">FY-N --</option>
                 @foreach ($fyNs as $fy)
                     <option value="{{ $fy }}" {{ request('fy_n') == $fy ? 'selected' : '' }}>
                         {{ $fy }}</option>
@@ -26,7 +26,7 @@
             </select>
 
             <select name="reporter">
-                <option value="">-- Reporter --</option>
+                <option value="">Reporter --</option>
                 @foreach ($reporters as $reporter)
                     <option value="{{ $reporter }}" {{ request('reporter') == $reporter ? 'selected' : '' }}>
                         {{ $reporter }}</option>
@@ -34,7 +34,7 @@
             </select>
 
             <select name="line">
-                <option value="">-- Line --</option>
+                <option value="">Line --</option>
                 @foreach ($lines as $line)
                     <option value="{{ $line }}" {{ request('line') == $line ? 'selected' : '' }}>
                         {{ $line }}</option>
@@ -42,7 +42,7 @@
             </select>
 
             <select name="model">
-                <option value="">-- Model --</option>
+                <option value="">Model --</option>
                 @foreach ($models as $model)
                     <option value="{{ $model }}" {{ request('model') == $model ? 'selected' : '' }}>
                         {{ $model }}</option>
@@ -50,7 +50,7 @@
             </select>
 
             <select name="item_name">
-                <option value="">-- Item Name --</option>
+                <option value="">Item Name --</option>
                 @foreach ($itemNames as $item)
                     <option value="{{ $item }}" {{ request('item_name') == $item ? 'selected' : '' }}>
                         {{ $item }}</option>
@@ -58,7 +58,7 @@
             </select>
 
             <select name="defect_name">
-                <option value="">-- Defect Name --</option>
+                <option value="">Defect Name --</option>
                 @foreach ($defectNames as $defect)
                     <option value="{{ $defect }}" {{ request('defect_name') == $defect ? 'selected' : '' }}>
                         {{ $defect }}</option>
@@ -78,7 +78,7 @@
             <p>← Geser tabel ke kanan/kiri untuk melihat seluruh data →</p>
         </div>
 
-        <div class="table-defect-container">
+        <div class="table-container">
 
             {{-- Table of Data Production --}}
             <table class="tbl-data-defect">

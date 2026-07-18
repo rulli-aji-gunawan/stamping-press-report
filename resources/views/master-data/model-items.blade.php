@@ -11,7 +11,7 @@
 
         {{-- Add model button --}}
         <div class="btn-model">
-            <button id="btn-addMasterData" onclick="openForm()">Add New Model</button>
+            <button id="btn-addMasterData" onclick="openForm()">✛ Add New Model</button>
         </div>
 
         {{-- Table of User --}}
@@ -87,7 +87,7 @@
 
         {{-- Add model button --}}
         <div class="btn-model">
-            <button id="btn-addMasterData" onclick="openForm()">Add New Model</button>
+            <button id="btn-addMasterData" onclick="openForm()">✛ Add New Model</button>
         </div>
 
     </div>
@@ -103,17 +103,17 @@
         <div class="addModelItem">
             <h3>Add Model and Item</h3>
         </div>
-        <span class="close-popup" onclick="closeForm()">ⓧ</span>
+        <span class="close-popup" onclick="closePopup()">ⓧ</span>
 
         <label for="model_code">Model Code</label>
-        <input type="text" onchange="toUpperCase()" placeholder="Input model code" name="model_code" id="model_code"
-            required>
+        <input type="text" oninput="toUpperCase(this)" placeholder="Input model code" name="model_code"
+            id="model_code" required>
 
         <label for="model_year">Model Year</label>
         <input type="text" placeholder="Input model year" name="model_year" id="model_year" required>
 
         <label for="item_name">Item Name</label>
-        <input type="text" onchange="toUpperCase()" placeholder="Input item name" name="item_name" id="item_name"
+        <input type="text" oninput="toUpperCase(this)" placeholder="Input item name" name="item_name" id="item_name"
             required>
 
         <label for="product_picture">Panel Sketch</label>
@@ -121,7 +121,7 @@
 
         <div class="form-buttons">
             <button type="submit" class="btn-add">Add</button>
-            <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
+            <button type="button" class="btn-cancel" onclick="closePopup()">Cancel</button>
         </div>
     </form>
 </div>
@@ -135,7 +135,7 @@
         <div class="addModel">
             <h3>Edit Model</h3>
         </div>
-        <span class="close-popup" onclick="closeForm()">ⓧ</span>
+        <span class="close-popup" onclick="closePopup()">ⓧ</span>
 
         <input type="hidden" id="editModelId" name="id">
 
@@ -156,7 +156,7 @@
 
         <div class="form-buttons">
             <button type="submit" class="btn-update">Update</button>
-            <button type="button" class="btn-cancel" onclick="closeForm()">Cancel</button>
+            <button type="button" class="btn-cancel" onclick="closePopup()">Cancel</button>
         </div>
     </form>
 </div>
