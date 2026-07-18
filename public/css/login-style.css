@@ -213,6 +213,38 @@ form .login-admin-button:hover {
     color: var(--color_Dark1);
 }
 
+/* =============== Error Messages =============== */
+
+/* Banner error: credential salah (di atas form) */
+.container > .error {
+    background: #fdecea;
+    border: 1px solid #e57373;
+    border-left: 4px solid #e24a64;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: #c0392b;
+    font-size: 0.82rem;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: -6px;
+}
+
+/* Inline error: di bawah input (validasi field kosong/format) */
+form .error {
+    color: #e24a64;
+    font-size: 0.75rem;
+    text-align: left;
+    width: 90%;
+    margin-top: -16px;  /* kurangi gap 24px dari flex agar error dekat input */
+    padding: 0 4px;
+}
+
+/* Input border merah saat ada error */
+form input.input-error {
+    border: 1.5px solid #e24a64;
+    background-color: #fff5f6;
+}
 
 
 

@@ -43,8 +43,12 @@ class AuthController extends Controller
 
         // Validate
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email'    => ['required', 'email'],
             'password' => ['required'],
+        ], [
+            'email.required' => 'Email tidak boleh kosong.',
+            'email.email'    => 'Format email tidak valid.',
+            'password.required' => 'Password tidak boleh kosong.',
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -57,7 +61,7 @@ class AuthController extends Controller
             // return redirect()->route('dashboard');
 
         } else {
-            return back()->with('error', 'Login failed. Email or password is incorrect.');
+            return back()->with('error', 'Login gagal. Email atau password yang Anda masukkan salah.');
         }
     }
 
