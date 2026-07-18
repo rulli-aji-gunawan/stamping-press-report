@@ -2,8 +2,11 @@
 
 <main>
     <div class="container">
-        <h3>Welcome to the website of MMKI Stamping</h3>
-        <p>Limited access for production reporting system in MMKI Stamping. <br><br>This website will be continuously reviewed and improved.</p>
+        <h3>Welcome to MMKI Stamping Production Reporting System</h3>
+        <br>
+        <p>Only authorized users can access this platform.
+            <br><br>This platform is continuously reviewed and improved to ensure reliability.
+        </p>
         <br>
         {{-- <p>Please continue to login</p> --}}
         <a href="/login" class="continue-button">

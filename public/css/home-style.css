@@ -132,34 +132,45 @@ main .container {
     /* width: 78%; */
     width: 32%;
     padding: 28px;
-    background-color: var(--color_Green1);
+    background-color: lightgray;
     border-radius: 12px;
-    color: var(--color_Light1);
+    /* color: var(--color_Dark1); */
     align-items: center;
+    border: 1px solid var(--color_Green1);
     box-shadow: 5px 5px 5px -2px var(--color_Green2);
 }
 
 .container h3 {
-    font-weight: 300;
-    color: #fff;
+    font-weight: 500;
+    color: var(--color_Green1);
+}
+
+.container a {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--color_Green1);
+    text-align: center;
+    line-height: 1.5rem;
 }
 
 .continue-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--color_Light1);
-    color: var(--color_Dark1);
+    background: var(--color_Light2);
     width: auto;
     height: auto;
-    padding: 10px;
+    padding: 12px;
     border: none;
+    border: 1px solid var(--color_Green1);
     border-radius: 6px;
 }
 
 .continue-button:hover {
     /* font-weight: 600; */
-    background: yellow;
+    background: var(--color_Green1);
+    font-weight: 400;
+    color: yellow;
     cursor: pointer;
 }
 
