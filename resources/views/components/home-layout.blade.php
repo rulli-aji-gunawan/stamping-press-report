@@ -8,8 +8,10 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <!-- Styles  -->
     <link rel="shortcut icon" href="kxp_fav.png" type="image/x-icon">
-    {{-- <link rel="stylesheet" href="/css/home-style.css"> --}}
-    <link href="{{ 'css/home-style.css?v=' . time() }}" rel="stylesheet" type="text/css">
+    <!-- Design System (base first) -->
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('css/home-style.css') }}?v={{ filemtime(public_path('css/home-style.css')) }}">
 
     <script>
         // Prevent FOUC for dark mode
