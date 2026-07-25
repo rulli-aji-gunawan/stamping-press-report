@@ -10,12 +10,12 @@
 
         <form id="login-form" action="{{ route('login') }}" method="post">
             @csrf
-            <input type="email" name="email" placeholder="Email" value="{{ old('email') }}"
+            <input type="email" name="email" autocomplete="off" placeholder="Email" value="{{ old('email') }}"
                 class="{{ $errors->has('email') ? 'input-error' : '' }}">
             @error('email')
                 <p class="error">{{ $message }}</p>
             @enderror
-            <input type="password" name="password" placeholder="Password"
+            <input type="password" name="password" autocomplete="off" placeholder="Password"
                 class="{{ $errors->has('password') ? 'input-error' : '' }}">
             @error('password')
                 <p class="error">{{ $message }}</p>
