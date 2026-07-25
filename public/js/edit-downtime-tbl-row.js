@@ -453,6 +453,7 @@ $(document).ready(function () {
     this.style.padding = '6px 8px';
     this.style.boxSizing = 'border-box';
     this.style.height = '38px'; // Default height for 1 line
+    this.style.textWrap = 'balance';
 
     if (this.scrollHeight > 32) {
       this.style.height = this.scrollHeight + 'px';
@@ -465,23 +466,5 @@ $(document).ready(function () {
   // Initial trigger for existing elements (if any)
   $('#tbl-prod-problem textarea').each(autoResizeTextarea);
 
-  // Tambahkan handler Shift+Enter
-  $(document).on('keydown', '#tbl-prod-problem textarea', function (event) {
-    if (event.key === "Enter" && event.shiftKey) {
-      event.preventDefault();
-
-      const start = this.selectionStart;
-      const end = this.selectionEnd;
-
-      // sisipkan newline di posisi kursor
-      this.value = this.value.substring(0, start) + "\n" + this.value.substring(end);
-
-      // pindahkan kursor ke setelah newline
-      this.selectionStart = this.selectionEnd = start + 1;
-
-      // trigger auto-resize setelah newline
-      autoResizeTextarea.call(this);
-    }
-  });
 });
 
