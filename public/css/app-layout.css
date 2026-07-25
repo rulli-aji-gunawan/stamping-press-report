@@ -144,17 +144,18 @@ header form {
     display: flex;
     align-items: center;
     padding: 10px 9px;
-    color: var(--color_Light1);
+    color: var(--color_Green2);
     transition: var(--transition-slow);
     cursor: pointer;
 }
 
 .logo-box:hover {
-    color: var(--color_Green2);
+    color: var(--color_Light1);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .logo-box:hover img {
-    border-color: var(--color_Green2);
+    border-color: var(--color_Light1);
 }
 
 .logo-box img {
@@ -175,11 +176,13 @@ header form {
 .logo-name {
     padding-left: 44px;
     font-size: var(--text-md);
-    font-weight: 600;
+    /* font-weight: 600; */
+    color: var(--color_Light2);
     min-width: max-content;
     transition: var(--transition-slow);
     white-space: nowrap;
 }
+
 
 /* Sidebar List */
 .sidebar-list {
