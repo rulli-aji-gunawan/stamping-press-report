@@ -1,32 +1,9 @@
-/* Google Fonts  */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+/* === Popup Form Master Data Layout ===
+   Requires: base.css loaded before this file */
 
-/* Globals  */
-* {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-/* Variables  */
+/* Page-specific variables */
 :root {
-    --color_Blue: #3f93f1;
-    --color_LightBlue: #e5f1ff;
-    --color_Dark1: #1e1e1e;
-    --color_Dark2: #252527;
-    --color_Light1: #dfdfdf;
-    --color_Light2: #c4c4c4;
-    --color_Light3: #fdfdfd;
-    --color_Green1: #1c6d3f;
-    --color_Green2: #449d6b;
-    --color_DarkGreen: darkgreen;
-    --color_LightYellow1: #f9f9cc;
-    --color_Orange1: #fe6a50;
-    --color_LightRed: #e24a64;
+    --color_LightYellow1: #fff7b9;
 }
 
 /* Popup form - tersembunyi secara default */
@@ -47,7 +24,7 @@
     padding: 2px;
     top: 10px;
     right: 10px;
-    opacity: .6;
+    font-size: 20px;
     cursor: pointer;
 }
 
@@ -58,10 +35,10 @@
     width: 100%;
     padding: 10px 20px;
     border: 1px solid var(--color_Green1);
-    border-radius: 8px;
-    box-shadow: 2px 2px 4px #449d6b;
-    background-color: var(--color_Light3);
-    color: var(--color_Green1);
+    border-radius: var(--radius-lg);
+    box-shadow: 2px 2px 8px rgba(68, 157, 107, 0.3);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
 }
 
 h3 {
@@ -157,4 +134,11 @@ h3 {
 .form-popup button:hover {
     cursor: pointer;
     font-weight: bold;
+}
+
+/* Responsive popup */
+@media (max-width: 480px) {
+    .form-popup {
+        width: 95vw;
+    }
 }

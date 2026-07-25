@@ -275,7 +275,7 @@ function addRow() {
         </td>
         <td>
             <select name="production_problems[${rowCount}][dt_category]" required>
-              <option>${dtCategoryOptions}</option>
+              ${dtCategoryOptions}
             </select>
         </td>
         <td class="row-hide">
@@ -283,7 +283,7 @@ function addRow() {
         </td>
         <td>
             <select name="production_problems[${rowCount}][dt_classification]" required>
-              <option>${dtClassificationOptions}</option>
+              ${dtClassificationOptions}
             </select>
         </td>
         <td>
@@ -468,7 +468,7 @@ function saveData() {
       total_time: row.find('input[name$="[total_time]"]').val(),
       process_name: row.find('select[name$="[process_name]"] option:selected').text(),
       dt_category: row.find('select[name$="[dt_category]"] option:selected').text(),
-      dt_category_id: selectedOption.val(), // Mengambil value (ID) dari option
+      dt_category_id: row.find('select[name$="[dt_category]"] option:selected').data('id'),
       downtime_type: row.find('input[name$="[downtime_type]"]').val(),
       dt_classification: row.find('select[name$="[dt_classification]"]').val(),
       problem_description: row.find('textarea[name$="[problem_description]"]').val(),
@@ -544,4 +544,30 @@ document.querySelector('.report-form').addEventListener('submit', function (e) {
   document.querySelector('#submit').disabled = true;
   document.querySelector('#submit').textContent = 'Updating...';
 });
+
+$(document).ready(function () {
+  function autoResizeTextarea() {
+    this.style.resize = 'none';
+    this.style.overflowY = 'hidden';
+    this.style.overflowX = 'hidden';
+    this.style.fontSize = '14px';
+    this.style.lineHeight = '1.5';
+    this.style.padding = '6px 8px';
+    this.style.boxSizing = 'border-box';
+    this.style.height = '38px'; // Default height for 1 line
+    this.style.textWrap = 'balance';
+
+    if (this.scrollHeight > 32) {
+      this.style.height = this.scrollHeight + 'px';
+    }
+  }
+
+  // Handle dynamic inputs
+  $(document).on('input', '#tbl-prod-problem textarea', autoResizeTextarea);
+
+  // Initial trigger for existing elements (if any)
+  $('#tbl-prod-problem textarea').each(autoResizeTextarea);
+});
+
+
 

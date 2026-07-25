@@ -217,5 +217,27 @@ window.initDefectChart = function (defectData, currentFY) {
     };
 
     // Inisialisasi chart pertama kali dengan filter default
+    function applyChartTheme(theme) {
+        const isDark = theme === 'dark';
+        const textColor = isDark ? '#cbd5e1' : '#475569';
+        if (window.defectChart.options.plugins.legend && window.defectChart.options.plugins.legend.labels) {
+            window.defectChart.options.plugins.legend.labels.color = textColor;
+        }
+        if (window.defectChart.options.plugins.title) {
+            window.defectChart.options.plugins.title.color = textColor;
+        }
+        if (window.defectChart.options.scales && window.defectChart.options.scales.r) {
+            window.defectChart.options.scales.r.ticks.color = textColor;
+            window.defectChart.options.scales.r.grid = { color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' };
+        }
+        window.defectChart.update();
+    }
+
+    window.addEventListener('theme-changed', function (e) {
+        applyChartTheme(e.detail.theme);
+    });
+
+    const activeTheme = localStorage.getItem('theme') || 'light';
+    applyChartTheme(activeTheme);
     window.updateDefectChart(currentFY, 'all', 'all', 'all', '', 'all', 'all', 'all');
 };

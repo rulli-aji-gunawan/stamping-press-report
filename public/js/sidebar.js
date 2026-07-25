@@ -1,26 +1,22 @@
-const listItems = document.querySelectorAll(".sidebar-list li");
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleSidebar = document.querySelector(".toggle-sidebar");
+  const logo = document.querySelector(".logo-box");
+  const sidebar = document.querySelector(".sidebar");
 
-listItems.forEach((item) => {
-  item.addEventListener("click", () => {
-    let isActive = item.classList.contains("active");
-
-    listItems.forEach((el) => {
-      el.classList.remove("active");
+  if (toggleSidebar && sidebar) {
+    toggleSidebar.addEventListener("click", (e) => {
+      // Avoid double-toggle when clicking children handled by app-layout.blade.php
+      if (e.target.closest("#hide-toggle") || e.target.closest("#show-toggle")) {
+        return;
+      }
+      sidebar.classList.toggle("close");
     });
+  }
 
-    if (isActive) item.classList.remove("active");
-    else item.classList.add("active");
-  });
-});
-
-const toggleSidebar = document.querySelector(".toggle-sidebar");
-const logo = document.querySelector(".logo-box");
-const sidebar = document.querySelector(".sidebar");
-
-toggleSidebar.addEventListener("click", () => {
-  sidebar.classList.toggle("close");
-});
-
-logo.addEventListener("click", () => {
-  sidebar.classList.toggle("close");
+  if (logo && sidebar) {
+    logo.addEventListener("click", (e) => {
+      e.preventDefault();
+      sidebar.classList.toggle("close");
+    });
+  }
 });

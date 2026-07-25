@@ -1,50 +1,75 @@
-/* Google Fonts  */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+/* === Input Production Layout ===
+   Requires: base.css loaded before this file */
 
-/* Globals  */
-* {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
+/* Page-specific light-mode variables */
+:root {
+    --color_LightYellow1: #fef08a;
+    --color_Orange1: #f97316;
+    --color_Ored: #b91c1c;
+    --border-input: #cbd5e1;
+    --color_DarkGrey: #64748b;
+    text-wrap: nowrap;
 }
 
-/* Variables  */
-:root {
-    --color_Blue: #8bd4ff;
-    --color_LightBlue: #e5f1ff;
-    --color_Dark1: #1e1e1e;
-    --color_Dark2: #252527;
-    --color_DarkGrey: #636363;
-    --color_Light1: #dfdfdf;
-    --color_Light2: #c4c4c4;
-    --color_Light3: #f0f0f0;
-    --color_Light4: #fdfdfd;
-    --color_Green1: #1c6d3f;
-    --color_Green2: #449d6b;
-    --color_Green3: #dfece4;
-    --color_LightGreen1: #c5ffde;
-    --color_DarkGreen: darkgreen;
-    --color_LightYellow1: #fcfce6;
-    --color_Orange1: #fe6a50;
-    --color_LightRed: #e24a64;
-    --color_Ored: #bc4749;
+[data-theme="dark"] {
+    --color_LightYellow1: #451a03;
+    --color_Orange1: #fb923c;
+    --color_Ored: #ef4444;
+    --border-input: #334155;
+    --color_DarkGrey: #94a3b8;
 }
 
 .container {
     display: flex;
     flex-wrap: wrap;
     margin-top: 0px;
-    ;
-    /* background-color: inherit; */
-    background-color: var(--color_Light4);
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    gap: 20px;
+    padding: 24px;
+    gap: 24px;
+}
+
+#tbl-form-input-data-production input,
+#tbl-form-input-data-production select,
+#tbl-prod-problem select,
+#tbl-prod-problem input,
+#tbl-prod-problem textarea,
+#area-defect-table input[type="text"],
+#area-defect-table input[type="number"],
+#area-defect-table select {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--color_Light2);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#tbl-form-input-data-production input:focus,
+#tbl-form-input-data-production select:focus,
+#tbl-prod-problem select:focus,
+#tbl-prod-problem input:focus,
+#tbl-prod-problem textarea:focus,
+#area-defect-table input[type="text"]:focus,
+#area-defect-table input[type="number"]:focus,
+#area-defect-table select:focus {
+    border-color: var(--color_Green2);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+table#bolster-table,
+#area-defect-table {
+    background: var(--bg-secondary);
+    border: solid 1px var(--color_Light2);
+}
+
+table#bolster-table th,
+#area-defect-table th {
+    background: var(--color_Green1);
+    color: #ffffff;
+    border: 0.5px solid var(--color_Light2);
 }
 
 
@@ -53,11 +78,11 @@
 .report-form {
     /* max-width: 800px; */
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 #tbl-form-input-data-production {
-    /* max-width: 800px; */
+    width: 100%;
     display: inline-block;
     border-collapse: collapse;
     /* margin-bottom: 36px; */
@@ -133,11 +158,12 @@
 
 #tbl-form-input-data-production select.which-side-a,
 #tbl-form-input-data-production select.which-side-b {
-    /* width: 40%; */
+    width: 50%;
+    text-align: right;
     background: none;
     border: none;
     color: var(--color_Green2);
-    padding-left: 36px;
+    /* padding-left: 36px; */
 }
 
 #tbl-form-input-data-production select.which-side-material {
@@ -145,7 +171,7 @@
     background: none;
     border: none;
     color: var(--color_Green2);
-    padding-left: 36px;
+    /* padding-left: 36px; */
 }
 
 #item_name {
@@ -179,7 +205,7 @@
 }
 
 .label-act-qty p {
-    /* width: 82%; */
+    width: 100%;
     height: 20px;
     text-align: center;
     align-content: center;
@@ -192,9 +218,11 @@
 .input-qty {
     border: 1px solid var(--color_Light2);
     border-radius: 5px;
+    width: 100%;
+    text-align: right;
     /* border: none; */
     text-align: center;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     /* background: var(--color_LightYellow1); */
     /* border: 1px solid red; */
 }
@@ -276,6 +304,22 @@
     cursor: pointer;
 }
 
+.btn-add-ticket {
+    background-color: var(--color_Green2);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    transition: var(--transition-normal);
+}
+
+.btn-add-ticket:hover {
+    background-color: var(--color_Green1);
+}
+
 
 /* ====== Table detail of problem ====== */
 
@@ -343,6 +387,7 @@
 .time-problem input,
 #tbl-prod-problem textarea {
     border-radius: 5px;
+    height: auto;
     border: 1px solid var(--color_Light2);
     /* background: var(--color_LightYellow1); */
 }
@@ -580,8 +625,10 @@ td .no-problem-img {
 }
 
 .production-form-col {
-    flex: 1 1 1;
-    min-width: 600px;
+    /* flex: 1 1 auto; */
+    min-width: 0;
+    /* width: 100%; */
+    /* border: 1px solid var(--color_Ored); */
 }
 
 .area-mapping-col {
@@ -590,7 +637,7 @@ td .no-problem-img {
     gap: 10px;
     min-width: 340px;
     align-items: flex-start;
-    /* border: 1px solid var(--color_Light2); */
+    /* border: 1px solid var(--color_Ored); */
 }
 
 .area-mapping-image {
@@ -599,7 +646,8 @@ td .no-problem-img {
     height: 340px;
     min-width: 220px;
     min-height: 220px;
-    border: none;
+    border: 1px solid var(--color_Light2);
+    /* border: none; */
 
 }
 
@@ -664,21 +712,22 @@ td .no-problem-img {
 }
 
 table#bolster-table {
-    width: 340px;
+    width: 100%;
+    min-width: 340px;
     border-collapse: collapse;
-    background: #f8f8f8;
-    border-radius: 5px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
     overflow: hidden;
-    border: solid 1px var(--color_Light2);
+    border: solid 0.5px var(--color_Green1);
 }
 
 table#bolster-table th {
-    background: #176d8c;
-    font-size: 0.8rem;
+    background: var(--color_Green1);
+    font-size: var(--text-sm);
     color: #fff;
     font-weight: 400;
     padding: 4px;
-    border: 0.5px solid var(--color_Light2);
+    border: 0.5px solid var(--color_Green1);
     overflow: hidden;
     text-align: center;
 }
@@ -704,8 +753,8 @@ table#bolster-table select {
 }
 
 #area-defect-table th {
-    background: #176d8c;
-    font-size: 0.8rem;
+    background: var(--color_Green1);
+    font-size: var(--text-sm);
     color: #fff;
     font-weight: 400;
     padding: 4px;
@@ -750,7 +799,7 @@ table#bolster-table select {
     border: 1px solid var(--color_Light2);
     /* background: var(--color_LightYellow1); */
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
 }
 
 /* #area-defect-table input[type="text"] {
@@ -791,12 +840,34 @@ table#bolster-table select {
 }
 
 /* ============ Responsive / Breakpoints ========== */
-@media (max-width: 1080px) {}
+@media (max-width: 1024px) {
+    .production-main-row {
+        flex-direction: column;
+        align-items: center;
+    }
 
-/* For Medium Devices */
-@media (max-width: 774px) {}
+    .production-form-col {
+        width: 100%;
+        min-width: 100%;
+    }
 
-@media (max-width: 560px) {}
+    .area-mapping-col,
+    .area-mapping-table {
+        width: 100%;
+        align-items: center;
+    }
+
+    #tbl-form-input-data-production {
+        width: 100%;
+    }
+
+    #tbl-prod-problem {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
 
 /* For Small Devices */
 @media (max-width: 360px) {}
