@@ -1,7 +1,9 @@
 <x-app-layout>Dashboard Manufacturing Stamping</x-app-layout>
 
 <head>
-    <link rel="stylesheet" href="../css/dashboard-layout.css">
+    <!-- Design System (base first) -->
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dashboard-layout.css') }}">
     <link rel="stylesheet" href="{{ asset('css/input-production-layout.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -36,7 +38,6 @@
         <i class='bx bx-menu' id="show-toggle"></i>
     </div>
     <div class="filter-container">
-
         <div>
             {{-- <label for="shiftFilter">Shift: </label> --}}
             <select id="shiftFilter">
@@ -123,9 +124,6 @@
             {{-- <label for="dateFilter">Date: </label> --}}
             <input type="date" id="dateFilter">
             <button id="clearDateFilter" class="btn-sm">X</button>
-        </div>
-        <div>
-            <p id="resetDateFilter">Reset date filter</p>
         </div>
     </div>
     <div class="dashboard-container">

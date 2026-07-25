@@ -1,58 +1,52 @@
-/* Variables  */
-:root {
-    --color_Blue: #3f93f1;
-    --color_LightBlue: #e5f1ff;
-    --color_Dark1: #1e1e1e;
-    --color_Dark2: #252527;
-    --color_DarkGrey: #636363;
-    --color_Light1: #dfdfdf;
-    --color_Light2: #c4c4c4;
-    --color_Light3: #fdfdfd;
-    --color_Light4: #ffffd7;
-    --color_Green1: #1c6d3f;
-    --color_Green2: #449d6b;
-    --color_Green3: #dfece4;
-    --color_Green4: #f6ffe7;
-    --color_DarkGreen: darkgreen;
-    --color_LightYellow1: #f9f9cc;
-    --color_Orange1: #fe6a50;
-    --color_LightRed: #e24a64;
-}
+/* Variables & Themes mapped from app-layout.css */
 
 .filter-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    width: 100%;
-    margin-top: 12px;
+    gap: 0.75rem;
+    margin-top: 10px;
+    margin-left: 24px;
+    margin-right: 24px;
+    padding: 10px;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-layout);
     justify-content: center;
-    align-items: center;
-    /* border: solid 1px var(--color_Light2); */
+    border: 1px solid var(--color_Light2);
 }
 
 .dashboard-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     margin-top: 18px;
-    margin-left: 36px;
-    margin-right: 36px;
-    /* width: 96%; */
-    background-color: inherit;
-    justify-content: space-between;
-    align-items: center;
-    gap: 28px;
-    /* border: 1px solid var(--color_Green1); */
+    margin-left: 24px;
+    margin-right: 24px;
+    gap: 16px;
+    background-color: transparent;
+    padding-bottom: 40px;
 }
 
-.home-content {
+.home-content,
+.chart-container {
     text-align: center;
-    width: 420px;
-    height: 240px;
-    padding: 0px;
-    border-radius: 4px;
-    border: solid 1px var(--color_Light2);
+    background-color: var(--bg-secondary);
+    border-radius: 12px !important;
+    border: 1px solid var(--color_Light2) !important;
+    padding: 16px;
+    box-shadow: var(--shadow-layout);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 260px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+.home-content:hover,
+.chart-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
 
 #fyFilter,
 #monthFilter,
@@ -61,61 +55,113 @@
 #modelFilter,
 #itemFilter,
 #lineFilter,
-#groupFilter{
-    height: 2rem;
-    border-radius: 4px;
-    justify-content: left;
-    align-items: center;
-    background: var(--color_Green4);
-    /* border: 1px solid var(--color_Green1); */
+#groupFilter {
+    height: 2.2rem;
+    border-radius: 6px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--color_Light2);
+    padding: 0 10px;
+    outline: none;
+    font-weight: 500;
+    transition: border-color 0.2s;
 }
 
-#dateFilter {
-    border: 1px solid var(--color_DarkGrey);
+#fyFilter:focus,
+#monthFilter:focus,
+#dateFilter:focus,
+#shiftFilter:focus,
+#modelFilter:focus,
+#itemFilter:focus,
+#lineFilter:focus,
+#groupFilter:focus {
+    border-color: var(--color_Green2);
 }
 
 #clearDateFilter {
-    border: 1px solid var(--color_Light2);
-    width: 1.5rem;
-    border-radius: 4px;
-    justify-content: left;
-    align-items: center;
-    background: var(--color_Orange1);
-    color: var(--color_Light3);
+    border: none;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 6px;
+    background-color: var(--color_LightRed);
+    color: white;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#resetDateFilter  {
-    width: auto;
-    margin-left: -10px;
-    border-radius: 4px;
-    justify-content: left;
-    align-items: center;
-    cursor: pointer;
-    color: var(--color_DarkGrey);
+#clearDateFilter:hover {
+    background-color: #d32f2f;
 }
 
 #sphChart,
 #orChart,
 #ftcChart,
 #rrChart,
-#srChart {
-    position: relative;
-    width: 360px;
-    height: 240px;
-    margin-top: 5px;
-    background: var(--color_Light4);
-    /* border: 1px solid var(--color_Orange1); */
+#srChart,
+#defectChart {
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent !important;
+    border: none !important;
 }
 
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        margin-left: 12px;
+        margin-right: 12px;
+        gap: 16px;
+    }
 
-/* ============ Responsive / Breakpoints ========== */
-@media (max-width: 1080px) {}
+    .filter-container {
+        margin-left: 12px;
+        margin-right: 12px;
+        padding: 10px;
+        gap: 0.5rem;
+    }
+}
 
-/* For Medium Devices */
-@media (max-width: 774px) {}
+@media (max-width: 768px) {
+    .filter-container {
+        margin-left: 8px;
+        margin-right: 8px;
+        margin-top: 40px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
 
-@media (max-width: 560px) {}
+    .filter-container select,
+    .filter-container input,
+    .filter-container button {
+        width: 100%;
+        height: 2.4rem;
+    }
 
-/* For Small Devices */
-@media (max-width: 360px) {}
+    .dashboard-container {
+        grid-template-columns: 1fr;
+        margin-left: 8px;
+        margin-right: 8px;
+        margin-top: 16px;
+        gap: 12px;
+    }
+
+    .home-content,
+    .chart-container {
+        height: 280px !important;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .home-content,
+    .chart-container {
+        height: 240px !important;
+        padding: 10px;
+    }
+}
