@@ -13,11 +13,13 @@
         <!-- Links pagination -->
         {{ $table_downtimes->links('vendor.pagination.custom-tailwind') }}
 
-        <form class="filter-table" method="GET" action="{{ route('table_downtime') }}" class="mb-4 flex flex-wrap gap-2">
-            <input type="date" name="date_from" value="{{ request('date_from') }}" placeholder="From Date">
-            <input type="date" name="date_until" value="{{ request('date_until') }}" placeholder="Until Date">
+        <form class="filter-container" method="GET" action="{{ route('table_downtime') }}">
+            <input type="date" name="date_from" id="dateFilter" value="{{ request('date_from') }}"
+                placeholder="From Date">
+            <input type="date" name="date_until" id="dateFilter" value="{{ request('date_until') }}"
+                placeholder="Until Date">
 
-            <select name="fy_n">
+            <select name="fy_n" id="fyFilter">
                 <option value="">FY-N --</option>
                 @foreach ($fyNs as $fy)
                     <option value="{{ $fy }}" {{ request('fy_n') == $fy ? 'selected' : '' }}>
@@ -25,7 +27,7 @@
                 @endforeach
             </select>
 
-            <select name="reporter">
+            <select name="reporter" id="reporterFilter">
                 <option value="">Reporter --</option>
                 @foreach ($reporters as $reporter)
                     <option value="{{ $reporter }}" {{ request('reporter') == $reporter ? 'selected' : '' }}>
@@ -33,7 +35,7 @@
                 @endforeach
             </select>
 
-            <select name="line">
+            <select name="line" id="lineFilter">
                 <option value="">Line --</option>
                 @foreach ($lines as $line)
                     <option value="{{ $line }}" {{ request('line') == $line ? 'selected' : '' }}>
@@ -41,7 +43,7 @@
                 @endforeach
             </select>
 
-            <select name="model">
+            <select name="model" id="modelFilter">
                 <option value="">Model --</option>
                 @foreach ($models as $model)
                     <option value="{{ $model }}" {{ request('model') == $model ? 'selected' : '' }}>
@@ -49,7 +51,7 @@
                 @endforeach
             </select>
 
-            <select name="item_name">
+            <select name="item_name" id="itemFilter">
                 <option value="">Item Name --</option>
                 @foreach ($itemNames as $item)
                     <option value="{{ $item }}" {{ request('item_name') == $item ? 'selected' : '' }}>

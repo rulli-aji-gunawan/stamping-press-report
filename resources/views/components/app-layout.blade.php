@@ -149,7 +149,7 @@
             <li class="dropdown">
                 <div class="title">
                     <a href="#" class="link" aria-label="Master Data">
-                        <i class='bx bx-cog' aria-hidden="true"></i>
+                        <i class='bx bx-key' aria-hidden="true"></i>
                         <span class="name">Master Data</span>
                     </a>
                     <i class='bx bxs-chevron-down' aria-hidden="true"></i>

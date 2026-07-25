@@ -226,31 +226,31 @@
                                 </select>
                             </th>
                             <td>
-                                <label for="plan_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="plan_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="plan_a" name="plan_a"
                                     min="0" max="999" value="{{ $production->plan_a }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="ok_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="ok_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="ok_a" name="ok_a"
                                     min="0" max="999" value="{{ $production->ok_a }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="rework_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="rework_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="rework_a" name="rework_a"
                                     min="0" max="999" value="{{ $production->rework_a }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="scrap_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="scrap_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="scrap_a" name="scrap_a"
                                     min="0" max="999" value="{{ $production->scrap_a }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="sample_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="sample_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="sample_a" name="sample_a"
                                     min="0" max="999" value="{{ $production->sample_a }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
@@ -278,31 +278,31 @@
                                 </select>
                             </th>
                             <td>
-                                <label for="plan_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="plan_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="plan_b" name="plan_b"
                                     min="0" max="999" value="{{ $production->plan_b }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="ok_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="ok_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="ok_b" name="ok_b"
                                     min="0" max="999" value="{{ $production->ok_b }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="rework_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="rework_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="rework_b" name="rework_b"
                                     min="0" max="999" value="{{ $production->rework_b }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="scrap_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="scrap_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="scrap_b" name="scrap_b"
                                     min="0" max="999" value="{{ $production->scrap_b }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="sample_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="sample_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="sample_b" name="sample_b"
                                     min="0" max="999" value="{{ $production->sample_b }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
@@ -1237,92 +1237,92 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-            let materialTicketRowCounter = {{ count($existingTickets) + 1 }};
+        let materialTicketRowCounter = {{ count($existingTickets) + 1 }};
 
-            // Fungsi untuk generate coil number
-            function generateCoilNumber() {
-                const coilNumbers = [];
-                const materialTicketRows = document.querySelectorAll('.material-ticket-row');
+        // Fungsi untuk generate coil number
+        function generateCoilNumber() {
+            const coilNumbers = [];
+            const materialTicketRows = document.querySelectorAll('.material-ticket-row');
 
-                materialTicketRows.forEach(function(row) {
-                    const whichSide = row.querySelector('select[name="which-side-material[]"]').value;
-                    const ticketText = row.querySelector('input[name="material_ticket_no_text[]"]').value;
-                    const ticketR = row.querySelector('select[name="material_ticket_no_r[]"]').value;
-                    const ticketS = row.querySelector('select[name="material_ticket_no_s[]"]').value;
-                    const ticketP = row.querySelector('select[name="material_ticket_no_p[]"]').value;
+            materialTicketRows.forEach(function(row) {
+                const whichSide = row.querySelector('select[name="which-side-material[]"]').value;
+                const ticketText = row.querySelector('input[name="material_ticket_no_text[]"]').value;
+                const ticketR = row.querySelector('select[name="material_ticket_no_r[]"]').value;
+                const ticketS = row.querySelector('select[name="material_ticket_no_s[]"]').value;
+                const ticketP = row.querySelector('select[name="material_ticket_no_p[]"]').value;
 
-                    if (whichSide && ticketText) {
-                        let coilNumber = `${whichSide} : ${ticketText}`;
-                        const ticketParts = [ticketR, ticketS, ticketP].filter(part => part && part !== '');
-                        if (ticketParts.length > 0) {
-                            coilNumber += `-${ticketParts.join('-')}`;
-                        }
-                        coilNumbers.push(coilNumber);
+                if (whichSide && ticketText) {
+                    let coilNumber = `${whichSide} : ${ticketText}`;
+                    const ticketParts = [ticketR, ticketS, ticketP].filter(part => part && part !== '');
+                    if (ticketParts.length > 0) {
+                        coilNumber += `-${ticketParts.join('-')}`;
                     }
-                });
-
-                const coilNoField = document.getElementById('coil_no');
-                if (coilNoField) {
-                    coilNoField.value = coilNumbers.join(' | ');
-                }
-            }
-
-            // Event listeners untuk auto-generate coil number
-            document.addEventListener('change', function(e) {
-                if (e.target.matches('select[name="which-side-material[]"]') ||
-                    e.target.matches('select[name="material_ticket_no_r[]"]') ||
-                    e.target.matches('select[name="material_ticket_no_s[]"]') ||
-                    e.target.matches('select[name="material_ticket_no_p[]"]')) {
-                    generateCoilNumber();
+                    coilNumbers.push(coilNumber);
                 }
             });
 
-            document.addEventListener('input', function(e) {
-                if (e.target.matches('input[name="material_ticket_no_text[]"]')) {
-                    generateCoilNumber();
-                }
-            });
+            const coilNoField = document.getElementById('coil_no');
+            if (coilNoField) {
+                coilNoField.value = coilNumbers.join(' | ');
+            }
+        }
 
-            // Add new material ticket row
-            const addButton = document.getElementById('btn-addMaterialTicketNumber');
-            if (addButton) {
-                addButton.addEventListener('click', addNewMaterialTicketRow);
+        // Event listeners untuk auto-generate coil number
+        document.addEventListener('change', function(e) {
+            if (e.target.matches('select[name="which-side-material[]"]') ||
+                e.target.matches('select[name="material_ticket_no_r[]"]') ||
+                e.target.matches('select[name="material_ticket_no_s[]"]') ||
+                e.target.matches('select[name="material_ticket_no_p[]"]')) {
+                generateCoilNumber();
+            }
+        });
+
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('input[name="material_ticket_no_text[]"]')) {
+                generateCoilNumber();
+            }
+        });
+
+        // Add new material ticket row
+        const addButton = document.getElementById('btn-addMaterialTicketNumber');
+        if (addButton) {
+            addButton.addEventListener('click', addNewMaterialTicketRow);
+        }
+
+        // Add new material ticket row - untuk button di empty state
+        const addButtonEmpty = document.getElementById('btn-addMaterialTicketNumber-empty');
+        if (addButtonEmpty) {
+            addButtonEmpty.addEventListener('click', addNewMaterialTicketRow);
+        }
+
+        function addNewMaterialTicketRow(e) {
+            e.preventDefault();
+
+            const table = document.getElementById('tbl-form-input-data-production');
+            const newRow = document.createElement('tr');
+            newRow.classList.add('material-ticket-row');
+            newRow.id = `material-ticket-row-${materialTicketRowCounter}`;
+
+            // Generate options untuk R (1-10)
+            let rOptions = '<option value="">--</option>';
+            for (let i = 1; i <= 10; i++) {
+                rOptions += `<option value="R${i}">R${i}</option>`;
             }
 
-            // Add new material ticket row - untuk button di empty state
-            const addButtonEmpty = document.getElementById('btn-addMaterialTicketNumber-empty');
-            if (addButtonEmpty) {
-                addButtonEmpty.addEventListener('click', addNewMaterialTicketRow);
+            // Generate options untuk S (0-5)
+            let sOptions = '<option value="">--</option>';
+            for (let i = 0; i <= 5; i++) {
+                const sValue = i.toString().padStart(2, '0');
+                sOptions += `<option value="S${sValue}">S${sValue}</option>`;
             }
 
-            function addNewMaterialTicketRow(e) {
-                e.preventDefault();
+            // Generate options untuk P (1-25)
+            let pOptions = '<option value="">--</option>';
+            for (let i = 1; i <= 25; i++) {
+                pOptions += `<option value="P${i}">P${i}</option>`;
+            }
 
-                const table = document.getElementById('tbl-form-input-data-production');
-                const newRow = document.createElement('tr');
-                newRow.classList.add('material-ticket-row');
-                newRow.id = `material-ticket-row-${materialTicketRowCounter}`;
-
-                // Generate options untuk R (1-10)
-                let rOptions = '<option value="">--</option>';
-                for (let i = 1; i <= 10; i++) {
-                    rOptions += `<option value="R${i}">R${i}</option>`;
-                }
-
-                // Generate options untuk S (0-5)
-                let sOptions = '<option value="">--</option>';
-                for (let i = 0; i <= 5; i++) {
-                    const sValue = i.toString().padStart(2, '0');
-                    sOptions += `<option value="S${sValue}">S${sValue}</option>`;
-                }
-
-                // Generate options untuk P (1-25)
-                let pOptions = '<option value="">--</option>';
-                for (let i = 1; i <= 25; i++) {
-                    pOptions += `<option value="P${i}">P${i}</option>`;
-                }
-
-                newRow.innerHTML = `
+            newRow.innerHTML = `
                 <td class="td-right-gen"><label></label></td>
                 <th>
                     <select class="general-select" name="which-side-material[]">
@@ -1357,22 +1357,22 @@
                 </td>
                     `;
 
-                table.appendChild(newRow);
-                materialTicketRowCounter++;
+            table.appendChild(newRow);
+            materialTicketRowCounter++;
 
-    }
-
-    // Remove material ticket row function
-    window.removeMaterialTicketRow = function(rowId) {
-        const row = document.getElementById(rowId);
-        if (row) {
-            row.remove();
-            setTimeout(generateCoilNumber, 100);
         }
-    };
 
-    // Initial generation saat page load
-    generateCoilNumber();
+        // Remove material ticket row function
+        window.removeMaterialTicketRow = function(rowId) {
+            const row = document.getElementById(rowId);
+            if (row) {
+                row.remove();
+                setTimeout(generateCoilNumber, 100);
+            }
+        };
+
+        // Initial generation saat page load
+        generateCoilNumber();
     });
 </script>
 

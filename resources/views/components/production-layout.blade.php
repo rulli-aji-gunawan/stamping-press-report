@@ -1,6 +1,7 @@
 @props(['models', 'years'])
 
 <head>
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}">
     <link rel="stylesheet" href="{{ asset('css/input-production-layout.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -22,7 +23,6 @@
     <div class="toggle-sidebar">
         <i class='bx bx-x-circle' id="hide-toggle"></i>
         <i class='bx bx-menu' id="show-toggle"></i>
-    </div>
     </div>
     <div class="container">
 
@@ -85,7 +85,7 @@
                             </td>
                             <td>
                                 <input type="text" name="show_total_prod_time" id="show_total_prod_time"
-                                    placeholder="...minutes">
+                                    placeholder="...minutes" readonly>
                             </td>
                         </tr>
                         <tr>
@@ -167,31 +167,31 @@
                                 </select>
                             </th>
                             <td>
-                                <label for="plan_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="plan_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="plan_a" name="plan_a"
                                     min="0" max="999" oninput="limitInputLength(this, 3)"
                                     placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="ok_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="ok_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="ok_a" name="ok_a"
                                     min="0" max="999" oninput="limitInputLength(this, 3)"
                                     placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="rework_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="rework_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="rework_a" name="rework_a"
                                     min="0" max="999" oninput="limitInputLength(this, 3)"
                                     placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="scrap_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="scrap_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="scrap_a" name="scrap_a"
                                     min="0" max="999" oninput="limitInputLength(this, 3)"
                                     placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="sample_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="sample_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="sample_a" name="sample_a"
                                     min="0" max="999" oninput="limitInputLength(this, 3)"
                                     placeholder=".... pcs" required>
@@ -208,31 +208,31 @@
                                 </select>
                             </th>
                             <td>
-                                <label for="plan_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="plan_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="plan_b" name="plan_b"
                                     min="0" max="999" oninput="limitInputLength(this, 3)"
                                     placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="ok_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="ok_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="ok_b" name="ok_b"
                                     min="0" max="999" oninput="limitInputLength(this, 3)"
                                     placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="rework_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="rework_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="rework_b" name="rework_b"
                                     min="0" max="999" oninput="limitInputLength(this, 3)"
                                     placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="scrap_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="scrap_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="scrap_b" name="scrap_b"
                                     min="0" max="999" oninput="limitInputLength(this, 3)"
                                     placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="sample_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="sample_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="sample_b" name="sample_b"
                                     min="0" max="999" oninput="limitInputLength(this, 3)"
                                     placeholder=".... pcs" required>
@@ -272,8 +272,7 @@
                         </tr>
                         <tr>
                             <th class="td-right-gen">
-                                <button type="button" id="btn-addMaterialTicketNumber"
-                                    style="background: #4CAF50; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
+                                <button type="button" id="btn-addMaterialTicketNumber" class="btn-add-ticket">
                                     Add Ticket
                                 </button>
                             </th>
