@@ -1,5 +1,9 @@
 /* Variables & Themes mapped from app-layout.css */
 
+.home {
+    padding-top: 10px;
+}
+
 .filter-container {
     display: flex;
     flex-wrap: wrap;
