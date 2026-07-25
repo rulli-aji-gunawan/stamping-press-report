@@ -312,7 +312,8 @@
                                 <button class="delete-table-production-btn" id="btn-delete"
                                     data_id="{{ $table_production->id }}"
                                     item_name="{{ $table_production->item_name }}"
-                                    production_date="{{ $table_production->date }}"><i class="bx bx-trash" style="color: red; font-size: 1rem;"></i></button>
+                                    production_date="{{ $table_production->date }}"><i class="bx bx-trash"
+                                        style="color: red; font-size: 1rem;"></i></button>
                             </td>
                         </tr>
                     @empty

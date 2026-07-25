@@ -13,7 +13,8 @@
         <!-- Links pagination -->
         {{ $table_defects->links('vendor.pagination.custom-tailwind') }}
 
-        <form class="filter-container" method="GET" action="{{ route('table_defect') }}" class="mb-4 flex flex-wrap gap-2">
+        <form class="filter-container" method="GET" action="{{ route('table_defect') }}"
+            class="mb-4 flex flex-wrap gap-2">
             <input type="date" name="date_from" id="dateFilter" value="{{ request('date_from') }}"
                 placeholder="From Date">
             <input type="date" name="date_until" id="dateFilter" value="{{ request('date_until') }}"
