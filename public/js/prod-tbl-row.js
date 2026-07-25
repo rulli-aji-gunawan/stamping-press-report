@@ -257,7 +257,7 @@ function addRow() {
         </td>
         <td>
             <select name="production_problems[${rowCount}][dt_category]" required>
-              <option>${dtCategoryOptions}</option>
+              ${dtCategoryOptions}
             </select>
         </td>
         <td class="row-hide">
@@ -265,19 +265,19 @@ function addRow() {
         </td>
         <td>
             <select name="production_problems[${rowCount}][dt_classification]" required>
-              <option>${dtClassificationOptions}</option>
+              ${dtClassificationOptions}
             </select>
         </td>
         <td>
-            <textarea rows="1" name="production_problems[${rowCount}][problem_description]" required
+            <textarea name="production_problems[${rowCount}][problem_description]" required
                 placeholder="...input problem description"></textarea>
         </td>
         <td>
-            <textarea rows="1" name="production_problems[${rowCount}][root_cause]" required
+            <textarea name="production_problems[${rowCount}][root_cause]" required
                 placeholder="...input root causes analysis"></textarea>
         </td>
         <td>
-            <textarea rows="1" name="production_problems[${rowCount}][counter_measure]" required
+            <textarea name="production_problems[${rowCount}][counter_measure]" required
                 placeholder="...input action or countermeasure"></textarea>
         </td>
         <td>
@@ -470,8 +470,7 @@ function saveData() {
       time_until: row.find('input[name$="[time_until]"]').val(),
       total_time: row.find('input[name$="[total_time]"]').val(),
       process_name: row.find('select[name$="[process_name]"] option:selected').text(),
-      dt_category: row.find('select[name$="[dt_category]"] option:selected').text(),
-      dt_category_id: selectedOption.val(), // Mengambil value (ID) dari option
+      dt_category_id: row.find('select[name$="[dt_category]"] option:selected').data('id'),
       downtime_type: row.find('input[name$="[downtime_type]"]').val(),
       dt_classification: row.find('select[name$="[dt_classification]"]').val(),
       problem_description: row.find('textarea[name$="[problem_description]"]').val(),
@@ -538,3 +537,46 @@ function validateProblemData(problem) {
     problem.dt_category &&
     problem.problem_description;
 }
+
+$(document).ready(function () {
+  function autoResizeTextarea() {
+    this.style.resize = 'none';
+    this.style.overflowY = 'hidden';
+    this.style.overflowX = 'hidden';
+    this.style.fontSize = '14px';
+    this.style.lineHeight = '1.5';
+    this.style.padding = '6px 8px';
+    this.style.boxSizing = 'border-box';
+    this.style.height = '38px'; // Default height for 1 line
+
+    if (this.scrollHeight > 32) {
+      this.style.height = this.scrollHeight + 'px';
+    }
+  }
+
+  // Handle dynamic inputs
+  $(document).on('input', '#tbl-prod-problem textarea', autoResizeTextarea);
+
+  // Initial trigger for existing elements (if any)
+  $('#tbl-prod-problem textarea').each(autoResizeTextarea);
+
+  // Tambahkan handler Shift+Enter
+  $(document).on('keydown', '#tbl-prod-problem textarea', function (event) {
+    if (event.key === "Enter" && event.shiftKey) {
+      event.preventDefault();
+
+      const start = this.selectionStart;
+      const end = this.selectionEnd;
+
+      // sisipkan newline di posisi kursor
+      this.value = this.value.substring(0, start) + "\n" + this.value.substring(end);
+
+      // pindahkan kursor ke setelah newline
+      this.selectionStart = this.selectionEnd = start + 1;
+
+      // trigger auto-resize setelah newline
+      autoResizeTextarea.call(this);
+    }
+  });
+});
+

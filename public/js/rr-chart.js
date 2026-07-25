@@ -235,6 +235,27 @@ window.initRRDashboardChart = function (rrData, currentFY) {
         originalDraw.apply(this, arguments);
     };
 
+    function applyChartTheme(theme) {
+        const isDark = theme === 'dark';
+        const textColor = isDark ? '#cbd5e1' : '#475569';
+        if (window.rrChart.options.plugins.legend && window.rrChart.options.plugins.legend.labels) {
+            window.rrChart.options.plugins.legend.labels.color = textColor;
+        }
+        if (window.rrChart.options.plugins.datalabels) {
+            window.rrChart.options.plugins.datalabels.color = isDark ? '#f472b6' : 'rgb(179, 30, 111, 1)';
+        }
+        if (window.rrChart.options.scales.x && window.rrChart.options.scales.x.ticks) {
+            window.rrChart.options.scales.x.ticks.color = textColor;
+        }
+        window.rrChart.update();
+    }
+
+    window.addEventListener('theme-changed', function (e) {
+        applyChartTheme(e.detail.theme);
+    });
+
     // Inisialisasi chart pertama kali
+    const activeTheme = localStorage.getItem('theme') || 'light';
+    applyChartTheme(activeTheme);
     window.updateRRDashboardChart(currentFY, 'all', 'all', 'all', '', 'all', 'all', 'all');
 };
