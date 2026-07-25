@@ -238,31 +238,31 @@
                                 </select>
                             </th>
                             <td>
-                                <label for="plan_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="plan_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="plan_a" name="plan_a"
                                     min="0" max="999" value="{{ $production->plan_a }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="ok_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="ok_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="ok_a" name="ok_a"
                                     min="0" max="999" value="{{ $production->ok_a }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="rework_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="rework_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="rework_a" name="rework_a"
                                     min="0" max="999" value="{{ $production->rework_a }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="scrap_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="scrap_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="scrap_a" name="scrap_a"
                                     min="0" max="999" value="{{ $production->scrap_a }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="sample_a" class="td-right-a">A-side :</label>
+                                <!-- <label for="sample_a" class="td-right-a">A-side :</label> -->
                                 <input class="input-qty" type="number" id="sample_a" name="sample_a"
                                     min="0" max="999" value="{{ $production->sample_a }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
@@ -290,31 +290,31 @@
                                 </select>
                             </th>
                             <td>
-                                <label for="plan_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="plan_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="plan_b" name="plan_b"
                                     min="0" max="999" value="{{ $production->plan_b }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="ok_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="ok_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="ok_b" name="ok_b"
                                     min="0" max="999" value="{{ $production->ok_b }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="rework_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="rework_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="rework_b" name="rework_b"
                                     min="0" max="999" value="{{ $production->rework_b }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="scrap_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="scrap_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="scrap_b" name="scrap_b"
                                     min="0" max="999" value="{{ $production->scrap_b }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
                             </td>
                             <td>
-                                <label for="sample_b" class="td-right-b">B-side :</label>
+                                <!-- <label for="sample_b" class="td-right-b">B-side :</label> -->
                                 <input class="input-qty" type="number" id="sample_b" name="sample_b"
                                     min="0" max="999" value="{{ $production->sample_b }}"
                                     oninput="limitInputLength(this, 3)" placeholder=".... pcs" required>
@@ -416,7 +416,8 @@
                                     <input type="text" name="material_ticket_no_text[]"
                                         class="material_ticket_no_text"
                                         id="material_ticket_no_text-existing-{{ $index }}"
-                                        value="{{ $ticket['ticket_text'] }}" placeholder="...ticket no." readonly disabled>
+                                        value="{{ $ticket['ticket_text'] }}" placeholder="...ticket no." readonly
+                                        disabled>
                                 </td>
                                 <td colspan="3">
                                     <select name="material_ticket_no_r[]" class="material-ticket-no"
@@ -642,7 +643,8 @@
                                     </td>
                                     <td>
                                         <input type="number" name="defect_qtys_b[]"
-                                            value="{{ $defect->defect_qty_b }}" min="1" placeholder="Qty-b" null>
+                                            value="{{ $defect->defect_qty_b }}" min="1" placeholder="Qty-b"
+                                            null>
                                     </td>
                                     <td>
                                         <select name="defect_categories[]" required>
