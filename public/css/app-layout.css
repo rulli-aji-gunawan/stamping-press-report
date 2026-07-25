@@ -356,7 +356,7 @@ header form {
 }
 
 /* ─── Body Overrides for App Shell ─── */
-body {
+html body {
     background-color: var(--color_Green1);
 }
 
