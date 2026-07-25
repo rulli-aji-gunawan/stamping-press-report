@@ -9,9 +9,19 @@
     <!-- Styles  -->
     <link rel="shortcut icon" href="kxp_fav.png" type="image/x-icon">
     {{-- <link rel="stylesheet" href="/css/home-style.css"> --}}
-    <link href="{{'css/home-style.css?v='.time()}}" rel="stylesheet" type="text/css">
+    <link href="{{ 'css/home-style.css?v=' . time() }}" rel="stylesheet" type="text/css">
 
-    
+    <script>
+        // Prevent FOUC for dark mode
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
+
 </head>
 
 <body>
@@ -23,7 +33,7 @@
         </div>
         <p class="page-title">{{ $slot }}</p>
         <div class="right-header">
-            <a href="#" class="link-logout">Login</a>
+            <a href="/login" class="link-login">Login</a>
         </div>
     </header>
 

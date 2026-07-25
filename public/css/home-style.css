@@ -1,212 +1,236 @@
-/* Google Fonts  */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+/* ==========================================================
+   HOME-STYLE.CSS — Landing / Home Page
+   Requires: base.css loaded before this file
+   ========================================================== */
 
-/* Globals  */
-* {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
-}
-
+/* ─── Body ───────────────────────────────────────────────── */
 body {
-    background-color: var(--color_Light1);
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Variables  */
-:root {
-    --color_Dark1: #1e1e1e;
-    --color_Dark2: #252527;
-    --color_Light1: #dfdfdf;
-    --color_Light2: #c4c4c4;
-    --color_Green1: #1c6d3f;
-    --color_Green2: #449d6b;
-    --color_DarkGreen: darkgreen;
-}
-
-/* =============== Header =============== */
+/* ─── Header ─────────────────────────────────────────────── */
 header {
     display: flex;
-    top: 0;
-    left: 0;
-    height: 80px;
     align-items: center;
-    font-size: 1.0rem;
+    height: 64px;
     width: 100%;
     background-color: var(--color_Green1);
-    box-shadow: 0 5px 5px -2px var(--color_Green2);
-    transition: all .5s ease;
-    z-index: 100;
+    box-shadow: var(--shadow-layout);
+    padding: 0 16px;
+    flex-shrink: 0;
 }
 
 .logo-box {
     display: flex;
-    flex: 25%;
+    flex: 1;
+    align-items: center;
+    gap: 10px;
     color: var(--color_Light1);
-    align-items: center;
-    padding-left: 10px;
-    /* border: 1px solid; */
+    min-width: 0;
 }
 
 .logo-box img {
+    height: 40px;
+    width: 40px;
     border: 2px solid var(--color_Light2);
-    border-radius: 100%;
-}
-
-.logo-box i,
-.logo-box img {
-    display: flex;
-    align-items: center;
-    font-size: 28px;
-    height: 42px;
-    width: 42px;
-    margin-right: 10px;
-    text-align: center;
-    line-height: 32px;
-    transition: all .5s ease;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 .logo-name {
-    padding-left: px;
-    font-size: 18px;
+    font-size: var(--text-md);
     font-weight: 600;
-    min-width: max-content;
-    transition: all .5s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .page-title {
-    display: flex;
-    flex: 50%;
-    padding: 10px;
-    font-size: 1.8rem;
+    flex: 2;
+    font-size: var(--text-2xl);
     font-weight: 500;
     color: var(--color_Light1);
-    justify-content: center;
-    /* border: 1px solid; */
+    text-align: center;
 }
 
 .right-header {
+    flex: 1;
     display: flex;
-    flex: 25%;
-    justify-content: end;
-    padding: 20px;
-    /* border: 1px solid var(--color_Light2); */
+    justify-content: flex-end;
 }
 
 header a {
-    display: none;
-    list-style: none;
+    display: inline-flex;
+    align-items: center;
     color: var(--color_Light1);
-    border: 1px solid var(--color_Light2);
-    border-radius: 6px;
-    padding: 5px 10px;
-    /* border: 1px solid; */
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: var(--radius-md);
+    padding: 5px 12px;
+    font-size: var(--text-sm);
+    transition: var(--transition-normal);
+    white-space: nowrap;
 }
 
 header a:hover {
-    background: var(--color_Green2);
-    font-weight: 500;
-    color: yellow;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: var(--color_Light1);
 }
 
-
-/* =============== Form Section =============== */
-
+/* ─── Main / Card Section ────────────────────────────────── */
 main {
+    flex: 1;
     display: flex;
+    align-items: center;
     justify-content: center;
-    text-align: center;
-    font-size: 1.2rem;
+    padding: 48px 16px;
 }
 
 main .container {
-    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    top: 78px;
-    /* min-height: 420px; */
-    min-height: 420px;
-    /* width: 78%; */
-    width: 32%;
-    padding: 28px;
-    background-color: lightgray;
-    border-radius: 12px;
-    /* color: var(--color_Dark1); */
+    gap: 20px;
+    width: 100%;
+    max-width: 460px;
+    padding: 40px 36px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), var(--shadow-layout);
     align-items: center;
-    border: 1px solid var(--color_Green1);
-    box-shadow: 5px 5px 5px -2px var(--color_Green2);
+    text-align: center;
+    animation: containerFadeIn 0.5s ease;
+}
+
+@keyframes containerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .container h3 {
-    font-weight: 500;
+    font-size: var(--text-lg);
+    font-weight: 600;
     color: var(--color_Green1);
+    line-height: 1.4;
 }
 
-.container a {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--color_Green1);
-    text-align: center;
-    line-height: 1.5rem;
+[data-theme="dark"] .container h3 {
+    color: var(--color_Green2);
 }
 
+.container p {
+    color: var(--text-secondary);
+    font-size: var(--text-md);
+    line-height: 1.7;
+}
+
+/* Continue Button */
 .continue-button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--color_Light2);
-    width: auto;
-    height: auto;
-    padding: 12px;
+    gap: 8px;
+    background: var(--color_Green2);
+    color: #fff;
+    font-size: var(--text-md);
+    font-weight: 600;
+    padding: 12px 28px;
     border: none;
-    border: 1px solid var(--color_Green1);
-    border-radius: 6px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    margin-top: 8px;
+    text-decoration: none;
 }
 
 .continue-button:hover {
-    /* font-weight: 600; */
     background: var(--color_Green1);
-    font-weight: 500;
-    color: yellow;
-    cursor: pointer;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(28, 109, 63, 0.3);
 }
 
+.continue-button:active {
+    transform: translateY(0);
+}
+
+/* Admin Login Button */
 .login-admin-button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: yellow;
-    background: var(--color_Green2);
-    width: 128px;
-    height: 28px;
-    padding: 5px;
-    border: none;
-    border-radius: 6px;
-    align-self: center;
+    background: transparent;
+    color: var(--color_Green2);
+    border: 1.5px solid var(--color_Green2);
+    font-size: var(--text-sm);
+    padding: 6px 18px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    text-decoration: none;
 }
 
 .login-admin-button:hover {
-    /* font-weight: 600; */
-    /* background: var(--color_Light2); */
-    color: yellow;
-
+    background: var(--color_Green2);
+    color: #fff;
 }
 
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: var(--text-lg);
+    }
 
+    .logo-name {
+        display: none;
+    }
 
+    main .container {
+        padding: 28px 20px;
+    }
+}
 
-/* =============== Home Section =============== */
+@media (max-width: 480px) {
+    header {
+        height: auto;
+        padding: 10px 12px;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
 
-/* ============ Responsive / Breakpoints ========== */
-@media (max-width: 1080px) {}
+    .logo-box,
+    .right-header {
+        flex: unset;
+    }
 
-/* For Medium Devices */
-@media (max-width: 774px) {}
+    .page-title {
+        flex: unset;
+        width: 100%;
+        font-size: var(--text-md);
+        text-align: center;
+    }
 
-@media (max-width: 560px) {}
+    main {
+        padding: 24px 12px;
+        align-items: flex-start;
+    }
 
-/* For Small Devices */
-@media (max-width: 360px) {}
+    main .container {
+        padding: 24px 16px;
+    }
+
+    .continue-button {
+        width: 100%;
+    }
+}

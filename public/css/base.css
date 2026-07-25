@@ -1,0 +1,382 @@
+/* ==========================================================
+   BASE.CSS — Unified Design System for MMKI Stamping Press
+   Include this file FIRST before any page-specific CSS
+   ========================================================== */
+
+/* ─── Google Fonts ─────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* ─── Global Reset ──────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body,
+html,
+input,
+select,
+textarea,
+button {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ─── Design Tokens — Light Mode ────────────────────────── */
+:root {
+    /* Brand Colors */
+    --color_Blue: #3f93f1;
+    --color_Dark1: #1e1e1e;
+    --color_Dark2: #252527;
+    --color_Light1: #dfdfdf;
+    --color_Light2: #c4c4c4;
+    --color_Light3: #fdfdfd;
+    --color_Light4: #ffffff;
+    --color_Green1: #1c6d3f;
+    --color_Green2: #449d6b;
+    --color_Green3: #f2f8f4;
+    --color_Green4: #eff6f2;
+    --color_DarkGreen: darkgreen;
+    --color_LightRed: #e24a64;
+    --color_LightBlue: #e2e8f0;
+    --color_DarkGrey: #636363;
+    --color_LightGreen1: #d1fae5;
+    --color_LightYellow1: #fff7b9;
+    --color_Orange1: #f97316;
+
+    /* Semantic Tokens */
+    --bg-primary: #f2f8f4;
+    --bg-secondary: #ffffff;
+    --text-primary: #1e1e1e;
+    --text-secondary: #252527;
+    --border-color: #cbd5e1;
+    --shadow-layout: 0 5px 5px -2px var(--color_Green2);
+    --shadow-sidebar: 5px 2px 5px -2px var(--color_Green2);
+    --color_ActiveBg: var(--color_Green2);
+
+    /* Typography Scale */
+    --text-xs: 0.70rem;
+    --text-sm: 0.80rem;
+    --text-base: 0.90rem;
+    --text-md: 1.00rem;
+    --text-lg: 1.20rem;
+    --text-xl: 1.60rem;
+    --text-2xl: 1.80rem;
+
+    /* Spacing */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+
+    /* Transitions */
+    --transition-fast: all 0.15s ease;
+    --transition-normal: all 0.30s ease;
+    --transition-slow: all 0.50s ease;
+}
+
+/* ─── Design Tokens — Dark Mode ─────────────────────────── */
+[data-theme="dark"] {
+    --color_Blue: #60a5fa;
+    --color_Dark1: #f8fafc;
+    --color_Dark2: #cbd5e1;
+    --color_Light1: #f1f5f9;
+    --color_Light2: #475569;
+    --color_Light3: #1e293b;
+    --color_Light4: #161e2f;
+    --color_Green1: #111827;
+    --color_Green2: #34d399;
+    --color_Green3: #1f2937;
+    --color_Green4: #1e293b;
+    --color_DarkGreen: #34d399;
+    --color_LightRed: #f87171;
+    --color_LightBlue: #1e293b;
+    --color_DarkGrey: #94a3b8;
+    --color_LightGreen1: #064e3b;
+    --color_LightYellow1: #451a03;
+    --color_Orange1: #fb923c;
+
+    --bg-primary: #0b0f19;
+    --bg-secondary: #161e2f;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --shadow-layout: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --shadow-sidebar: 4px 0 20px rgba(0, 0, 0, 0.4);
+    --color_ActiveBg: #1f2937;
+}
+
+/* ─── Base Body ─────────────────────────────────────────── */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Accessibility — Focus Ring ────────────────────────── */
+:focus-visible {
+    outline: 2px solid var(--color_Green2);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* ─── Alert / Flash Messages ────────────────────────────── */
+.alert {
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    margin-bottom: 8px;
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    min-width: 280px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: alertSlideIn 0.3s ease;
+}
+
+.alert-success {
+    background: #d1fae5;
+    border: 1px solid #6ee7b7;
+    color: #065f46;
+}
+
+.alert-danger {
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+}
+
+[data-theme="dark"] .alert-success {
+    background: #064e3b;
+    border-color: #34d399;
+    color: #6ee7b7;
+}
+
+[data-theme="dark"] .alert-danger {
+    background: #450a0a;
+    border-color: #f87171;
+    color: #fca5a5;
+}
+
+@keyframes alertSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* ─── Dark Mode Table Overrides ─────────────────────────── */
+[data-theme="dark"] table td p,
+[data-theme="dark"] table td a,
+[data-theme="dark"] table td {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] table tr:nth-child(even) {
+    background-color: #1e293b !important;
+}
+
+[data-theme="dark"] table tr:nth-child(odd) {
+    background-color: #0f172a !important;
+}
+
+[data-theme="dark"] select,
+[data-theme="dark"] input,
+[data-theme="dark"] textarea {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] select option {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+}
+
+/* ─── Shared Button Utilities ────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    border: none;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background-color: var(--color_Green1);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: var(--color_Green2);
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: var(--color_Light2);
+    color: var(--color_Dark1);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color_Dark2);
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: var(--color_LightRed);
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+    color: #fff;
+}
+
+.btn-success {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--color_Green2);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    border: none;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    white-space: nowrap;
+}
+
+.btn-success:hover {
+    background-color: var(--color_Green1);
+    color: #fff;
+}
+
+/* ─── Error Popup (shared, used in app-layout) ──────────── */
+.error-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.error-popup-content {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    animation: popupSlideIn 0.3s ease;
+}
+
+.error-popup-header {
+    background: var(--color_LightRed);
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.error-popup-header h3 {
+    margin: 0;
+    flex: 1;
+    font-size: 1.1rem;
+}
+
+.error-popup-body {
+    padding: 20px;
+    color: var(--text-primary);
+}
+
+.error-popup-footer {
+    padding: 15px 20px;
+    text-align: right;
+    border-top: 1px solid var(--border-color);
+}
+
+.btn-error-ok {
+    background: var(--color_LightRed);
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    transition: var(--transition-fast);
+}
+
+.btn-error-ok:hover {
+    opacity: 0.85;
+}
+
+.close-popup-btn {
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: var(--transition-fast);
+}
+
+.close-popup-btn:hover {
+    opacity: 0.7;
+}
+
+@keyframes popupSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ─── Sidebar Overlay (Mobile) ──────────────────────────── */
+#sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    transition: opacity 0.3s ease;
+}
+
+#sidebar-overlay.active {
+    display: block;
+}

@@ -8,13 +8,8 @@
             <br><br>This platform is continuously reviewed and improved to ensure reliability.
         </p>
         <br>
-        {{-- <p>Please continue to login</p> --}}
         <a href="/login" class="continue-button">
             Login to Dashboard ⇨
         </a>
-        {{-- <p>or</p>
-        <a href="/login-admin" class="login-admin-button">
-            <p>Login as admin</p>
-        </a> --}}
     </div>
 </main>
