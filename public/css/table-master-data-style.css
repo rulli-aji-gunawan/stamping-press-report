@@ -43,7 +43,8 @@
 #reporterFilter,
 #modelFilter,
 #itemFilter,
-#lineFilter {
+#lineFilter,
+#defectFilter {
     height: 2.2rem;
     border-radius: 6px;
     background-color: var(--bg-primary);
@@ -60,7 +61,8 @@
 #reporterFilter:focus,
 #modelFilter:focus,
 #itemFilter:focus,
-#lineFilter:focus {
+#lineFilter:focus,
+#defectFilter:focus {
     border-color: var(--color_Green2);
 }
 
