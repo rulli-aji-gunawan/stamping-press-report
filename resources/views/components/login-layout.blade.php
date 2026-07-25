@@ -8,7 +8,20 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <!-- Styles  -->
     <link rel="shortcut icon" href="kxp_fav.png" type="image/x-icon">
-    <link rel="stylesheet" href="/css/login-style.css">
+    <!-- Design System (base first) -->
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('css/login-style.css') }}?v={{ filemtime(public_path('css/login-style.css')) }}">
+
+    <script>
+        // Prevent FOUC for dark mode
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
 
 </head>
 
@@ -25,6 +38,4 @@
         </div>
     </header>
 
-    <!-- Link JS -->
-    {{-- <script src="main.js"></script> --}}
 </body>

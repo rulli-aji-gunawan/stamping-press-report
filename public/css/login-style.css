@@ -1,262 +1,291 @@
-/* Google Fonts  */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+/* ==========================================================
+   LOGIN-STYLE.CSS — Login Page
+   Requires: base.css loaded before this file
+   ========================================================== */
 
-/* Globals  */
-* {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
-}
-
+/* ─── Body ───────────────────────────────────────────────── */
 body {
-    background-color: var(--color_Light1);
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Variables  */
-:root {
-    --color_Dark1: #1e1e1e;
-    --color_Dark2: #252527;
-    --color_Light1: #dfdfdf;
-    --color_Light2: #c4c4c4;
-    --color_Green1: #1c6d3f;
-    --color_Green2: #449d6b;
-    --color_DarkGreen: darkgreen;
-}
-
-/* =============== Header =============== */
+/* ─── Header ─────────────────────────────────────────────── */
 header {
     display: flex;
-    top: 0;
-    left: 0;
-    height: 80px;
     align-items: center;
-    font-size: 1.0rem;
+    height: 64px;
     width: 100%;
     background-color: var(--color_Green1);
-    box-shadow: 0 5px 5px -2px var(--color_Green2);
-    transition: all .5s ease;
-    z-index: 100;
+    box-shadow: var(--shadow-layout);
+    padding: 0 16px;
+    flex-shrink: 0;
 }
 
 .logo-box {
     display: flex;
-    flex: 25%;
+    flex: 1;
+    align-items: center;
+    gap: 10px;
     color: var(--color_Light1);
-    align-items: center;
-    padding-left: 10px;
-    /* border: 1px solid; */
+    min-width: 0;
 }
 
 .logo-box img {
+    height: 40px;
+    width: 40px;
     border: 2px solid var(--color_Light2);
-    border-radius: 100%;
-}
-
-.logo-box i,
-.logo-box img {
-    display: flex;
-    align-items: center;
-    font-size: 28px;
-    height: 42px;
-    width: 42px;
-    margin-right: 10px;
-    text-align: center;
-    line-height: 32px;
-    transition: all .5s ease;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 .logo-name {
-    padding-left: px;
-    font-size: 18px;
+    font-size: var(--text-md);
     font-weight: 600;
-    min-width: max-content;
-    transition: all .5s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .page-title {
-    display: flex;
-    flex: 50%;
-    font-size: 1.8rem;
+    flex: 2;
+    font-size: var(--text-2xl);
     font-weight: 500;
     color: var(--color_Light1);
-    justify-content: center;
-    /* border: 1px solid; */
+    text-align: center;
 }
 
 .right-header {
+    flex: 1;
     display: flex;
-    flex: 25%;
-    justify-content: end;
-    padding: 10px;
-    font-size: 1.0rem;
-    /* border: 1px solid var(--color_Light2); */
+    justify-content: flex-end;
+    padding: 0;
 }
 
 header a {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
     color: var(--color_Light1);
-    border: 1px solid var(--color_Light2);
-    border-radius: 6px;
-    padding: 2px 5px 2px 5px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: var(--radius-md);
+    padding: 5px 12px;
+    font-size: var(--text-sm);
+    transition: var(--transition-normal);
+    white-space: nowrap;
 }
 
 header a:hover {
-    /* background: var(--color_Green2); */
-    color: yellow;
-    /* font-weight: bold; */
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: var(--color_Light1);
 }
 
-
-/* =============== Form Section =============== */
-
+/* ─── Main / Form Section ────────────────────────────────── */
 main {
+    flex: 1;
     display: flex;
+    align-items: center;
     justify-content: center;
-    text-align: center;
-    font-size: 1.2rem;
+    padding: 40px 16px;
 }
 
 .container {
-    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    top: 78px;
-    align-self: center;
-    min-height: 380px;
-    width: auto;
-    padding: 28px;
-    background-color: lightgray;
-    border-radius: 12px;
-    color: var(--color_Light1);
-    border: 1px solid var(--color_Green1);
-    box-shadow: 5px 5px 5px -2px var(--color_Green2);
-    /* align-items: center; */
+    gap: 16px;
+    width: 100%;
+    max-width: 420px;
+    padding: 36px 32px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), var(--shadow-layout);
+    animation: formFadeIn 0.4s ease;
+}
+
+@keyframes formFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .container h3 {
-    font-weight: 200;
+    font-size: var(--text-md);
+    font-weight: 400;
     color: var(--color_Green1);
-    margin-bottom: 24px;
+    text-align: center;
+    margin-bottom: 8px;
 }
 
+[data-theme="dark"] .container h3 {
+    color: var(--color_Green2);
+}
+
+/* Form */
 .container form {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    text-align: center;
-    align-items: center;
-
+    gap: 16px;
 }
 
 form ::placeholder {
     color: var(--color_Light2);
-    /* padding-left: 5px; */
 }
 
 form input {
-    width: 90%;
-    height: 2.2rem;
-    padding: 2px 10px;
-    border: 1px solid var(--color_Light2);
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 1.2rem;
+    width: 100%;
+    height: 2.6rem;
+    padding: 6px 14px;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: var(--text-md);
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-form button {
+form input:focus {
+    border-color: var(--color_Green2);
+    box-shadow: 0 0 0 3px rgba(68, 157, 107, 0.18);
+    outline: none;
+}
+
+form button[type="submit"] {
     align-self: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+    width: 60%;
+    height: 2.6rem;
     background: var(--color_Green2);
-    color: var(--color_Light1);
-    font-weight: 500;
-    width: 40%;
-    height: auto;
-    padding: 8px;
-    font-size: 1.4rem;
+    color: #fff;
+    font-weight: 600;
+    font-size: var(--text-md);
     border: none;
-    border-radius: 6px;
-}
-
-form button:hover {
-    background: var(--color_Green1);
-    font-weight: 500;
-    color: yellow;
+    border-radius: var(--radius-md);
     cursor: pointer;
+    transition: var(--transition-normal);
+    margin-top: 8px;
 }
 
+form button[type="submit"]:hover {
+    background: var(--color_Green1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(28, 109, 63, 0.3);
+}
+
+form button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Login admin button */
 form .login-admin-button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: yellow;
     background: var(--color_Green2);
-    width: 128px;
-    height: 28px;
-    padding: 5px;
+    color: #fff;
+    width: auto;
+    padding: 5px 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-md);
     align-self: center;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: var(--transition-normal);
 }
 
 form .login-admin-button:hover {
-    /* font-weight: 600; */
-    background: var(--color_Light2);
-    color: var(--color_Dark1);
+    background: var(--color_Green1);
+    color: #fff;
 }
 
-/* =============== Error Messages =============== */
-
-/* Banner error: credential salah (di atas form) */
-.container > .error {
+/* ─── Error Messages ─────────────────────────────────────── */
+.container>.error {
     background: #fdecea;
     border: 1px solid #e57373;
-    border-left: 4px solid #e24a64;
-    border-radius: 6px;
+    border-left: 4px solid var(--color_LightRed);
+    border-radius: var(--radius-md);
     padding: 10px 14px;
     color: #c0392b;
-    font-size: 0.82rem;
+    font-size: var(--text-sm);
     text-align: left;
     width: 100%;
-    box-sizing: border-box;
-    margin-bottom: -6px;
 }
 
-/* Inline error: di bawah input (validasi field kosong/format) */
+[data-theme="dark"] .container>.error {
+    background: #450a0a;
+    border-color: var(--color_LightRed);
+    color: #fca5a5;
+}
+
 form .error {
-    color: #e24a64;
-    font-size: 0.75rem;
+    color: var(--color_LightRed);
+    font-size: var(--text-xs);
     text-align: left;
-    width: 90%;
-    margin-top: -16px;  /* kurangi gap 24px dari flex agar error dekat input */
-    padding: 0 4px;
+    margin-top: -10px;
+    padding: 0 2px;
 }
 
-/* Input border merah saat ada error */
 form input.input-error {
-    border: 1.5px solid #e24a64;
+    border-color: var(--color_LightRed);
     background-color: #fff5f6;
 }
 
+[data-theme="dark"] form input.input-error {
+    background-color: #450a0a;
+}
 
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: var(--text-lg);
+    }
 
-/* =============== Home Section =============== */
+    .logo-name {
+        display: none;
+    }
 
-/* ============ Responsive / Breakpoints ========== */
-@media (max-width: 1080px) {}
+    .container {
+        padding: 28px 20px;
+    }
 
-/* For Medium Devices */
-@media (max-width: 774px) {}
+    form button[type="submit"] {
+        width: 80%;
+    }
+}
 
-@media (max-width: 560px) {}
+@media (max-width: 480px) {
+    header {
+        height: auto;
+        padding: 10px 12px;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
 
-/* For Small Devices */
-@media (max-width: 360px) {}
+    .logo-box,
+    .right-header {
+        flex: unset;
+    }
+
+    .page-title {
+        flex: unset;
+        width: 100%;
+        font-size: var(--text-md);
+        text-align: center;
+    }
+
+    main {
+        padding: 24px 12px;
+        align-items: flex-start;
+    }
+
+    .container {
+        padding: 24px 16px;
+    }
+}
