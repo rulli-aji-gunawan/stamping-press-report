@@ -1242,6 +1242,37 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const cancelButton = document.getElementById('cancel');
+        if (cancelButton) {
+            cancelButton.addEventListener('click', function(e) {
+                const confirmed = confirm(
+                    'Apakah Anda yakin ingin meninggalkan halaman ini? Perubahan yang belum disimpan akan hilang.'
+                    );
+                if (!confirmed) {
+                    e.preventDefault();
+                }
+            });
+        }
+        const form = document.querySelector('.report-form');
+        let isDirty = false;
+        if (form) {
+            form.addEventListener('change', () => {
+                isDirty = true;
+            });
+            window.addEventListener('beforeunload', function(e) {
+                if (isDirty) {
+                    const confirmationMessage =
+                        'Anda memiliki perubahan yang belum disimpan. Apakah Anda yakin ingin meninggalkan halaman ini?';
+                    (e || window.event).returnValue = confirmationMessage;
+                    return confirmationMessage;
+                }
+            });
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
         let materialTicketRowCounter = {{ count($existingTickets) + 1 }};
 
         // Fungsi untuk generate coil number
