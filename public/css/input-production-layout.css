@@ -182,9 +182,14 @@ table#bolster-table th,
     border: none;
 }
 
+#time,
 #show_total_prod_time,
 #spm,
-#line {
+#line,
+#group,
+#shift,
+#model,
+#model_year {
     width: 100%;
     border: 1px solid var(--color_Light2);
     /* border: none; */
@@ -538,7 +543,7 @@ td .no-problem-img {
     width: 100%;
     height: 2rem;
     border-radius: 5px;
-    padding-left: 5px;
+    padding: 5px;
     border: 1px solid var(--color_Light2);
     background: var(--color_LightRed);
     color: #fff;

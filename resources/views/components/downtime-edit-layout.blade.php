@@ -48,7 +48,7 @@
                             <th><label for="reporter" class="td-right-gen">Reporter :</label></th>
                             <td>
                                 <select id="reporter" name="reporter" required>
-                                    <option value="">Select Reporter</option>
+                                    <option value="" disabled selected>Select Reporter</option>
                                     <option value="Joni" {{ $production->reporter == 'Joni' ? 'selected' : '' }}>Joni
                                     </option>
                                     <option value="Kosim" {{ $production->reporter == 'Kosim' ? 'selected' : '' }}>
@@ -66,7 +66,7 @@
                             </th>
                             <td>
                                 <select id="group" name="group" required>
-                                    <option value="">-</option>
+                                    <option value="" disabled selected>-</option>
                                     <option value="A" {{ $production->group == 'A' ? 'selected' : '' }}>A</option>
                                     <option value="B" {{ $production->group == 'B' ? 'selected' : '' }}>B</option>
                                 </select>
@@ -737,7 +737,7 @@
                                     value="{{ $problem->total_time }}" min="1" required></td>
                             <td>
                                 <select name="production_problems[{{ $index }}][process_name]" required>
-                                    <option value="">Select Process</option>
+                                    <option value="" disabled selected>Select Process</option>
                                     @foreach ($processNames as $process)
                                         <option value="{{ $process->process_name }}"
                                             {{ $problem->process_name == $process->process_name ? 'selected' : '' }}>
@@ -749,7 +749,7 @@
                             <td>
                                 <select name="production_problems[{{ $index }}][dt_category]"
                                     class="dt-category-select" data-index="{{ $index }}" required>
-                                    <option value="">Select Category</option>
+                                    <option value="" disabled selected>Select Category</option>
                                     @foreach ($dtCategories as $cat)
                                         <option value="{{ $cat->downtime_name }}" data-id="{{ $cat->id }}"
                                             {{ $problem->dt_category == $cat->downtime_name ? 'selected' : '' }}>
@@ -764,7 +764,7 @@
                             </td>
                             <td>
                                 <select name="production_problems[{{ $index }}][dt_classification]" required>
-                                    <option value="">Select Classification</option>
+                                    <option value="" disabled selected>Select Classification</option>
                                     @foreach ($dtClassifications as $class)
                                         <option value="{{ $class->downtime_classification }}"
                                             {{ $problem->dt_classification == $class->downtime_classification ? 'selected' : '' }}>
@@ -784,7 +784,7 @@
                             </td>
                             <td>
                                 <select name="production_problems[{{ $index }}][pic]" required>
-                                    <option value="">Select PIC</option>
+                                    <option value="" disabled selected>Select PIC</option>
                                     <option value="press" {{ $problem->pic == 'press' ? 'selected' : '' }}>Press
                                     </option>
                                     <option value="tooling" {{ $problem->pic == 'tooling' ? 'selected' : '' }}>
@@ -803,7 +803,7 @@
                             </td>
                             <td>
                                 <select name="production_problems[{{ $index }}][status]" required>
-                                    <option value="">Select Status</option>
+                                    <option value="" disabled selected>Select Status</option>
                                     <option value="open" {{ $problem->status == 'open' ? 'selected' : '' }}>Open
                                     </option>
                                     <option value="monitoring"
